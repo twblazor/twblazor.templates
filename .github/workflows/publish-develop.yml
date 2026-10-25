@@ -70,12 +70,12 @@ jobs:
         run: |
           set -euo pipefail
           ls -1 ./artifacts
-          if [ ! -f "./artifacts/TwBlazor.Templates.$VERSION.nupkg" ]; then
-            echo "::error::Expected ./artifacts/TwBlazor.Templates.$VERSION.nupkg."
+          if [ ! -f "./artifacts/twblazor.templates.$VERSION.nupkg" ]; then
+            echo "::error::Expected ./artifacts/twblazor.templates.$VERSION.nupkg."
             exit 1
           fi
           case "$VERSION" in
-            *-preview.*) echo "Packed TwBlazor.Templates $VERSION" ;;
+            *-preview.*) echo "Packed twblazor.templates $VERSION" ;;
             *) echo "::error::develop must only publish previews, got $VERSION."; exit 1 ;;
           esac
 

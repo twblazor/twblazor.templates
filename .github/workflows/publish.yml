@@ -163,11 +163,11 @@ jobs:
         run: |
           set -euo pipefail
           ls -1 ./artifacts
-          if [ ! -f "./artifacts/TwBlazor.Templates.$VERSION.nupkg" ]; then
-            echo "::error::Expected ./artifacts/TwBlazor.Templates.$VERSION.nupkg but MinVer produced something else."
+          if [ ! -f "./artifacts/twblazor.templates.$VERSION.nupkg" ]; then
+            echo "::error::Expected ./artifacts/twblazor.templates.$VERSION.nupkg but MinVer produced something else."
             exit 1
           fi
-          echo "Packed TwBlazor.Templates $VERSION"
+          echo "Packed twblazor.templates $VERSION"
 
       - name: Publish to GitHub Packages
         env:

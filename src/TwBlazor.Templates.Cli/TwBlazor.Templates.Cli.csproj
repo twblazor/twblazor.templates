@@ -7,7 +7,7 @@
     <RootNamespace>TwBlazor.Templates.Cli</RootNamespace>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>twblazor</ToolCommandName>
-    <PackageId>TwBlazor.Templates</PackageId>
+    <PackageId>twblazor.templates</PackageId>
     <Authors>twblazor</Authors>
     <Company>twblazor</Company>
     <Description>Scaffold a Blazor Web App with twblazor and a dashboard, sidebar or navbar layout.</Description>

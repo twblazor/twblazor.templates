@@ -7,7 +7,7 @@ The templates share one set of pages and layouts across Server, WebAssembly and 
 ## Install
 
 ```bash
-dotnet tool install -g TwBlazor.Templates
+dotnet tool install -g twblazor.templates
 ```
 
 This is a .NET tool, so install it with `dotnet tool install`, not `dotnet new install`.
@@ -23,7 +23,7 @@ twblazor new MyApp
 To install the tool and create an app in one PowerShell line:
 
 ```powershell
-dotnet tool install -g TwBlazor.Templates; twblazor new MyApp -i wasm -t dashboard
+dotnet tool install -g twblazor.templates; twblazor new MyApp -i wasm -t dashboard
 ```
 
 `twblazor install` only registers the templates with `dotnet new`; it does not create an app.
@@ -178,7 +178,7 @@ If `main` or its tags are protected so the workflow's `GITHUB_TOKEN` cannot push
 ### Install a release
 
 ```bash
-dotnet tool install -g TwBlazor.Templates
+dotnet tool install -g twblazor.templates
 twblazor new MyApp -i wasm -t dashboard
 ```
 
