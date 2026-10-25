@@ -6,7 +6,7 @@ name: Update twblazor
 # a new twblazor.templates version after it is merged.
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       version:
