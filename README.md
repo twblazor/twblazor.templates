@@ -10,7 +10,7 @@ The templates share one set of pages and layouts across Server, WebAssembly and 
 
 | Dashboard | Sidebar | Navbar |
 | --- | --- | --- |
-| [![Dashboard template: sidebar, top bar, KPI cards and charts](images/templates/dashboard.png)](images/templates/dashboard.png) | [![Sidebar template: grouped navigation and a welcome page](images/templates/sidebar.png)](images/templates/sidebar.png) | [![Navbar template: top navigation and a welcome page](images/templates/navbar.png)](images/templates/navbar.png) |
+| [![Dashboard template: sidebar, top bar, KPI cards and charts](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png) | [![Sidebar template: grouped navigation and a welcome page](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png) | [![Navbar template: top navigation and a welcome page](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png) |
 
 - **dashboard**: a sidebar, a top bar, KPI cards, revenue/traffic/order charts, recent orders and activity.
 - **sidebar**: grouped sidebar navigation, a welcome and resources page, and a settings form.
@@ -74,8 +74,9 @@ The pages, layouts and `Theme.cs` move to the `.Client` project for WebAssembly 
 
 ## Contributing
 
-The preview app, build instructions, screenshot setup, theme sync and release process are documented in [CONTRIBUTING.md](CONTRIBUTING.md).
+The preview app, build instructions, screenshot setup, theme sync and release process are documented in [CONTRIBUTING.md](https://github.com/twblazor/twblazor.templates/blob/main/CONTRIBUTING.md).
 
 ## License
 
 MIT
+
