@@ -102,7 +102,7 @@ global.json                   pins the .NET 10 SDK
 
 `templates/twblazor/ui/Theme.cs` is generated from the default theme in the main `twblazor` repository. The canonical source is currently `src/TwBlazor.Theme/Theme.cs`; the sync also checks `src/Theme/Theme.cs` first if the file moves. This is a template copy, not a live dependency: a generated app pins a `twblazor` package version, so its `Theme.cs` must match that version.
 
-The **Update twblazor** workflow checks the latest stable `twblazor` release every day at 06:00 UTC, syncs the theme and package references, builds and tests the result, then opens a pull request to `develop`. It can also be run from **Actions > Update twblazor > Run workflow** with a version, or triggered by a `twblazor-release` repository dispatch. Merging the pull request puts the update into the normal develop -> main release flow.
+The **Update twblazor** workflow checks the latest stable `twblazor` release every day at 06:17 UTC, syncs the theme and package references, builds and tests the result, then opens a pull request to `develop`. It can also be run from **Actions > Update twblazor > Run workflow** with a version, or triggered by a `twblazor-release` repository dispatch. Merging the pull request puts the update into the normal develop -> main release flow.
 
 The workflow uses the same `twblazor-release` GitHub App as the main repository. Install the app on `twblazor.templates` with **Contents: read and write** and **Pull requests: read and write**, and add `RELEASE_BOT_CLIENT_ID` as a repository variable and `RELEASE_BOT_PRIVATE_KEY` as a repository secret.
 
