@@ -8,7 +8,7 @@ internal static class TemplateSource
     /// <summary>
     /// The NuGet package that carries the templates.
     /// </summary>
-    internal const string PackageId = "TwBlazor.Templates";
+    internal const string PackageId = "twblazor.templates";
 
     /// <summary>
     /// Resolves an explicit template source, or falls back to the templates bundled with the tool.
