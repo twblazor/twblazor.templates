@@ -122,8 +122,12 @@ jobs:
             echo "Opened the update pull request."
           else
             COMPARE_URL="https://github.com/$GITHUB_REPOSITORY/compare/develop...$BRANCH?expand=1"
-            GH_TOKEN="$FALLBACK_TOKEN" gh issue create \
-              --title "chore: update twblazor to $VERSION" \
-              --body "The update workflow built and tested a branch that updates Theme.cs and the package references to twblazor $VERSION. Open the pull request from $COMPARE_URL." || true
+            VERSION_TITLE="chore: update twblazor to $VERSION"
+            EXISTING_ISSUE="$(GH_TOKEN="$FALLBACK_TOKEN" gh issue list --state open --limit 100 --json title --jq '.[] | select(.title == env.VERSION_TITLE) | .number' | head -n 1)"
+            if [ -z "$EXISTING_ISSUE" ]; then
+              GH_TOKEN="$FALLBACK_TOKEN" gh issue create \
+                --title "$VERSION_TITLE" \
+                --body "The update workflow built and tested a branch that updates Theme.cs and the package references to twblazor $VERSION. Open the pull request from $COMPARE_URL." || true
+            fi
             echo "::warning::Could not open the pull request. Open it from $COMPARE_URL"
           fi
