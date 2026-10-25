@@ -17,7 +17,6 @@ public static class AppNavigation
     /// </summary>
     public static List<NavigationItem> Sidebar { get; } =
     [
-        new() { Label = "Overview", Href = "/", Icon = Icon.Grid_1X2_Fill },
         new()
         {
             Label = "Workspace",
@@ -25,6 +24,7 @@ public static class AppNavigation
             Collapsed = false,
             NavigationItems =
             [
+                new() { Label = "Overview", Href = "/", Icon = Icon.Grid_1X2_Fill },
                 new() { Label = "Settings", Href = "/settings", Icon = Icon.Gear }
             ]
         },
