@@ -91,7 +91,7 @@ src/TwBlazor.Templates.Cli/   the twblazor command and packable tool
 templates/twblazor/           the dotnet new template
 preview/                      the Server preview app linked to the template UI
 tests/                        tests for the parser, template and locators
-scripts/                      release version helpers and theme sync
+scripts/                      release, theme sync and screenshot helpers
 .github/workflows/            CI, PR checks, theme sync and NuGet publishing
 preview.ps1                   generates and runs a preview app
 .vsconfig                     the Visual Studio workload the solution needs
