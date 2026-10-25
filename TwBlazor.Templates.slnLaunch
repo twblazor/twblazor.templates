@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "Preview",
+    "Projects": [
+      {
+        "Path": "preview\\TwBlazor.Templates.Preview\\TwBlazor.Templates.Preview.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  }
+]

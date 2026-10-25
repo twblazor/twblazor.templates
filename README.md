@@ -81,6 +81,8 @@ dotnet run
 
 The first two commands are needed once. After that the project rebuilds the stylesheet on every build when `node_modules` exists. `wwwroot/css/output.css` is generated and ignored.
 
+In Visual Studio, choose the **Preview** launch profile in the toolbar, or right-click `TwBlazor.Templates.Preview` and choose **Set as Startup Project**. The profile is stored in `TwBlazor.Templates.slnLaunch` so it is shared with everyone who opens the solution.
+
 The preview routes are:
 
 - `/` - dashboard layout

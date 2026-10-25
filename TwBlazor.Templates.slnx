@@ -3,6 +3,7 @@
     <File Path=".vsconfig" />
     <File Path="preview.ps1" />
     <File Path="README.md" />
+    <File Path="TwBlazor.Templates.slnLaunch" />
     <File Path="Directory.Build.props" />
     <File Path=".editorconfig" />
   </Folder>
