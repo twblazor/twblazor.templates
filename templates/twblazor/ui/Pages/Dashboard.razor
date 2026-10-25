@@ -1,4 +1,5 @@
 @page "/"
+@using TwBlazor.Models
 @inject ITwToastService ToastService
 
 <PageTitle>Dashboard</PageTitle>
@@ -80,6 +81,30 @@
                 </TwFlex>
             </TwCard>
         }
+    </TwGrid>
+
+    <TwGrid Cols="1" ColsSm="2" ColsXl="4" Gap="6">
+        <TwGridItem ColSpanSm="2" ColSpanXl="2">
+            <TwChart Title="Revenue" Description="Last 6 months · GBP" Class="h-full rounded-xl border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-white/5">
+                <TwAreaChart Categories="@revenueMonths"
+                             Series="@revenueSeries"
+                             Curve="ChartCurve.Smooth"
+                             ValueFormat="C0" />
+            </TwChart>
+        </TwGridItem>
+
+        <TwChart Title="Traffic by source" Description="Visits this month" Class="h-full rounded-xl border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-white/5">
+            <TwPieChart Data="@trafficSources"
+                        InnerRadius="0.6"
+                        CenterText="4,120"
+                        ValueFormat="N0" />
+        </TwChart>
+
+        <TwChart Title="Orders this week" Description="Last 5 days" Class="h-full rounded-xl border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-white/5">
+            <TwColumnChart Categories="@orderDays"
+                           Series="@orderSeries"
+                           ValueFormat="N0" />
+        </TwChart>
     </TwGrid>
 
     <TwGrid Cols="1" ColsLg="3" Gap="6">
@@ -174,6 +199,28 @@
         new("Orders", "1,284", "+8.2% this month", Icon.Cart_Fill),
         new("Customers", "892", "+3.1% this month", Icon.People),
         new("Refund rate", "1.2%", "-0.3% this month", Icon.Shield_Check)
+    ];
+
+    private static readonly string[] revenueMonths = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+
+    private static readonly ChartSeries[] revenueSeries =
+    [
+        new("Revenue", [28400, 31200, 33800, 35600, 39400, 42180])
+    ];
+
+    private static readonly ChartValue[] trafficSources =
+    [
+        new("Search", 1840),
+        new("Direct", 1120),
+        new("Social", 760),
+        new("Email", 400)
+    ];
+
+    private static readonly string[] orderDays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+
+    private static readonly ChartSeries[] orderSeries =
+    [
+        new("Orders", [84, 92, 78, 105, 96])
     ];
 
     private static readonly Order[] orders =
