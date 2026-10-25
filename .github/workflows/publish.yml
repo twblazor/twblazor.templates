@@ -96,9 +96,20 @@ jobs:
       version: ${{ steps.version.outputs.version }}
 
     steps:
+      # GITHUB_TOKEN is subject to branch protection, so the app token is used
+      # for checkout, tag pushes and the develop back-merge. The app is on the
+      # ruleset's bypass list, as in the main twblazor repository.
+      - name: Create app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v5
         with:
+          token: ${{ steps.app-token.outputs.token }}
           fetch-depth: 0    # MinVer needs full history to measure commit height
           fetch-tags: true  # ...and every release tag to find the base version
 
@@ -143,6 +154,16 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
+
+      - name: Check theme matches twblazor
+        shell: pwsh
+        run: |
+          $project = Get-Content templates/twblazor/host/TwBlazorApp.csproj -Raw
+          $match = [regex]::Match($project, '<PackageReference[^>]*Include="twblazor"[^>]*Version="([^"]+)"')
+          if (-not $match.Success) {
+              throw "Could not find the twblazor PackageReference in the template host project."
+          }
+          ./scripts/sync-theme.ps1 -Ref "v$($match.Groups[1].Value)" -Check
 
       - name: Restore
         run: dotnet restore TwBlazor.Templates.slnx
@@ -198,7 +219,7 @@ jobs:
 
       - name: Back-merge into develop
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
           REPO: ${{ github.repository }}
         shell: bash
         run: |

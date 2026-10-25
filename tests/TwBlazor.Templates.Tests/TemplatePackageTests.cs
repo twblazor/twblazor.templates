@@ -12,6 +12,7 @@ public sealed class TemplatePackageTests
     [InlineData("ui/Layout/NavbarLayout.razor")]
     [InlineData("ui/Pages/Dashboard.razor")]
     [InlineData("ui/Pages/Welcome.razor")]
+    [InlineData("ui/Pages/WelcomeContent.razor")]
     [InlineData("ui/Pages/Settings.razor")]
     [InlineData("ui/Pages/NotFound.razor")]
     [InlineData("ui/AppNavigation.cs")]
@@ -46,6 +47,36 @@ public sealed class TemplatePackageTests
     }
 
     [Fact]
+    public void Template_LaunchSettingsHaveNoWslProfile()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        var launchSettingsFiles = Directory.GetFiles(templateDirectory, "launchSettings.json", SearchOption.AllDirectories);
+
+        Assert.NotEmpty(launchSettingsFiles);
+        Assert.All(launchSettingsFiles, file =>
+        {
+            var json = File.ReadAllText(file);
+
+            Assert.DoesNotContain("\"WSL\"", json, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("\"commandName\": \"WSL", json, StringComparison.OrdinalIgnoreCase);
+        });
+    }
+
+    [Fact]
+    public void Preview_LaunchSettingsHaveNoWslProfile()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        var repositoryRoot = Directory.GetParent(templateDirectory)!.Parent!.FullName;
+        var launchSettings = Path.Combine(repositoryRoot, "preview", "TwBlazor.Templates.Preview", "Properties", "launchSettings.json");
+
+        Assert.True(File.Exists(launchSettings), $"{launchSettings} is missing.");
+
+        var json = File.ReadAllText(launchSettings);
+        Assert.DoesNotContain("\"WSL\"", json, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("\"commandName\": \"WSL", json, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void Template_UsesThePublishedTwBlazorPackage()
     {
         var templateDirectory = FindTemplateDirectory();
@@ -57,7 +88,8 @@ public sealed class TemplatePackageTests
 
         Assert.All(projects, project =>
         {
-            Assert.Contains("<PackageReference Include=\"twblazor\" Version=\"3.0.0\" />", project);
+            Assert.Contains("<PackageReference Include=\"twblazor\" Version=\"", project);
+            Assert.Matches("<PackageReference Include=\"twblazor\" Version=\"[^\"]+\" />", project);
             Assert.DoesNotContain("TWLBLAZOR_PROJECT_PATH", project);
         });
     }

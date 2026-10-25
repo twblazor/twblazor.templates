@@ -46,6 +46,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
+      - name: Check theme matches twblazor
+        shell: pwsh
+        run: |
+          $project = Get-Content templates/twblazor/host/TwBlazorApp.csproj -Raw
+          $match = [regex]::Match($project, '<PackageReference[^>]*Include="twblazor"[^>]*Version="([^"]+)"')
+          if (-not $match.Success) {
+              throw "Could not find the twblazor PackageReference in the template host project."
+          }
+          ./scripts/sync-theme.ps1 -Ref "v$($match.Groups[1].Value)" -Check
+
       - name: Compute preview version
         id: version
         shell: pwsh

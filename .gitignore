@@ -11,12 +11,16 @@ TestResults/
 # Node
 node_modules/
 
+# Generated preview stylesheet
+preview/TwBlazor.Templates.Preview/wwwroot/css/output.css
+
 # IDE
 .vs/
 .vscode/
 .idea/
 *.user
 *.suo
+*.slnLaunch.user
 
 # OS
 .DS_Store

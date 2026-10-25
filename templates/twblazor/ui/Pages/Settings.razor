@@ -3,31 +3,31 @@
 
 <PageTitle>Settings</PageTitle>
 
-<div class="mx-auto w-full max-w-3xl space-y-6">
-    <header>
+<TwContainer MaxWidth="ContainerSize.Xl4" Gutter="0" Class="space-y-6">
+    <TwFlex Element="LayoutElement.Header" Direction="FlexDirection.Col" Gap="1">
         <p class="text-xs font-semibold uppercase tracking-widest text-purple-700 dark:text-purple-300">Account</p>
-        <h1 class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Manage your profile and choose what you hear about.</p>
-    </header>
+        <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Manage your profile and choose what you hear about.</p>
+    </TwFlex>
 
     <TwCard Title="Profile" TitleLevel="2">
         <HeaderContent>
             <p class="text-sm text-gray-600 dark:text-gray-400">This is how you appear across the app.</p>
         </HeaderContent>
         <ChildContent>
-            <div class="grid gap-4 sm:grid-cols-2">
-                <TwTextfield Label="First name" @bind-Value="firstName" Placeholder="Jane" />
-                <TwTextfield Label="Last name" @bind-Value="lastName" Placeholder="Doe" />
-                <TwTextfield Label="Email" @bind-Value="email" InputType="email" Placeholder="jane@example.com" />
-                <TwTextfield Label="Role" @bind-Value="role" Placeholder="Product lead" />
-            </div>
-            <div class="mt-5 flex justify-end">
+            <TwGrid Cols="1" ColsSm="2" Gap="4">
+                <TwTextfield Label="First name" @bind-Value="firstName" Placeholder="Your first name" />
+                <TwTextfield Label="Last name" @bind-Value="lastName" Placeholder="Your last name" />
+                <TwTextfield Label="Email" @bind-Value="email" InputType="email" Placeholder="you@example.com" />
+                <TwTextfield Label="Role" @bind-Value="role" Placeholder="Your role" />
+            </TwGrid>
+            <TwFlex Justify="JustifyContent.End" Class="mt-5">
                 <TwButton Label="Save changes"
                           Variant="ButtonVariant.Filled"
                           Color="Color.Primary"
                           StartIcon="Icon.Check_Lg"
                           OnClick="Save" />
-            </div>
+            </TwFlex>
         </ChildContent>
     </TwCard>
 
@@ -36,36 +36,34 @@
             <p class="text-sm text-gray-600 dark:text-gray-400">Pick the updates that are worth interrupting you for.</p>
         </HeaderContent>
         <ChildContent>
-            <div class="space-y-4">
+            <TwFlex Direction="FlexDirection.Col" Gap="4">
                 <TwSwitch @bind-Value="productUpdates" Label="Product updates" Color="Color.Primary" />
                 <TwSwitch @bind-Value="weeklyDigest" Label="Weekly digest" Color="Color.Primary" />
                 <TwSwitch @bind-Value="securityAlerts" Label="Security alerts" Color="Color.Primary" />
-            </div>
+            </TwFlex>
         </ChildContent>
     </TwCard>
 
     <TwCard Title="Danger zone" TitleLevel="2">
-        <ChildContent>
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                    <p class="text-sm font-medium">Delete your account</p>
-                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">This removes your profile and every page you have created.</p>
-                </div>
-                <TwButton Label="Delete account"
-                          Variant="ButtonVariant.Outlined"
-                          Color="Color.Danger"
-                          StartIcon="Icon.Trash"
-                          OnClick="ShowDeleteToast" />
-            </div>
-        </ChildContent>
+        <TwFlex Direction="FlexDirection.Col" DirectionSm="FlexDirection.Row" Justify="JustifyContent.Between" Align="AlignItems.Center" Gap="3">
+            <TwFlexItem MinWidthZero>
+                <p class="text-sm font-medium">Delete your account</p>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">This removes your profile and every page you have created.</p>
+            </TwFlexItem>
+            <TwButton Label="Delete account"
+                      Variant="ButtonVariant.Outlined"
+                      Color="Color.Danger"
+                      StartIcon="Icon.Trash"
+                      OnClick="ShowDeleteToast" />
+        </TwFlex>
     </TwCard>
-</div>
+</TwContainer>
 
 @code {
-    private string firstName = "Jane";
-    private string lastName = "Doe";
-    private string email = "jane@example.com";
-    private string role = "Product lead";
+    private string firstName = string.Empty;
+    private string lastName = string.Empty;
+    private string email = string.Empty;
+    private string role = string.Empty;
 
     private bool productUpdates = true;
     private bool weeklyDigest = true;

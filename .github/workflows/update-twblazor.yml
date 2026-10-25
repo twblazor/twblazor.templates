@@ -1,0 +1,133 @@
+name: Update twblazor
+
+# Keeps the template's Theme.cs and package references aligned with the latest
+# stable twblazor release. The generated app still gets a template snapshot:
+# the update opens a reviewable PR, then the usual release workflow publishes
+# a new twblazor.templates version after it is merged.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'twblazor version, for example 3.1.0. Leave blank for the latest stable release.'
+        required: false
+        type: string
+  repository_dispatch:
+    types: [twblazor-release]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-twblazor
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Sync the theme and package references
+    runs-on: ubuntu-latest
+    steps:
+      # Use the same twblazor-release bot as the main repository. The built-in
+      # GITHUB_TOKEN cannot open pull requests in this organisation.
+      - name: Create app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Checkout develop
+        uses: actions/checkout@v5
+        with:
+          ref: develop
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Resolve twblazor version
+        id: version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_VERSION: ${{ inputs.version }}
+          DISPATCH_VERSION: ${{ github.event.client_payload.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="${INPUT_VERSION:-${DISPATCH_VERSION:-}}"
+          VERSION="${VERSION#v}"
+
+          if [ -z "$VERSION" ]; then
+            TAG="$(gh api repos/twblazor/twblazor/releases/latest --jq .tag_name)"
+            VERSION="${TAG#v}"
+          fi
+
+          if [ -z "$VERSION" ]; then
+            echo "::error::Could not resolve a twblazor version."
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Resolved twblazor $VERSION."
+
+      - name: Update Theme.cs and package references
+        shell: pwsh
+        run: ./scripts/update-twblazor.ps1 -Version '${{ steps.version.outputs.version }}' -Ref '${{ steps.version.outputs.tag }}'
+
+      - name: Restore
+        run: dotnet restore TwBlazor.Templates.slnx
+
+      - name: Build
+        run: dotnet build TwBlazor.Templates.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test TwBlazor.Templates.slnx -c Release --no-build
+
+      - name: Check for changes
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "The templates already match twblazor ${{ steps.version.outputs.version }}."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BRANCH="chore/twblazor-$VERSION"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add templates preview
+          git commit -m "chore: update twblazor to $VERSION"
+          git push --force origin "$BRANCH"
+
+          BODY="Updates the template Theme.cs and package references to twblazor $VERSION. The update workflow built and tested this branch."
+
+          if gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+            echo "Updated the existing pull request."
+          else
+            gh pr create \
+              --base develop \
+              --head "$BRANCH" \
+              --title "chore: update twblazor to $VERSION" \
+              --body "$BODY"
+          fi
