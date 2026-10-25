@@ -12,6 +12,7 @@ public sealed class TemplatePackageTests
     [InlineData("ui/Layout/NavbarLayout.razor")]
     [InlineData("ui/Pages/Dashboard.razor")]
     [InlineData("ui/Pages/Welcome.razor")]
+    [InlineData("ui/Pages/WelcomeContent.razor")]
     [InlineData("ui/Pages/Settings.razor")]
     [InlineData("ui/Pages/NotFound.razor")]
     [InlineData("ui/AppNavigation.cs")]

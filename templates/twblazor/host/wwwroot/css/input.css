@@ -4,6 +4,11 @@
 @source "../../../**/*.razor";
 @source "../../../**/Theme.cs";
 
+/* FocusOnNavigate moves focus to the page heading; a heading does not need a visible focus ring. */
+h1:focus {
+    outline: none;
+}
+
 /* Powers TwSkeleton's wave animation and TwProgress's Animated shimmer. */
 @keyframes tw-wave {
     0% {

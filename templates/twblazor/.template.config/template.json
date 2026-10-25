@@ -120,7 +120,7 @@
         { "condition": "(layout != \"dashboard\")", "exclude": [ "Pages/Dashboard.razor", "Layout/DashboardLayout.razor" ] },
         { "condition": "(layout != \"sidebar\")", "exclude": [ "Layout/SidebarLayout.razor" ] },
         { "condition": "(layout != \"navbar\")", "exclude": [ "Layout/NavbarLayout.razor" ] },
-        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor" ] }
+        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor", "Pages/WelcomeContent.razor" ] }
       ]
     },
     {
@@ -136,7 +136,7 @@
         { "condition": "(layout != \"dashboard\")", "exclude": [ "Pages/Dashboard.razor", "Layout/DashboardLayout.razor" ] },
         { "condition": "(layout != \"sidebar\")", "exclude": [ "Layout/SidebarLayout.razor" ] },
         { "condition": "(layout != \"navbar\")", "exclude": [ "Layout/NavbarLayout.razor" ] },
-        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor" ] }
+        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor", "Pages/WelcomeContent.razor" ] }
       ]
     }
   ],
