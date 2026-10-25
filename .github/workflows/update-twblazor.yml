@@ -17,9 +17,7 @@ on:
     types: [twblazor-release]
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: read
 
 concurrency:
   group: update-twblazor
@@ -30,11 +28,25 @@ jobs:
     name: Sync the theme and package references
     runs-on: ubuntu-latest
     steps:
+      # Use the same twblazor-release bot as the main repository. The built-in
+      # GITHUB_TOKEN cannot open pull requests in this organisation.
+      - name: Create app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+
       - name: Checkout develop
         uses: actions/checkout@v5
         with:
           ref: develop
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v5
@@ -94,8 +106,7 @@ jobs:
       - name: Create or update pull request
         if: steps.changes.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.SYNC_TOKEN || secrets.GITHUB_TOKEN }}
-          FALLBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
           VERSION: ${{ steps.version.outputs.version }}
         shell: bash
         run: |
@@ -112,22 +123,11 @@ jobs:
           BODY="Updates the template Theme.cs and package references to twblazor $VERSION. The update workflow built and tested this branch."
 
           if gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
-            gh pr edit "$BRANCH" --add-label release:patch
-          elif gh pr create \
+            echo "Updated the existing pull request."
+          else
+            gh pr create \
               --base develop \
               --head "$BRANCH" \
               --title "chore: update twblazor to $VERSION" \
-              --body "$BODY" \
-              --label release:patch; then
-            echo "Opened the update pull request."
-          else
-            COMPARE_URL="https://github.com/$GITHUB_REPOSITORY/compare/develop...$BRANCH?expand=1"
-            VERSION_TITLE="chore: update twblazor to $VERSION"
-            EXISTING_ISSUE="$(GH_TOKEN="$FALLBACK_TOKEN" gh issue list --state open --limit 100 --json title --jq '.[] | select(.title == env.VERSION_TITLE) | .number' | head -n 1)"
-            if [ -z "$EXISTING_ISSUE" ]; then
-              GH_TOKEN="$FALLBACK_TOKEN" gh issue create \
-                --title "$VERSION_TITLE" \
-                --body "The update workflow built and tested a branch that updates Theme.cs and the package references to twblazor $VERSION. Open the pull request from $COMPARE_URL." || true
-            fi
-            echo "::warning::Could not open the pull request. Open it from $COMPARE_URL"
+              --body "$BODY"
           fi
