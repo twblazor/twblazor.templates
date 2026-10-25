@@ -1,4 +1,4 @@
-[![twblazor: Tailwind CSS components for Blazor](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/readme-banner.png)](https://twblazor.com/)
+[![twblazor: Tailwind CSS components for Blazor](https://raw.githubusercontent.com/twblazor/twblazor/main/images/readme-banner.png)](https://twblazor.com/)
 
 # twblazor.templates
 
