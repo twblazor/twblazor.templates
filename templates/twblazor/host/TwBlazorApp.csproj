@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="twblazor" Version="3.0.0" />
+    <!--#if (HasClient) -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.13" />
+    <!--#endif -->
+  </ItemGroup>
+  <!--#if (HasClient) -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\TwBlazorApp.Client\TwBlazorApp.Client.csproj" />
+  </ItemGroup>
+  <!--#endif -->
+
+  <!-- Tailwind cannot read classes from a .dll, so the app builds its own stylesheet from the markup and Theme.cs. -->
+  <Target Name="BuildTailwindCss" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)/../node_modules/.bin')">
+    <Exec Command="npm run build:css" WorkingDirectory="$(MSBuildProjectDirectory)/.." />
+  </Target>
+
+</Project>

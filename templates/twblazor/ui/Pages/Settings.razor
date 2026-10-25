@@ -1,0 +1,79 @@
+@page "/settings"
+@inject ITwToastService ToastService
+
+<PageTitle>Settings</PageTitle>
+
+<div class="mx-auto w-full max-w-3xl space-y-6">
+    <header>
+        <p class="text-xs font-semibold uppercase tracking-widest text-purple-700 dark:text-purple-300">Account</p>
+        <h1 class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Manage your profile and choose what you hear about.</p>
+    </header>
+
+    <TwCard Title="Profile" TitleLevel="2">
+        <HeaderContent>
+            <p class="text-sm text-gray-600 dark:text-gray-400">This is how you appear across the app.</p>
+        </HeaderContent>
+        <ChildContent>
+            <div class="grid gap-4 sm:grid-cols-2">
+                <TwTextfield Label="First name" @bind-Value="firstName" Placeholder="Jane" />
+                <TwTextfield Label="Last name" @bind-Value="lastName" Placeholder="Doe" />
+                <TwTextfield Label="Email" @bind-Value="email" InputType="email" Placeholder="jane@example.com" />
+                <TwTextfield Label="Role" @bind-Value="role" Placeholder="Product lead" />
+            </div>
+            <div class="mt-5 flex justify-end">
+                <TwButton Label="Save changes"
+                          Variant="ButtonVariant.Filled"
+                          Color="Color.Primary"
+                          StartIcon="Icon.Check_Lg"
+                          OnClick="Save" />
+            </div>
+        </ChildContent>
+    </TwCard>
+
+    <TwCard Title="Notifications" TitleLevel="2">
+        <HeaderContent>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Pick the updates that are worth interrupting you for.</p>
+        </HeaderContent>
+        <ChildContent>
+            <div class="space-y-4">
+                <TwSwitch @bind-Value="productUpdates" Label="Product updates" Color="Color.Primary" />
+                <TwSwitch @bind-Value="weeklyDigest" Label="Weekly digest" Color="Color.Primary" />
+                <TwSwitch @bind-Value="securityAlerts" Label="Security alerts" Color="Color.Primary" />
+            </div>
+        </ChildContent>
+    </TwCard>
+
+    <TwCard Title="Danger zone" TitleLevel="2">
+        <ChildContent>
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-medium">Delete your account</p>
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">This removes your profile and every page you have created.</p>
+                </div>
+                <TwButton Label="Delete account"
+                          Variant="ButtonVariant.Outlined"
+                          Color="Color.Danger"
+                          StartIcon="Icon.Trash"
+                          OnClick="ShowDeleteToast" />
+            </div>
+        </ChildContent>
+    </TwCard>
+</div>
+
+@code {
+    private string firstName = "Jane";
+    private string lastName = "Doe";
+    private string email = "jane@example.com";
+    private string role = "Product lead";
+
+    private bool productUpdates = true;
+    private bool weeklyDigest = true;
+    private bool securityAlerts = true;
+
+    private void Save() =>
+        ToastService.ShowSuccess("Settings saved", "Your profile is up to date.");
+
+    private void ShowDeleteToast() =>
+        ToastService.ShowWarning("Delete account", "This is a starter, so there is nothing to delete.");
+}

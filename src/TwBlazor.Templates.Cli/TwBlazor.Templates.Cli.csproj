@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>TwBlazor.Templates.Cli</AssemblyName>
+    <RootNamespace>TwBlazor.Templates.Cli</RootNamespace>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>twblazor</ToolCommandName>
+    <PackageId>TwBlazor.Templates</PackageId>
+    <Authors>twblazor</Authors>
+    <Company>twblazor</Company>
+    <Description>Scaffold a Blazor Web App with twblazor and a dashboard, sidebar or navbar layout.</Description>
+    <PackageProjectUrl>https://twblazor.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/twblazor/twblazor.templates</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>blazor;tailwindcss;templates;dotnet-new;twblazor</PackageTags>
+    <!-- Versioning (MinVer). The version comes from Git tags: a tagged commit
+         builds that exact version, and commits after it build the next patch as
+         a preview. Nothing in the repository stores the version. -->
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleaseIdentifiers>preview</MinVerDefaultPreReleaseIdentifiers>
+    <!-- Hot reload compiles without MinVer, so skip it in Debug and keep every
+         Debug build on the same 1.0.0.0 assembly version. Packages are Release. -->
+    <MinVerSkip Condition="'$(Configuration)' == 'Debug'">true</MinVerSkip>
+    <!-- The template needs .template.config and .gitignore, which NuGet excludes by default. -->
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="TwBlazor.Templates.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../templates/twblazor/**/*"
+          Exclude="../../templates/twblazor/**/bin/**;../../templates/twblazor/**/obj/**;../../templates/twblazor/**/.vs/**;../../templates/twblazor/**/node_modules/**"
+          Pack="true"
+          PackagePath="tools/$(TargetFramework)/any/templates/twblazor/" />
+  </ItemGroup>
+
+</Project>

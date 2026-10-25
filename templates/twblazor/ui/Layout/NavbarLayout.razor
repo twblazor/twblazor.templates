@@ -1,0 +1,49 @@
+@inherits LayoutComponentBase
+@inject ITwToastService ToastService
+
+<TwToastProvider />
+<TwDialogProvider />
+
+<div class="flex min-h-dvh flex-col">
+    <TwNavbar NavigationItems="@AppNavigation.Top">
+        <BrandContent>
+            <a href="/" class="flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-600">
+                <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-purple-600 to-fuchsia-500 text-white shadow-sm">
+                    <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-lg" />
+                </span>
+                <span class="text-base font-semibold tracking-tight">TwBlazorApp</span>
+            </a>
+        </BrandContent>
+        <ActionsContent>
+            <TwButton Label="Sign in"
+                      Variant="ButtonVariant.Text"
+                      Color="Color.Dark"
+                      Dense
+                      OnClick="ShowSignInToast" />
+            <TwButton Label="Get started"
+                      Variant="ButtonVariant.Filled"
+                      Color="Color.Primary"
+                      Dense
+                      Href="/settings" />
+        </ActionsContent>
+    </TwNavbar>
+
+    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+        @Body
+    </main>
+
+    <footer class="border-t border-gray-200 dark:border-white/10">
+        <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-gray-500 sm:flex-row sm:px-6 lg:px-8 dark:text-gray-400">
+            <p>&copy; @DateTime.Now.Year TwBlazorApp. Built with twblazor.</p>
+            <nav class="flex items-center gap-5" aria-label="Footer">
+                <a href="https://twblazor.com" target="_blank" rel="noreferrer" class="font-medium hover:text-gray-900 dark:hover:text-white">Documentation</a>
+                <a href="/settings" class="font-medium hover:text-gray-900 dark:hover:text-white">Settings</a>
+            </nav>
+        </div>
+    </footer>
+</div>
+
+@code {
+    private void ShowSignInToast() =>
+        ToastService.ShowInfo("Sign in", "Connect this button to your own authentication flow.");
+}

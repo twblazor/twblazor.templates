@@ -1,0 +1,34 @@
+name: PR Checks (main)
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  verify-branch-policy:
+    name: Verify Branch Policy
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify source branch
+        shell: bash
+        run: |
+          if [ "${{ github.head_ref }}" != "develop" ]; then
+            echo "::error::PRs to main must originate from the develop branch. Merge into develop first."
+            exit 1
+          fi
+          echo "Branch policy check passed."
+
+  build-and-test:
+    name: Build and Test
+    uses: ./.github/workflows/build-and-test.yml
+    with:
+      configuration: Release
+
+

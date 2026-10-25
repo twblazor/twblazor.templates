@@ -1,0 +1,93 @@
+name: Publish Develop Preview
+
+# Publishes a preview of develop on every push. The version is derived by
+# MinVer from the newest release tag plus the number of commits since it:
+#
+#   tag v1.0.0, 3 commits later -> 1.0.1-preview.3
+#   one more commit             -> 1.0.1-preview.4
+#
+# Previews go to GitHub Packages. NuGet.org only receives stable releases from
+# publish.yml, so a develop push never claims a stable NuGet version.
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+  packages: write
+  actions: write
+
+concurrency:
+  group: publish-develop
+  cancel-in-progress: true
+
+jobs:
+  publish-preview:
+    name: Build and Publish Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0    # MinVer needs full history to measure commit height
+          fetch-tags: true  # ...and every release tag to find the base version
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Compute preview version
+        id: version
+        shell: pwsh
+        run: ./scripts/next-preview-version.ps1
+
+      - name: Restore
+        run: dotnet restore TwBlazor.Templates.slnx
+
+      - name: Build
+        run: dotnet build TwBlazor.Templates.slnx -c Release --no-restore -p:MinVerVersionOverride=${{ steps.version.outputs.version }}
+
+      - name: Test
+        run: dotnet test TwBlazor.Templates.slnx -c Release --no-build -p:MinVerVersionOverride=${{ steps.version.outputs.version }}
+
+      - name: Pack
+        run: dotnet pack src/TwBlazor.Templates.Cli/TwBlazor.Templates.Cli.csproj -c Release --no-build -o artifacts -p:MinVerVersionOverride=${{ steps.version.outputs.version }}
+
+      - name: Verify packed version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ls -1 ./artifacts
+          if [ ! -f "./artifacts/TwBlazor.Templates.$VERSION.nupkg" ]; then
+            echo "::error::Expected ./artifacts/TwBlazor.Templates.$VERSION.nupkg."
+            exit 1
+          fi
+          case "$VERSION" in
+            *-preview.*) echo "Packed TwBlazor.Templates $VERSION" ;;
+            *) echo "::error::develop must only publish previews, got $VERSION."; exit 1 ;;
+          esac
+
+      - name: Publish to GitHub Packages
+        env:
+          NUGET_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget push "./artifacts/*.nupkg" --source "https://nuget.pkg.github.com/TwBlazor/index.json" --api-key "$NUGET_API_KEY" --skip-duplicate
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package-preview
+          path: artifacts/*.nupkg
+
+

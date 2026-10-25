@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Scans every project in the solution, including the classes the components use in Theme.cs. */
+@source "../../../**/*.razor";
+@source "../../../**/Theme.cs";
+
+/* Powers TwSkeleton's wave animation and TwProgress's Animated shimmer. */
+@keyframes tw-wave {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50%,
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.tw-wave::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, var(--tw-wave-color, rgb(255 255 255 / 40%)), transparent);
+    animation: tw-wave 1.6s linear infinite;
+}
+
+.dark .tw-wave::after {
+    background: linear-gradient(90deg, transparent, var(--tw-wave-color, rgb(255 255 255 / 8%)), transparent);
+}
+
+/* Powers TwIcon's pulse animation. */
+.tw-icon-pulse::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: currentColor;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 500ms ease-out, opacity 450ms ease-out;
+    pointer-events: none;
+}
+
+.tw-icon-pulse:active::after {
+    opacity: 0.25;
+    transform: scale(1);
+    transition: transform 120ms ease-out, opacity 80ms ease-out;
+}
+
+/* Powers TwRating's pop when a rating is picked. Each pick flips data-pop between 0 and 1, and with it the
+   keyframe name, because re-applying the same animation to an element does not replay it. */
+@keyframes tw-rating-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.35);
+    }
+
+    65% {
+        transform: scale(0.92);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes tw-rating-pop-alt {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.35);
+    }
+
+    65% {
+        transform: scale(0.92);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tw-rating-pop {
+    animation: tw-rating-pop 420ms ease-out both;
+}
+
+.tw-rating-pop[data-pop="1"] {
+    animation-name: tw-rating-pop-alt;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tw-wave::after {
+        animation: none;
+    }
+
+    .tw-icon-pulse::after {
+        transition: none;
+    }
+
+    .tw-rating-pop {
+        animation: none;
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "interactivity": {
+      "longName": "interactivity",
+      "shortName": "int"
+    },
+    "layout": {
+      "longName": "layout",
+      "shortName": "l"
+    },
+    "kestrelHttpPort": {
+      "isHidden": true
+    },
+    "kestrelHttpsPort": {
+      "isHidden": true
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TwBlazorApp/TwBlazorApp.csproj" />
+  <!--#if (HasClient) -->
+  <Project Path="TwBlazorApp.Client/TwBlazorApp.Client.csproj" />
+  <!--#endif -->
+</Solution>

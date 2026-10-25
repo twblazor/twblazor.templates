@@ -1,0 +1,35 @@
+@inject TwBlazorOptions TwOptions
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <ResourcePreloader />
+    <link rel="stylesheet" href="@Assets["_content/twblazor/icons/bootstrap-icons.min.css"]" />
+    <link rel="stylesheet" href="@Assets["css/output.css"]" />
+    <ImportMap />
+    @*#if (UseServer)
+    <HeadOutlet @rendermode="InteractiveServer" />
+    ##elseif (UseWebAssembly)
+    <HeadOutlet @rendermode="InteractiveWebAssembly" />
+    ##else
+    <HeadOutlet @rendermode="InteractiveAuto" />
+    ##endif*@
+</head>
+
+<body class="min-h-dvh antialiased @TwOptions.Theme.Colors.NeutralSurface.Body @TwOptions.Theme.Colors.NeutralText.Heading">
+    @*#if (UseServer)
+    <Routes @rendermode="InteractiveServer" />
+    ##elseif (UseWebAssembly)
+    <Routes @rendermode="InteractiveWebAssembly" />
+    ##else
+    <Routes @rendermode="InteractiveAuto" />
+    ##endif*@
+    <script src="@Assets["_content/twblazor/js/twblazor.js"]"></script>
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
+</body>
+
+</html>

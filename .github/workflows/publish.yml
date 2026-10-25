@@ -1,0 +1,214 @@
+name: Publish Release
+
+# Cuts a stable release of main. The version is decided by the release:major /
+# release:minor / release:patch label on the pull request that was merged
+# (enforced before merge by pr-release-label.yml), turned into a Git tag here.
+# That tag is the only record of the version: MinVer reads it at build time, so
+# nothing in the repository needs to be edited or committed in order to release.
+# release:none skips the release job entirely.
+#
+# The release job uses the "release" environment, so it waits for an approver
+# before anything is tagged or published.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump for this release
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        default: patch
+
+permissions:
+  contents: write
+  packages: write
+  actions: write
+  id-token: write
+
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+
+jobs:
+  determine-bump:
+    name: Determine Version Bump
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read   # read the merged PR's release: label
+    outputs:
+      skip: ${{ steps.bump.outputs.skip }}
+      bump: ${{ steps.bump.outputs.bump }}
+
+    steps:
+      - name: Determine version bump
+        id: bump
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_BUMP: ${{ inputs.bump }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "Manual dispatch requested a '$INPUT_BUMP' bump."
+            echo "bump=$INPUT_BUMP" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          LABELS="$(gh api "repos/$REPO/commits/$SHA/pulls" --jq '.[].labels[].name' || true)"
+          echo "Labels on the pull request for $SHA: ${LABELS:-(none)}"
+
+          if echo "$LABELS" | grep -qx 'release:none'; then
+            echo "The merged pull request is labelled 'release:none'; skipping the release."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          BUMPS="$(echo "$LABELS" | grep -E '^release:(major|minor|patch)$' | sort -u | xargs || true)"
+          COUNT="$(echo "$BUMPS" | wc -w)"
+
+          if [ "$COUNT" -eq 1 ]; then
+            echo "bump=${BUMPS#release:}" >> "$GITHUB_OUTPUT"
+          elif [ "$COUNT" -gt 1 ]; then
+            echo "::error::The pull request for $SHA carries more than one release bump label ($BUMPS), so the version is ambiguous and nothing was published."
+            exit 1
+          else
+            echo "::error::No release:major, release:minor or release:patch label found on the pull request for $SHA, so nothing was published. To release this commit, run this workflow manually (Actions -> Publish Release -> Run workflow) and choose a bump."
+            exit 1
+          fi
+
+  release:
+    name: Tag, Build and Publish Release
+    needs: determine-bump
+    if: needs.determine-bump.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    environment: release
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0    # MinVer needs full history to measure commit height
+          fetch-tags: true  # ...and every release tag to find the base version
+
+      - name: Compute release version
+        id: version
+        shell: pwsh
+        run: |
+          $existing = @(git tag --list --points-at HEAD | Where-Object { $_ -match '^v\d+\.\d+\.\d+$' })
+          if ($existing.Count -gt 0) {
+              $tag = $existing[0]
+              Write-Host "HEAD is already tagged $tag; reusing that version."
+              "version=$($tag.Substring(1))" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+              "tag=$tag"                     | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          } else {
+              ./scripts/next-release-version.ps1 -Bump '${{ needs.determine-bump.outputs.bump }}'
+          }
+
+      - name: Create release tag
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "Tag $TAG already exists."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag -a "$TAG" -m "Release $TAG"
+          fi
+          git push origin "refs/tags/$TAG"
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore
+        run: dotnet restore TwBlazor.Templates.slnx
+
+      - name: Build
+        run: dotnet build TwBlazor.Templates.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test TwBlazor.Templates.slnx -c Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/TwBlazor.Templates.Cli/TwBlazor.Templates.Cli.csproj -c Release --no-build -o artifacts
+
+      - name: Verify packed version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ls -1 ./artifacts
+          if [ ! -f "./artifacts/TwBlazor.Templates.$VERSION.nupkg" ]; then
+            echo "::error::Expected ./artifacts/TwBlazor.Templates.$VERSION.nupkg but MinVer produced something else."
+            exit 1
+          fi
+          echo "Packed TwBlazor.Templates $VERSION"
+
+      - name: Publish to GitHub Packages
+        env:
+          NUGET_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget push "./artifacts/*.nupkg" --source "https://nuget.pkg.github.com/TwBlazor/index.json" --api-key "$NUGET_API_KEY" --skip-duplicate
+
+      - name: NuGet login (OIDC to temporary API key)
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ secrets.NUGET_ORG_USERNAME }}
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push "./artifacts/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --skip-duplicate
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.version.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "GitHub Release $TAG already exists."
+          else
+            gh release create "$TAG" --title "$TAG" --generate-notes ./artifacts/*.nupkg
+          fi
+
+      - name: Back-merge into develop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          SHA="$(git rev-parse HEAD)"
+          if OUT="$(gh api -X PATCH "repos/$REPO/git/refs/heads/develop" -F sha="$SHA" -F force=false 2>&1)"; then
+            echo "Fast-forwarded develop to $SHA."
+          else
+            echo "$OUT"
+            echo "::warning::Could not fast-forward develop to $SHA; it has likely moved on since this release started. Merge main into develop by hand."
+          fi
+
+

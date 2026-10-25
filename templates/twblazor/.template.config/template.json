@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "twblazor",
+  "classifications": [ "Web", "Blazor", "WebAssembly", "Tailwind" ],
+  "identity": "TwBlazor.Templates.App.CSharp",
+  "groupIdentity": "TwBlazor.Templates.App",
+  "name": "twblazor App",
+  "shortName": "twblazor",
+  "defaultName": "TwBlazorApp",
+  "description": "A Blazor Web App styled with twblazor and Tailwind CSS, with a dashboard, sidebar or navbar layout.",
+  "sourceName": "TwBlazorApp",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "symbols": {
+    "interactivity": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "Server",
+      "description": "Where the app's interactive components run.",
+      "choices": [
+        { "choice": "Server", "description": "Runs on the server over a SignalR connection." },
+        { "choice": "WebAssembly", "description": "Runs in the browser using WebAssembly." },
+        { "choice": "Auto", "description": "Runs on the server while the WebAssembly files download, then in the browser." }
+      ]
+    },
+    "layout": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "dashboard",
+      "description": "The layout the app starts with.",
+      "choices": [
+        { "choice": "dashboard", "description": "A sidebar and top bar, with a dashboard home page." },
+        { "choice": "sidebar", "description": "A sidebar for navigation." },
+        { "choice": "navbar", "description": "A top navigation bar." }
+      ]
+    },
+    "UseServer": {
+      "type": "computed",
+      "value": "(interactivity == \"Server\")"
+    },
+    "UseWebAssembly": {
+      "type": "computed",
+      "value": "(interactivity == \"WebAssembly\")"
+    },
+    "UseAuto": {
+      "type": "computed",
+      "value": "(interactivity == \"Auto\")"
+    },
+    "HasClient": {
+      "type": "computed",
+      "value": "(interactivity != \"Server\")"
+    },
+    "kestrelHttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
+    },
+    "kestrelHttpPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": { "low": 5000, "high": 5300 }
+    },
+    "kestrelHttpPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "kestrelHttpPort",
+        "fallbackVariableName": "kestrelHttpPortGenerated"
+      },
+      "replaces": "5500"
+    },
+    "kestrelHttpsPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTPS endpoint in launchSettings.json."
+    },
+    "kestrelHttpsPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": { "low": 7000, "high": 7300 }
+    },
+    "kestrelHttpsPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "kestrelHttpsPort",
+        "fallbackVariableName": "kestrelHttpsPortGenerated"
+      },
+      "replaces": "5501"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "include": [ "TwBlazorApp.slnx", ".vsconfig", "package.json", "README.md", ".gitignore" ]
+    },
+    {
+      "source": "./host/",
+      "target": "./TwBlazorApp/"
+    },
+    {
+      "condition": "(HasClient)",
+      "source": "./client/",
+      "target": "./TwBlazorApp.Client/"
+    },
+    {
+      "condition": "(UseServer)",
+      "source": "./ui/",
+      "target": "./TwBlazorApp/",
+      "modifiers": [
+        { "condition": "(layout == \"dashboard\")", "rename": { "Layout/DashboardLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"sidebar\")", "rename": { "Layout/SidebarLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"navbar\")", "rename": { "Layout/NavbarLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"dashboard\")", "rename": { "Pages/Dashboard.razor": "Pages/Home.razor" } },
+        { "condition": "(layout != \"dashboard\")", "rename": { "Pages/Welcome.razor": "Pages/Home.razor" } },
+        { "condition": "(layout != \"dashboard\")", "exclude": [ "Pages/Dashboard.razor", "Layout/DashboardLayout.razor" ] },
+        { "condition": "(layout != \"sidebar\")", "exclude": [ "Layout/SidebarLayout.razor" ] },
+        { "condition": "(layout != \"navbar\")", "exclude": [ "Layout/NavbarLayout.razor" ] },
+        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor" ] }
+      ]
+    },
+    {
+      "condition": "(HasClient)",
+      "source": "./ui/",
+      "target": "./TwBlazorApp.Client/",
+      "modifiers": [
+        { "condition": "(layout == \"dashboard\")", "rename": { "Layout/DashboardLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"sidebar\")", "rename": { "Layout/SidebarLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"navbar\")", "rename": { "Layout/NavbarLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"dashboard\")", "rename": { "Pages/Dashboard.razor": "Pages/Home.razor" } },
+        { "condition": "(layout != \"dashboard\")", "rename": { "Pages/Welcome.razor": "Pages/Home.razor" } },
+        { "condition": "(layout != \"dashboard\")", "exclude": [ "Pages/Dashboard.razor", "Layout/DashboardLayout.razor" ] },
+        { "condition": "(layout != \"sidebar\")", "exclude": [ "Layout/SidebarLayout.razor" ] },
+        { "condition": "(layout != \"navbar\")", "exclude": [ "Layout/NavbarLayout.razor" ] },
+        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor" ] }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "TwBlazorApp.slnx" }
+  ]
+}

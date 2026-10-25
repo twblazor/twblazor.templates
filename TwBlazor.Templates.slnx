@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".vsconfig" />
+    <File Path="preview.ps1" />
+    <File Path="README.md" />
+    <File Path="Directory.Build.props" />
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="src/TwBlazor.Templates.Cli/TwBlazor.Templates.Cli.csproj" />
+  <Project Path="tests/TwBlazor.Templates.Tests/TwBlazor.Templates.Tests.csproj" />
+</Solution>
