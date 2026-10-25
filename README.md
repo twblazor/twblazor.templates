@@ -8,7 +8,9 @@ The templates share one set of pages and layouts across Server, WebAssembly and 
 
 ## Templates
 
-| Dashboard | Sidebar | Navbar |
+<!-- The labels are code spans of equal length, with non-breaking spaces, so the three screenshots render at exactly the same width in GitHub and NuGet. -->
+
+| `Dashboard` | ` Sidebar ` | ` Navbar  ` |
 | --- | --- | --- |
 | [![Dashboard template: sidebar, top bar, KPI cards and charts](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png) | [![Sidebar template: grouped navigation and a welcome page](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png) | [![Navbar template: top navigation and a welcome page](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png) |
 

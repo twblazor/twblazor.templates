@@ -72,6 +72,8 @@ The README screenshots are captured from the preview routes with Playwright at 1
 
 The script writes `images/templates/dashboard.png`, `sidebar.png` and `navbar.png`. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
 
+The README table headers are deliberately equal-length code spans using non-breaking spaces (`Dashboard`, `Sidebar`, `Navbar`). Keep them that way so all three screenshots render at exactly the same width on GitHub and NuGet.
+
 ## How the templates are organised
 
 ```
