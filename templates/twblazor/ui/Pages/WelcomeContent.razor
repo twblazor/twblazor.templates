@@ -1,0 +1,162 @@
+<TwContainer MaxWidth="ContainerSize.Xl6" Gutter="0" Class="space-y-8">
+    <TwContainer Element="LayoutElement.Section"
+                 MaxWidth="ContainerSize.Full"
+                 Gutter="6"
+                 PaddingY="8"
+                 Class="relative overflow-hidden rounded-3xl border border-purple-100 bg-linear-to-br from-purple-50 via-white to-fuchsia-50 dark:border-white/10 dark:from-purple-500/10 dark:via-transparent dark:to-fuchsia-500/10 sm:px-10 sm:py-10">
+        <div class="pointer-events-none absolute -end-24 -top-24 size-72 rounded-full bg-fuchsia-200/40 blur-3xl dark:bg-fuchsia-500/10" aria-hidden="true"></div>
+
+        <TwGrid Cols="1" ColsLg="2" Gap="8" Align="AlignItems.Center" Class="relative">
+            <div>
+                <TwFlex Element="LayoutElement.Span"
+                        Inline
+                        Align="AlignItems.Center"
+                        Gap="1.5"
+                        Class="rounded-full border border-purple-200 bg-white/80 px-3 py-1 text-xs font-semibold text-purple-700 dark:border-purple-400/20 dark:bg-white/5 dark:text-purple-200">
+                    <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-[0.7rem]" />
+                    <span>twblazor starter</span>
+                </TwFlex>
+
+                <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">Welcome to twblazor</h1>
+                <p class="mt-4 max-w-xl text-sm leading-6 text-gray-600 sm:text-base dark:text-gray-300">
+                    Your twblazor app is ready. Start with the docs, browse the components, or open the source when you want to see how something works.
+                </p>
+
+                <TwFlex Wrap="FlexWrap.Wrap" Gap="2" Class="mt-6">
+                    <TwButton Label="Read the docs"
+                              Variant="ButtonVariant.Filled"
+                              Color="Color.Primary"
+                              StartIcon="Icon.Book"
+                              Href="https://twblazor.com"
+                              Target="_blank" />
+                    <TwButton Label="GitHub"
+                              Variant="ButtonVariant.Outlined"
+                              Color="Color.Dark"
+                              StartIcon="Icon.Github"
+                              Href="https://github.com/twblazor/twblazor"
+                              Target="_blank" />
+                    <TwButton Label="API reference"
+                              Variant="ButtonVariant.Text"
+                              Color="Color.Dark"
+                              EndIcon="Icon.Arrow_Up_Right"
+                              Href="https://twblazor.github.io/twblazor/"
+                              Target="_blank" />
+                </TwFlex>
+            </div>
+
+            <TwCard Title="Start here" TitleLevel="2" Bordered="false" Class="h-full bg-white/80 backdrop-blur dark:bg-white/5">
+                <TwFlex Direction="FlexDirection.Col" Gap="1">
+                    <a href="https://twblazor.com" target="_blank" rel="noreferrer" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">
+                        <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Between" Gap="3" Class="px-2 py-2 text-sm text-gray-700 hover:bg-purple-50 dark:text-gray-200 dark:hover:bg-white/10">
+                            <TwFlex Align="AlignItems.Center" Gap="2.5">
+                                <TwIcon Icon="Icon.Book" Class="text-purple-600 dark:text-purple-300" />
+                                <span>Documentation</span>
+                            </TwFlex>
+                            <TwIcon Icon="Icon.Arrow_Up_Right" Class="text-xs text-gray-400" />
+                        </TwFlex>
+                    </a>
+                    <a href="https://github.com/twblazor/twblazor" target="_blank" rel="noreferrer" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">
+                        <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Between" Gap="3" Class="px-2 py-2 text-sm text-gray-700 hover:bg-purple-50 dark:text-gray-200 dark:hover:bg-white/10">
+                            <TwFlex Align="AlignItems.Center" Gap="2.5">
+                                <TwIcon Icon="Icon.Github" Class="text-purple-600 dark:text-purple-300" />
+                                <span>GitHub repository</span>
+                            </TwFlex>
+                            <TwIcon Icon="Icon.Arrow_Up_Right" Class="text-xs text-gray-400" />
+                        </TwFlex>
+                    </a>
+                    <a href="https://twblazor.github.io/twblazor/" target="_blank" rel="noreferrer" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">
+                        <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Between" Gap="3" Class="px-2 py-2 text-sm text-gray-700 hover:bg-purple-50 dark:text-gray-200 dark:hover:bg-white/10">
+                            <TwFlex Align="AlignItems.Center" Gap="2.5">
+                                <TwIcon Icon="Icon.Journal_Code" Class="text-purple-600 dark:text-purple-300" />
+                                <span>API reference</span>
+                            </TwFlex>
+                            <TwIcon Icon="Icon.Arrow_Up_Right" Class="text-xs text-gray-400" />
+                        </TwFlex>
+                    </a>
+                    <a href="https://twblazor.com/theme" target="_blank" rel="noreferrer" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">
+                        <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Between" Gap="3" Class="px-2 py-2 text-sm text-gray-700 hover:bg-purple-50 dark:text-gray-200 dark:hover:bg-white/10">
+                            <TwFlex Align="AlignItems.Center" Gap="2.5">
+                                <TwIcon Icon="Icon.Brush" Class="text-purple-600 dark:text-purple-300" />
+                                <span>Theme builder</span>
+                            </TwFlex>
+                            <TwIcon Icon="Icon.Arrow_Up_Right" Class="text-xs text-gray-400" />
+                        </TwFlex>
+                    </a>
+                </TwFlex>
+            </TwCard>
+        </TwGrid>
+    </TwContainer>
+
+    <TwGrid Cols="1" ColsSm="2" ColsLg="4" Gap="4">
+        <TwCard Title="Documentation" TitleLevel="2" Class="h-full">
+            <TwFlex Direction="FlexDirection.Col" FullHeight Gap="3">
+                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-10 rounded-xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                    <TwIcon Icon="Icon.Book" Class="text-lg" />
+                </TwFlex>
+                <p class="text-sm leading-6 text-gray-600 dark:text-gray-300">Guides, live examples and every component parameter.</p>
+                <TwFlexItem PushEnd>
+                    <a href="https://twblazor.com" target="_blank" rel="noreferrer" class="text-sm font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300">Read the docs</a>
+                </TwFlexItem>
+            </TwFlex>
+        </TwCard>
+
+        <TwCard Title="Source code" TitleLevel="2" Class="h-full">
+            <TwFlex Direction="FlexDirection.Col" FullHeight Gap="3">
+                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-10 rounded-xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                    <TwIcon Icon="Icon.Github" Class="text-lg" />
+                </TwFlex>
+                <p class="text-sm leading-6 text-gray-600 dark:text-gray-300">The library, docs and templates are open source on GitHub.</p>
+                <TwFlexItem PushEnd>
+                    <a href="https://github.com/twblazor/twblazor" target="_blank" rel="noreferrer" class="text-sm font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300">Open GitHub</a>
+                </TwFlexItem>
+            </TwFlex>
+        </TwCard>
+
+        <TwCard Title="API reference" TitleLevel="2" Class="h-full">
+            <TwFlex Direction="FlexDirection.Col" FullHeight Gap="3">
+                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-10 rounded-xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                    <TwIcon Icon="Icon.Journal_Code" Class="text-lg" />
+                </TwFlex>
+                <p class="text-sm leading-6 text-gray-600 dark:text-gray-300">Generated reference documentation for every public type.</p>
+                <TwFlexItem PushEnd>
+                    <a href="https://twblazor.github.io/twblazor/" target="_blank" rel="noreferrer" class="text-sm font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300">Open DocFX</a>
+                </TwFlexItem>
+            </TwFlex>
+        </TwCard>
+
+        <TwCard Title="Theme builder" TitleLevel="2" Class="h-full">
+            <TwFlex Direction="FlexDirection.Col" FullHeight Gap="3">
+                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-10 rounded-xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                    <TwIcon Icon="Icon.Brush" Class="text-lg" />
+                </TwFlex>
+                <p class="text-sm leading-6 text-gray-600 dark:text-gray-300">Generate a Theme.cs with your brand colours and the components you use.</p>
+                <TwFlexItem PushEnd>
+                    <a href="https://twblazor.com/theme" target="_blank" rel="noreferrer" class="text-sm font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300">Open the builder</a>
+                </TwFlexItem>
+            </TwFlex>
+        </TwCard>
+    </TwGrid>
+
+    <TwCard Title="Make it yours" TitleLevel="2">
+        <TwGrid Cols="1" ColsMd="2" Gap="4">
+            <TwFlex Align="AlignItems.Start" Gap="3">
+                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-9 shrink-0 rounded-xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                    <TwIcon Icon="Icon.Brush" />
+                </TwFlex>
+                <div>
+                    <p class="text-sm font-semibold">Change the theme</p>
+                    <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">Edit <code class="rounded bg-gray-100 px-1 py-0.5 text-[0.8em] dark:bg-white/10">Theme.cs</code> or generate a new one at <a href="https://twblazor.com/theme" target="_blank" rel="noreferrer" class="font-semibold text-purple-700 underline-offset-4 hover:underline dark:text-purple-300">twblazor.com/theme</a>.</p>
+                </div>
+            </TwFlex>
+            <TwFlex Align="AlignItems.Start" Gap="3">
+                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-9 shrink-0 rounded-xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
+                    <TwIcon Icon="Icon.File_Text" />
+                </TwFlex>
+                <div>
+                    <p class="text-sm font-semibold">Add a page</p>
+                    <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">Create a <code class="rounded bg-gray-100 px-1 py-0.5 text-[0.8em] dark:bg-white/10">.razor</code> file in <code class="rounded bg-gray-100 px-1 py-0.5 text-[0.8em] dark:bg-white/10">Pages</code> and add its route to <code class="rounded bg-gray-100 px-1 py-0.5 text-[0.8em] dark:bg-white/10">AppNavigation.cs</code>.</p>
+                </div>
+            </TwFlex>
+        </TwGrid>
+    </TwCard>
+</TwContainer>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>TwBlazorApp</RootNamespace>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="twblazor" Version="3.0.0" />
+  </ItemGroup>
+
+  <!-- The template's shared UI is linked rather than copied, so edits show up here immediately. -->
+  <ItemGroup>
+    <Content Include="../../templates/twblazor/ui/**/*.razor"
+             Exclude="../../templates/twblazor/ui/Layout/DashboardLayout.razor;../../templates/twblazor/ui/Pages/Welcome.razor"
+             Link="%(RecursiveDir)%(Filename)%(Extension)" />
+    <Content Include="../../templates/twblazor/ui/Layout/DashboardLayout.razor" Link="Layout/MainLayout.razor" />
+    <Compile Include="../../templates/twblazor/ui/**/*.cs" Link="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- Build the preview stylesheet from the template's own Tailwind entry point when npm has been installed. -->
+  <Target Name="BuildTailwindCss" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)/node_modules/.bin')">
+    <Exec Command="npm run build:css" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+</Project>

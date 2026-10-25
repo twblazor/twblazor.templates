@@ -16,6 +16,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logo.png</PackageIcon>
     <PackageTags>blazor;tailwindcss;templates;dotnet-new;twblazor</PackageTags>
     <!-- Versioning (MinVer). The version comes from Git tags: a tagged commit
          builds that exact version, and commits after it build the next patch as
@@ -41,6 +42,7 @@
 
   <ItemGroup>
     <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../images/logo.png" Pack="true" PackagePath="\" />
     <None Include="../../templates/twblazor/**/*"
           Exclude="../../templates/twblazor/**/bin/**;../../templates/twblazor/**/obj/**;../../templates/twblazor/**/.vs/**;../../templates/twblazor/**/node_modules/**"
           Pack="true"

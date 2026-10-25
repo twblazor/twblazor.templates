@@ -4,14 +4,16 @@
 <TwToastProvider />
 <TwDialogProvider />
 
-<div class="flex min-h-dvh flex-col">
+<TwFlex Direction="FlexDirection.Col" FullHeight Class="min-h-dvh">
     <TwNavbar NavigationItems="@AppNavigation.Top">
         <BrandContent>
-            <a href="/" class="flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-600">
-                <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-linear-to-br from-purple-600 to-fuchsia-500 text-white shadow-sm">
-                    <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-lg" />
-                </span>
-                <span class="text-base font-semibold tracking-tight">TwBlazorApp</span>
+            <a href="/" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-600">
+                <TwFlex Inline Align="AlignItems.Center" Gap="2.5">
+                    <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-9 shrink-0 rounded-xl bg-linear-to-br from-purple-600 to-fuchsia-500 text-white shadow-sm">
+                        <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-lg" />
+                    </TwFlex>
+                    <span class="text-base font-semibold tracking-tight">TwBlazorApp</span>
+                </TwFlex>
             </a>
         </BrandContent>
         <ActionsContent>
@@ -28,20 +30,20 @@
         </ActionsContent>
     </TwNavbar>
 
-    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+    <TwContainer Element="LayoutElement.Main" MaxWidth="ContainerSize.Xl6" PaddingY="8" Class="flex-1">
         @Body
-    </main>
+    </TwContainer>
 
-    <footer class="border-t border-gray-200 dark:border-white/10">
-        <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-gray-500 sm:flex-row sm:px-6 lg:px-8 dark:text-gray-400">
+    <TwContainer Element="LayoutElement.Footer" MaxWidth="ContainerSize.Xl6" PaddingY="6" Class="border-t border-gray-200 dark:border-white/10">
+        <TwFlex Direction="FlexDirection.Col" DirectionSm="FlexDirection.Row" Justify="JustifyContent.Between" Align="AlignItems.Center" Gap="3" Class="text-xs text-gray-500 dark:text-gray-400">
             <p>&copy; @DateTime.Now.Year TwBlazorApp. Built with twblazor.</p>
-            <nav class="flex items-center gap-5" aria-label="Footer">
+            <TwFlex Element="LayoutElement.Nav" Gap="5" AriaLabel="Footer">
                 <a href="https://twblazor.com" target="_blank" rel="noreferrer" class="font-medium hover:text-gray-900 dark:hover:text-white">Documentation</a>
                 <a href="/settings" class="font-medium hover:text-gray-900 dark:hover:text-white">Settings</a>
-            </nav>
-        </div>
-    </footer>
-</div>
+            </TwFlex>
+        </TwFlex>
+    </TwContainer>
+</TwFlex>
 
 @code {
     private void ShowSignInToast() =>
