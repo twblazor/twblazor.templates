@@ -1,3 +1,5 @@
+[![twblazor: Tailwind CSS components for Blazor](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/readme-banner.png)](https://twblazor.com/)
+
 # twblazor.templates
 
 Create a Blazor Web App with [twblazor](https://twblazor.com) and Tailwind CSS in one command.
