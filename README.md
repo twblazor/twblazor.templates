@@ -133,12 +133,35 @@ src/TwBlazor.Templates.Cli/   the twblazor command and packable tool
 templates/twblazor/           the dotnet new template
 preview/                      the Server preview app linked to the template UI
 tests/                        tests for the parser, template and locators
-scripts/                      release version helpers
-.github/workflows/            CI, PR checks and NuGet publishing
+scripts/                      release version helpers and theme sync
+.github/workflows/            CI, PR checks, theme sync and NuGet publishing
 preview.ps1                   generates and runs a preview app
 .vsconfig                     the Visual Studio workload the solution needs
 global.json                   pins the .NET 10 SDK
 ```
+
+## Keeping Theme.cs in sync
+
+`templates/twblazor/ui/Theme.cs` is generated from the default theme in the main `twblazor` repository. The canonical source is currently `src/TwBlazor.Theme/Theme.cs`; the sync also checks `src/Theme/Theme.cs` first if the file moves. This is a template copy, not a live dependency: a generated app pins a `twblazor` package version, so its `Theme.cs` must match that version.
+
+The **Update twblazor** workflow checks the latest stable `twblazor` release every Monday, syncs the theme and package references, builds and tests the result, then opens a pull request to `develop` labelled `release:patch`. It can also be run from **Actions > Update twblazor > Run workflow** with a version, or triggered by a `twblazor-release` repository dispatch. Merging the pull request puts the update into the normal develop -> main release flow.
+
+The organization blocks `GITHUB_TOKEN` from creating pull requests, so add a repository secret named `SYNC_TOKEN` with a fine-grained personal access token that has **Contents: write** and **Pull requests: write** for this repository. Without that secret, the workflow still pushes the update branch and opens an issue with the compare link, but it cannot open the pull request itself.
+
+To do the same locally:
+
+```powershell
+# Check the committed theme against the pinned twblazor tag
+./scripts/sync-theme.ps1 -Ref v3.0.0 -Check
+
+# Update Theme.cs and all template package references to a specific version
+./scripts/update-twblazor.ps1 -Version 3.1.0
+
+# Or use a local twblazor checkout while developing
+./scripts/update-twblazor.ps1 -Version 3.1.0 -Source ../twblazor/src/TwBlazor.Theme/Theme.cs
+```
+
+`sync-theme.ps1` removes the theme builder's live-reload handler, gives the theme the app namespace, and adds the template's editing notes. The release workflows run the check before they build, so a template can never be published with a theme that does not match its `twblazor` package reference.
 
 ## Release flow
 

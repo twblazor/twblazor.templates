@@ -88,7 +88,8 @@ public sealed class TemplatePackageTests
 
         Assert.All(projects, project =>
         {
-            Assert.Contains("<PackageReference Include=\"twblazor\" Version=\"3.0.0\" />", project);
+            Assert.Contains("<PackageReference Include=\"twblazor\" Version=\"", project);
+            Assert.Matches("<PackageReference Include=\"twblazor\" Version=\"[^\"]+\" />", project);
             Assert.DoesNotContain("TWLBLAZOR_PROJECT_PATH", project);
         });
     }
