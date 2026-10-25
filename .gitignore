@@ -20,6 +20,7 @@ preview/TwBlazor.Templates.Preview/wwwroot/css/output.css
 .idea/
 *.user
 *.suo
+*.slnLaunch.user
 
 # OS
 .DS_Store
