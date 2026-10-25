@@ -70,7 +70,25 @@ The pages, layouts and `Theme.cs` move to the `.Client` project for WebAssembly 
 
 ## Preview the templates
 
-The repository solution contains the CLI and the tests, not a Blazor app. Generate a real app from the templates in this repository and run it with:
+The solution includes a Server preview app that links the template's shared `ui` files, so edits to the templates show up immediately:
+
+```bash
+cd preview/TwBlazor.Templates.Preview
+npm install
+npm run build:css
+dotnet run
+```
+
+The first two commands are needed once. After that the project rebuilds the stylesheet on every build when `node_modules` exists. `wwwroot/css/output.css` is generated and ignored.
+
+The preview routes are:
+
+- `/` - dashboard layout
+- `/sidebar` - sidebar layout
+- `/navbar` - navbar layout
+- `/settings` - settings page
+
+The preview project uses the published `twblazor` package and is Server-only. To generate a complete app in Server, WebAssembly or Auto mode, use `preview.ps1`:
 
 ```powershell
 .\preview.ps1 -Interactivity server -Layout dashboard
@@ -88,7 +106,7 @@ The script writes the app to `artifacts/preview/<name>`, restores packages, buil
 | `-NoRestore` | Skip `dotnet restore`. |
 | `-NoNpm` | Skip `npm install` and the Tailwind build. |
 
-The repository solution is a tooling solution. Visual Studio's "install extra components" prompt is about the workloads it infers, not the `.slnx` format. The checked-in `.vsconfig` asks for the ASP.NET and web development workload, which is what both the tooling solution and the generated apps need. Generated apps also include the `.vsconfig` and the web projects, so they should not ask for the desktop workload.
+The repository solution contains the CLI, the tests and the preview app. Visual Studio's "install extra components" prompt is about the workloads it infers, not the `.slnx` format. The checked-in `.vsconfig` asks for the ASP.NET and web development workload, which is what the solution and the generated apps need. Generated apps also include the `.vsconfig` and the web projects, so they should not ask for the desktop workload.
 
 Running a WebAssembly preview in Debug does not need the WebAssembly AOT tools. If you later publish with AOT, install them with `dotnet workload install wasm-tools`.
 
@@ -109,6 +127,7 @@ templates/twblazor/
 ```
 src/TwBlazor.Templates.Cli/   the twblazor command and packable tool
 templates/twblazor/           the dotnet new template
+preview/                      the Server preview app linked to the template UI
 tests/                        tests for the parser, template and locators
 scripts/                      release version helpers
 .github/workflows/            CI, PR checks and NuGet publishing
