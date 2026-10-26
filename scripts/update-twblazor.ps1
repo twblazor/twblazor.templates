@@ -1,6 +1,27 @@
+<#
+.SYNOPSIS
+    Updates the template Theme.cs and twblazor package references.
+
+.DESCRIPTION
+    Version is the twblazor package version written to the template projects. Ref is the git ref the
+    canonical Theme.cs is read from. A stable package defaults to its release tag (v<Version>); a
+    pre-release package defaults to develop, because preview packages are not tagged.
+
+.EXAMPLE
+    ./update-twblazor.ps1 -Version 3.1.0
+    Uses the canonical theme from tag v3.1.0.
+
+.EXAMPLE
+    ./update-twblazor.ps1 -Version 3.0.1-preview.2
+    Uses the canonical theme from develop and the 3.0.1-preview.2 GitHub package.
+
+.EXAMPLE
+    ./update-twblazor.ps1 -Version 3.0.1-preview.2 -Source ../twblazor/src/TwBlazor.Theme/Theme.cs
+    Uses a local twblazor checkout instead of downloading the theme.
+#>
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory, Position = 0)]
     [string]$Version,
 
     [string]$Ref,
@@ -18,8 +39,16 @@ if (-not $Version) {
     throw 'A twblazor version is required.'
 }
 
+if ($Version -match '^(develop|main)$') {
+    throw "'$Version' is a branch, not a package version. For a preview package from develop, use -Version 3.0.1-preview.2 -Ref develop."
+}
+
+if ($Version -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$') {
+    throw "'$Version' is not a package version. Use a version such as 3.1.0 or 3.0.1-preview.2."
+}
+
 if (-not $Ref) {
-    $Ref = "v$Version"
+    $Ref = if ($Version.Contains('-')) { 'develop' } else { "v$Version" }
 }
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
