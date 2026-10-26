@@ -16,6 +16,20 @@ Run the CLI from source against the templates in this repository:
 dotnet run --project src/TwBlazor.Templates.Cli -- new MyApp --templates templates/twblazor
 ```
 
+### Check the template tool before creating an app
+
+The published tool lives at [nuget.org/packages/twblazor.templates](https://www.nuget.org/packages/twblazor.templates). `scripts/pre-create-template.ps1` checks the installed global tool against the latest NuGet version and prompts before updating it:
+
+```powershell
+# Check only
+./scripts/pre-create-template.ps1
+
+# Check, then pass the same arguments to twblazor new
+./scripts/pre-create-template.ps1 MyApp -t blank
+```
+
+It skips the check when `--templates` points at a local template source.
+
 ## Preview the templates
 
 The solution includes a Server preview app that links the template's shared `ui` files, so edits to the templates show up immediately:
@@ -38,6 +52,7 @@ The preview routes are:
 - `/` - dashboard layout
 - `/sidebar` - sidebar layout
 - `/navbar` - navbar layout
+- `/blank` - blank layout
 - `/settings` - settings page
 
 The preview project uses the published `twblazor` package and is Server-only. To generate a complete app in Server, WebAssembly or Auto mode, use `preview.ps1`:
@@ -52,7 +67,7 @@ The script writes the app to `artifacts/preview/<name>`, restores packages, buil
 | Option | Effect |
 | --- | --- |
 | `-Interactivity server\|wasm\|auto` | Render mode. Default: `server`. |
-| `-Layout dashboard\|sidebar\|navbar` | Template layout. Default: `dashboard`. |
+| `-Layout dashboard\|sidebar\|navbar\|blank` | Template layout. Default: `dashboard`. |
 | `-Open` | Open the generated `.slnx` in Visual Studio instead of running it. |
 | `-NoRun` | Generate the app without starting it. |
 | `-NoRestore` | Skip `dotnet restore`. |
@@ -70,9 +85,9 @@ The README screenshots are captured from the preview routes with Playwright at 1
 ./scripts/screenshot-templates.ps1
 ```
 
-The script writes `images/templates/dashboard.png`, `sidebar.png` and `navbar.png`. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
+The script writes `images/templates/dashboard.png`, `sidebar.png`, `navbar.png` and `blank.png` at 1440x1050. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
 
-The README table headers are deliberately equal-length code spans using non-breaking spaces (`Dashboard`, `Sidebar`, `Navbar`). Keep them that way so all three screenshots render at exactly the same width on GitHub and NuGet.
+The README table uses equal-width headers and gives every image `width="100%"`, so all four screenshots render at the same size on GitHub and NuGet.
 
 ## How the templates are organised
 

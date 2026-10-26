@@ -27,7 +27,10 @@ internal enum LayoutTemplate
     Sidebar,
 
     /// <summary>A top navigation bar.</summary>
-    Navbar
+    Navbar,
+
+    /// <summary>A centered blank home page with a link to the docs.</summary>
+    Blank
 }
 
 /// <summary>

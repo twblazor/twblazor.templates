@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject ITwToastService ToastService
+@inject TwBlazorOptions Options
 
 <TwToastProvider />
 <TwDialogProvider />
@@ -8,11 +9,11 @@
            NavigationItems="@AppNavigation.Sidebar"
            MainContentClass="p-4 sm:p-6 lg:p-8">
     <HeaderContent>
-        <a href="/" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-600">
+        <a href="/" class="rounded-lg @Options.Theme.Tokens.FocusRing">
             <TwFlex Inline Align="AlignItems.Center" Gap="2.5">
-                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-9 shrink-0 rounded-xl bg-linear-to-br from-purple-600 to-fuchsia-500 text-white shadow-sm">
-                    <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-lg" />
-                </TwFlex>
+                <TwAvatar Icon="Icon.Lightning_Charge_Fill"
+                          Color="Color.Primary"
+                          Class="size-9 rounded-xl text-base" />
                 <span class="text-base font-semibold tracking-tight">TwBlazorApp</span>
             </TwFlex>
         </a>
@@ -25,8 +26,8 @@
         <TwFlex Align="AlignItems.Center" Gap="2.5">
             <TwAvatar AriaLabel="Account" Color="Color.Primary" Size="AvatarSize.Small" />
             <div class="hidden text-start sm:block">
-                <p class="text-sm font-medium leading-5">Account</p>
-                <p class="text-xs leading-4 text-gray-500 dark:text-gray-400">Signed in</p>
+                <TwText Element="LayoutElement.P" Size="TextSize.Sm" Weight="TextWeight.Medium" Class="leading-5">Account</TwText>
+                <TwText Element="LayoutElement.P" Size="TextSize.Xs" Tone="TextTone.Muted" Class="leading-4">Signed in</TwText>
             </div>
         </TwFlex>
     </NavbarActionsContent>
@@ -34,9 +35,9 @@
     <SidebarContent>
         <TwCard Title="Quick start" TitleLevel="3" Class="mt-6">
             <TwFlex Direction="FlexDirection.Col" Align="AlignItems.Start" Gap="2">
-                <p class="text-xs leading-5 text-gray-600 dark:text-gray-300">
+                <TwText Element="LayoutElement.P" Size="TextSize.Xs" Tone="TextTone.Secondary" Class="leading-5">
                     Add a page to <code class="rounded bg-gray-100 px-1 py-0.5 text-[0.7rem] dark:bg-white/10">Pages</code> and its link to <code class="rounded bg-gray-100 px-1 py-0.5 text-[0.7rem] dark:bg-white/10">AppNavigation.cs</code>.
-                </p>
+                </TwText>
                 <TwButton Label="Read the docs"
                           Variant="ButtonVariant.Text"
                           Color="Color.Primary"

@@ -155,7 +155,8 @@ internal static partial class CliParser
             "dashboard" => LayoutTemplate.Dashboard,
             "sidebar" => LayoutTemplate.Sidebar,
             "navbar" => LayoutTemplate.Navbar,
-            _ => throw new CliException($"'{value}' is not a template. Use dashboard, sidebar or navbar.")
+            "blank" => LayoutTemplate.Blank,
+            _ => throw new CliException($"'{value}' is not a template. Use dashboard, sidebar, navbar or blank.")
         };
 
     /// <summary>
@@ -183,6 +184,7 @@ internal static partial class CliParser
             LayoutTemplate.Dashboard => "dashboard",
             LayoutTemplate.Sidebar => "sidebar",
             LayoutTemplate.Navbar => "navbar",
+            LayoutTemplate.Blank => "blank",
             _ => throw new ArgumentOutOfRangeException(nameof(layout))
         };
 

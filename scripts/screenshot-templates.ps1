@@ -22,6 +22,7 @@ const routes = [
   ['dashboard', '/'],
   ['sidebar', '/sidebar'],
   ['navbar', '/navbar'],
+  ['blank', '/blank'],
 ];
 
 (async () => {

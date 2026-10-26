@@ -110,7 +110,7 @@ internal static class CliApplication
 
             Options:
               -i, --interactivity <mode>  Server, Wasm or Auto. Default: Server.
-              -t, --template <layout>     dashboard, sidebar or navbar. Default: dashboard.
+              -t, --template <layout>     dashboard, sidebar, navbar or blank. Default: dashboard.
               -o, --output <path>         Folder to create the app in. Default: ./<name>.
                   --templates <path|id>   Template folder or package id. Default: installed templates.
                   --no-restore            Skip dotnet restore.

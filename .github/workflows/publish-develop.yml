@@ -54,12 +54,37 @@ jobs:
           if (-not $match.Success) {
               throw "Could not find the twblazor PackageReference in the template host project."
           }
-          ./scripts/sync-theme.ps1 -Ref "v$($match.Groups[1].Value)" -Check
+
+          $version = $match.Groups[1].Value
+          $ref = if ($version -match '-') { 'develop' } else { "v$version" }
+          ./scripts/sync-theme.ps1 -Ref $ref -Check
 
       - name: Compute preview version
         id: version
         shell: pwsh
         run: ./scripts/next-preview-version.ps1
+
+      - name: Configure GitHub Packages for the preview twblazor package
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          $project = Get-Content templates/twblazor/host/TwBlazorApp.csproj -Raw
+          $match = [regex]::Match($project, '<PackageReference[^>]*Include="twblazor"[^>]*Version="([^"]+)"')
+          if (-not $match.Success) {
+              throw "Could not find the twblazor PackageReference in the template host project."
+          }
+
+          if ($match.Groups[1].Value -notmatch '-') {
+              Write-Host "The template uses a stable twblazor package; GitHub Packages is not needed."
+              exit 0
+          }
+
+          dotnet nuget add source "https://nuget.pkg.github.com/TwBlazor/index.json" `
+              --name github-packages `
+              --username "${{ github.actor }}" `
+              --password "$env:GITHUB_TOKEN" `
+              --store-password-in-clear-text
 
       - name: Restore
         run: dotnet restore TwBlazor.Templates.slnx

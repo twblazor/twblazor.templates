@@ -1,0 +1,15 @@
+@page "/blank"
+@layout BlankLayout
+
+<PageTitle>Blank layout preview</PageTitle>
+
+<TwFlex Direction="FlexDirection.Col" Align="AlignItems.Center" Justify="JustifyContent.Center" Gap="3" Class="text-center">
+    <TwText Element="LayoutElement.H1"
+            Size="TextSize.Xl4"
+            Weight="TextWeight.Bold"
+            Class="tracking-tight sm:text-5xl">Hello world</TwText>
+    <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted">
+        This is a blank twblazor app.
+        <TwLink Href="https://twblazor.com" Target="_blank" Color="Color.Primary" Class="font-medium underline underline-offset-4">Read the docs</TwLink>
+    </TwText>
+</TwFlex>
