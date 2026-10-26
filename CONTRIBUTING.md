@@ -71,7 +71,9 @@ The README screenshots are captured from the preview routes with Playwright at 1
 ./scripts/screenshot-templates.ps1
 ```
 
-The script writes `images/templates/dashboard.png`, `sidebar.png`, `navbar.png` and `blank.png`. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
+The script writes `images/templates/dashboard.png`, `sidebar.png`, `navbar.png` and `blank.png` at 1440x1050. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
+
+The README table uses equal-width headers and gives every image `width="100%"`, so all four screenshots render at the same size on GitHub and NuGet.
 
 ## How the templates are organised
 
