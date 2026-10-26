@@ -1,6 +1,6 @@
 # TwBlazorApp
 
-A Blazor app styled with [twblazor](https://twblazor.com) and Tailwind CSS. The projects reference the `twblazor` 3.0.1-preview.2 NuGet package.
+A Blazor app styled with [twblazor](https://twblazor.com) and Tailwind CSS. The projects reference the `twblazor` 3.1.0 NuGet package.
 
 ## Run it
 
