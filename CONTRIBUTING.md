@@ -16,6 +16,20 @@ Run the CLI from source against the templates in this repository:
 dotnet run --project src/TwBlazor.Templates.Cli -- new MyApp --templates templates/twblazor
 ```
 
+### Check the template tool before creating an app
+
+The published tool lives at [nuget.org/packages/twblazor.templates](https://www.nuget.org/packages/twblazor.templates). `scripts/pre-create-template.ps1` checks the installed global tool against the latest NuGet version and prompts before updating it:
+
+```powershell
+# Check only
+./scripts/pre-create-template.ps1
+
+# Check, then pass the same arguments to twblazor new
+./scripts/pre-create-template.ps1 MyApp -t blank
+```
+
+It skips the check when `--templates` points at a local template source.
+
 ## Preview the templates
 
 The solution includes a Server preview app that links the template's shared `ui` files, so edits to the templates show up immediately:
