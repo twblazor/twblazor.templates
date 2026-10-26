@@ -1,0 +1,24 @@
+@page "/not-found"
+@layout MainLayout
+
+<PageTitle>Page not found</PageTitle>
+
+<TwFlex Direction="FlexDirection.Col" Align="AlignItems.Center" Justify="JustifyContent.Center" FullHeight Gap="0" Class="min-h-[60vh] px-4 text-center">
+    <TwText Element="LayoutElement.H1" Size="TextSize.Xl3" Weight="TextWeight.Bold" Class="tracking-tight sm:text-4xl">Page not found</TwText>
+    <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted" Class="mt-3 max-w-md leading-6">
+        The page you are looking for does not exist, or it may have moved somewhere else.
+    </TwText>
+    <TwFlex Wrap="FlexWrap.Wrap" Justify="JustifyContent.Center" Gap="2" Class="mt-6">
+        <TwButton Label="Back to home"
+                  Variant="ButtonVariant.Filled"
+                  Color="Color.Primary"
+                  StartIcon="Icon.House_Door"
+                  Href="/" />
+        <TwButton Label="Read the docs"
+                  Variant="ButtonVariant.Outlined"
+                  Color="Color.Dark"
+                  EndIcon="Icon.Arrow_Up_Right"
+                  Href="https://twblazor.com"
+                  Target="_blank" />
+    </TwFlex>
+</TwFlex>

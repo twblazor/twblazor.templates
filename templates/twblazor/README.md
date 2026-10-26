@@ -1,6 +1,6 @@
 # TwBlazorApp
 
-A Blazor app styled with [twblazor](https://twblazor.com) and Tailwind CSS. The projects reference the `twblazor` 3.0.0 NuGet package.
+A Blazor app styled with [twblazor](https://twblazor.com) and Tailwind CSS. The projects reference the `twblazor` 3.0.1-preview.2 NuGet package.
 
 ## Run it
 
@@ -18,8 +18,8 @@ Open `TwBlazorApp.slnx` in Visual Studio to work on it there. The checked-in `.v
 ## Where things are
 
 - `TwBlazorApp/Pages` and `TwBlazorApp.Client/Pages`: your pages. Add a `.razor` file with an `@page` route and it appears in the app. With WebAssembly or Auto interactivity the pages live in the `.Client` project.
-- `TwBlazorApp/Layout/MainLayout.razor` and `TwBlazorApp.Client/Layout/MainLayout.razor`: the layout around every page. Pick a different layout by generating the app again with `-t dashboard`, `-t sidebar` or `-t navbar`.
-- `AppNavigation.cs`: the sidebar and top bar links. Add a page's route here so it shows up in the navigation.
+- `TwBlazorApp/Layout/MainLayout.razor` and `TwBlazorApp.Client/Layout/MainLayout.razor`: the layout around every page. Pick a different layout by generating the app again with `-t dashboard`, `-t sidebar`, `-t navbar` or `-t blank`.
+- `AppNavigation.cs`: the sidebar and top bar links. Add a page's route here so it shows up in the navigation. The blank layout does not include it.
 - `Theme.cs`: every twblazor class, in one file. To change colours, rounding, shadows or the components included, generate a new theme at [twblazor.com/theme](https://twblazor.com/theme) and replace the whole file.
 - `TwBlazorApp/wwwroot/css/input.css`: the Tailwind CSS entry point.
 

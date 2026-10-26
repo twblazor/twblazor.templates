@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject ITwToastService ToastService
+@inject TwBlazorOptions Options
 
 <TwToastProvider />
 <TwDialogProvider />
@@ -8,11 +9,11 @@
            NavigationItems="@AppNavigation.Sidebar"
            MainContentClass="p-4 sm:p-6 lg:p-10">
     <HeaderContent>
-        <a href="/" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-600">
+        <a href="/" class="rounded-lg @Options.Theme.Tokens.FocusRing">
             <TwFlex Inline Align="AlignItems.Center" Gap="2.5">
-                <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-9 shrink-0 rounded-xl bg-linear-to-br from-purple-600 to-fuchsia-500 text-white shadow-sm">
-                    <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-lg" />
-                </TwFlex>
+                <TwAvatar Icon="Icon.Lightning_Charge_Fill"
+                          Color="Color.Primary"
+                          Class="size-9 rounded-xl text-base" />
                 <span class="text-base font-semibold tracking-tight">TwBlazorApp</span>
             </TwFlex>
         </a>
@@ -27,8 +28,8 @@
             <TwFlex Align="AlignItems.Center" Gap="2.5">
                 <TwAvatar Color="Color.Primary" Size="AvatarSize.Small" />
                 <TwFlexItem MinWidthZero>
-                    <p class="truncate text-xs font-semibold">Your account</p>
-                    <p class="truncate text-xs text-gray-500 dark:text-gray-400">Free plan</p>
+                    <TwText Element="LayoutElement.P" Size="TextSize.Xs" Weight="TextWeight.Semibold" Truncate>Your account</TwText>
+                    <TwText Element="LayoutElement.P" Size="TextSize.Xs" Tone="TextTone.Muted" Truncate>Free plan</TwText>
                 </TwFlexItem>
             </TwFlex>
             <TwButton Label="Upgrade plan"

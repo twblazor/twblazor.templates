@@ -38,6 +38,7 @@ The preview routes are:
 - `/` - dashboard layout
 - `/sidebar` - sidebar layout
 - `/navbar` - navbar layout
+- `/blank` - blank layout
 - `/settings` - settings page
 
 The preview project uses the published `twblazor` package and is Server-only. To generate a complete app in Server, WebAssembly or Auto mode, use `preview.ps1`:
@@ -52,7 +53,7 @@ The script writes the app to `artifacts/preview/<name>`, restores packages, buil
 | Option | Effect |
 | --- | --- |
 | `-Interactivity server\|wasm\|auto` | Render mode. Default: `server`. |
-| `-Layout dashboard\|sidebar\|navbar` | Template layout. Default: `dashboard`. |
+| `-Layout dashboard\|sidebar\|navbar\|blank` | Template layout. Default: `dashboard`. |
 | `-Open` | Open the generated `.slnx` in Visual Studio instead of running it. |
 | `-NoRun` | Generate the app without starting it. |
 | `-NoRestore` | Skip `dotnet restore`. |
@@ -70,9 +71,7 @@ The README screenshots are captured from the preview routes with Playwright at 1
 ./scripts/screenshot-templates.ps1
 ```
 
-The script writes `images/templates/dashboard.png`, `sidebar.png` and `navbar.png`. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
-
-The README table headers are deliberately equal-length code spans using non-breaking spaces (`Dashboard`, `Sidebar`, `Navbar`). Keep them that way so all three screenshots render at exactly the same width on GitHub and NuGet.
+The script writes `images/templates/dashboard.png`, `sidebar.png`, `navbar.png` and `blank.png`. Pass `-BaseUrl` if the preview is running somewhere other than `http://localhost:5300`.
 
 ## How the templates are organised
 
@@ -103,6 +102,8 @@ global.json                   pins the .NET 10 SDK
 ## Keeping Theme.cs in sync
 
 `templates/twblazor/ui/Theme.cs` is generated from the default theme in the main `twblazor` repository. The canonical source is currently `src/TwBlazor.Theme/Theme.cs`; the sync also checks `src/Theme/Theme.cs` first if the file moves. This is a template copy, not a live dependency: a generated app pins a `twblazor` package version, so its `Theme.cs` must match that version.
+
+The template is also a blue-primary demo, so `sync-theme.ps1` transforms the canonical purple/fuchsia palette to blue/sky (and Info's blue to cyan so it stays distinct) before writing the file. The transform is deterministic and part of `-Check`, so the publish workflows still verify that the template theme matches the package tag.
 
 The **Update twblazor** workflow checks the latest stable `twblazor` release every day at 06:17 UTC, syncs the theme and package references, builds and tests the result, then opens a pull request to `develop`. It can also be run from **Actions > Update twblazor > Run workflow** with a version, or triggered by a `twblazor-release` repository dispatch. Merging the pull request puts the update into the normal develop -> main release flow.
 

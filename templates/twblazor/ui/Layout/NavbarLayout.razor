@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject ITwToastService ToastService
+@inject TwBlazorOptions Options
 
 <TwToastProvider />
 <TwDialogProvider />
@@ -7,11 +8,11 @@
 <TwFlex Direction="FlexDirection.Col" FullHeight Class="min-h-dvh">
     <TwNavbar NavigationItems="@AppNavigation.Top">
         <BrandContent>
-            <a href="/" class="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-600">
+            <a href="/" class="rounded-lg @Options.Theme.Tokens.FocusRing">
                 <TwFlex Inline Align="AlignItems.Center" Gap="2.5">
-                    <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-9 shrink-0 rounded-xl bg-linear-to-br from-purple-600 to-fuchsia-500 text-white shadow-sm">
-                        <TwIcon Icon="Icon.Lightning_Charge_Fill" Class="text-lg" />
-                    </TwFlex>
+                    <TwAvatar Icon="Icon.Lightning_Charge_Fill"
+                              Color="Color.Primary"
+                              Class="size-9 rounded-xl text-base" />
                     <span class="text-base font-semibold tracking-tight">TwBlazorApp</span>
                 </TwFlex>
             </a>
@@ -35,11 +36,11 @@
     </TwContainer>
 
     <TwContainer Element="LayoutElement.Footer" MaxWidth="ContainerSize.Xl6" PaddingY="6" Class="border-t border-gray-200 dark:border-white/10">
-        <TwFlex Direction="FlexDirection.Col" DirectionSm="FlexDirection.Row" Justify="JustifyContent.Between" Align="AlignItems.Center" Gap="3" Class="text-xs text-gray-500 dark:text-gray-400">
+        <TwFlex Direction="FlexDirection.Col" DirectionSm="FlexDirection.Row" Justify="JustifyContent.Between" Align="AlignItems.Center" Gap="3" Class="@($"text-xs {Options.Theme.Colors.NeutralText.Muted}")">
             <p>&copy; @DateTime.Now.Year TwBlazorApp. Built with twblazor.</p>
             <TwFlex Element="LayoutElement.Nav" Gap="5" AriaLabel="Footer">
-                <a href="https://twblazor.com" target="_blank" rel="noreferrer" class="font-medium hover:text-gray-900 dark:hover:text-white">Documentation</a>
-                <a href="/settings" class="font-medium hover:text-gray-900 dark:hover:text-white">Settings</a>
+                <TwLink Href="https://twblazor.com" Target="_blank" Tone="TextTone.Muted" Weight="TextWeight.Medium" Class="hover:text-gray-900 dark:hover:text-white">Documentation</TwLink>
+                <TwLink Href="/settings" Tone="TextTone.Muted" Weight="TextWeight.Medium" Class="hover:text-gray-900 dark:hover:text-white">Settings</TwLink>
             </TwFlex>
         </TwFlex>
     </TwContainer>

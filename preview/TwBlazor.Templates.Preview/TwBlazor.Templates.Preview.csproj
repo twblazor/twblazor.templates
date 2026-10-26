@@ -9,13 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="twblazor" Version="3.0.0" />
+    <PackageReference Include="twblazor" Version="3.0.1-preview.2" />
   </ItemGroup>
 
   <!-- The template's shared UI is linked rather than copied, so edits show up here immediately. -->
   <ItemGroup>
     <Content Include="../../templates/twblazor/ui/**/*.razor"
-             Exclude="../../templates/twblazor/ui/Layout/DashboardLayout.razor;../../templates/twblazor/ui/Pages/Welcome.razor"
+             Exclude="../../templates/twblazor/ui/Layout/DashboardLayout.razor;../../templates/twblazor/ui/Pages/Welcome.razor;../../templates/twblazor/ui/Pages/Blank.razor;../../templates/twblazor/ui/Pages/BlankNotFound.razor"
              Link="%(RecursiveDir)%(Filename)%(Extension)" />
     <Content Include="../../templates/twblazor/ui/Layout/DashboardLayout.razor" Link="Layout/MainLayout.razor" />
     <Compile Include="../../templates/twblazor/ui/**/*.cs" Link="%(RecursiveDir)%(Filename)%(Extension)" />

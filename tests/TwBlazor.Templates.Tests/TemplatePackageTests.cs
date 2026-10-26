@@ -10,7 +10,10 @@ public sealed class TemplatePackageTests
     [InlineData("ui/Layout/DashboardLayout.razor")]
     [InlineData("ui/Layout/SidebarLayout.razor")]
     [InlineData("ui/Layout/NavbarLayout.razor")]
+    [InlineData("ui/Layout/BlankLayout.razor")]
     [InlineData("ui/Pages/Dashboard.razor")]
+    [InlineData("ui/Pages/Blank.razor")]
+    [InlineData("ui/Pages/BlankNotFound.razor")]
     [InlineData("ui/Pages/Welcome.razor")]
     [InlineData("ui/Pages/WelcomeContent.razor")]
     [InlineData("ui/Pages/Settings.razor")]
@@ -43,7 +46,7 @@ public sealed class TemplatePackageTests
         var layouts = symbols.GetProperty("layout").GetProperty("choices").EnumerateArray().Select(choice => choice.GetProperty("choice").GetString()).ToList();
 
         Assert.Equal(["Server", "WebAssembly", "Auto"], interactivity);
-        Assert.Equal(["dashboard", "sidebar", "navbar"], layouts);
+        Assert.Equal(["dashboard", "sidebar", "navbar", "blank"], layouts);
     }
 
     [Fact]
