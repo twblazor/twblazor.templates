@@ -123,6 +123,18 @@ public sealed class TemplatePackageTests
     }
 
     [Fact]
+    public void PreCreateScript_ChecksNuGetAndPromptsBeforeUpdating()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        var repositoryRoot = Directory.GetParent(templateDirectory)!.Parent!.FullName;
+        var script = File.ReadAllText(Path.Combine(repositoryRoot, "scripts", "pre-create-template.ps1"));
+
+        Assert.Contains("https://www.nuget.org/packages/twblazor.templates", script);
+        Assert.Contains("dotnet tool update --global", script);
+        Assert.Contains("Read-Host", script);
+    }
+
+    [Fact]
     public void TemplateSource_IsFoundFromTheRepository()
     {
         var found = TemplateLocator.FindLocal();
