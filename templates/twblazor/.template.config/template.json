@@ -7,7 +7,7 @@
   "name": "twblazor App",
   "shortName": "twblazor",
   "defaultName": "TwBlazorApp",
-  "description": "A Blazor Web App styled with twblazor and Tailwind CSS, with a dashboard, sidebar or navbar layout.",
+  "description": "A Blazor Web App styled with twblazor and Tailwind CSS, with a dashboard, sidebar, navbar or blank layout.",
   "sourceName": "TwBlazorApp",
   "preferNameDirectory": true,
   "tags": {
@@ -34,7 +34,8 @@
       "choices": [
         { "choice": "dashboard", "description": "A sidebar and top bar, with a dashboard home page." },
         { "choice": "sidebar", "description": "A sidebar for navigation." },
-        { "choice": "navbar", "description": "A top navigation bar." }
+        { "choice": "navbar", "description": "A top navigation bar." },
+        { "choice": "blank", "description": "A centered blank home page with a link to the docs." }
       ]
     },
     "UseServer": {
@@ -115,12 +116,18 @@
         { "condition": "(layout == \"dashboard\")", "rename": { "Layout/DashboardLayout.razor": "Layout/MainLayout.razor" } },
         { "condition": "(layout == \"sidebar\")", "rename": { "Layout/SidebarLayout.razor": "Layout/MainLayout.razor" } },
         { "condition": "(layout == \"navbar\")", "rename": { "Layout/NavbarLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"blank\")", "rename": { "Layout/BlankLayout.razor": "Layout/MainLayout.razor" } },
         { "condition": "(layout == \"dashboard\")", "rename": { "Pages/Dashboard.razor": "Pages/Home.razor" } },
-        { "condition": "(layout != \"dashboard\")", "rename": { "Pages/Welcome.razor": "Pages/Home.razor" } },
+        { "condition": "(layout != \"dashboard\" && layout != \"blank\")", "rename": { "Pages/Welcome.razor": "Pages/Home.razor" } },
+        { "condition": "(layout == \"blank\")", "rename": { "Pages/Blank.razor": "Pages/Home.razor" } },
+        { "condition": "(layout == \"blank\")", "rename": { "Pages/BlankNotFound.razor": "Pages/NotFound.razor" } },
         { "condition": "(layout != \"dashboard\")", "exclude": [ "Pages/Dashboard.razor", "Layout/DashboardLayout.razor" ] },
         { "condition": "(layout != \"sidebar\")", "exclude": [ "Layout/SidebarLayout.razor" ] },
         { "condition": "(layout != \"navbar\")", "exclude": [ "Layout/NavbarLayout.razor" ] },
-        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor", "Pages/WelcomeContent.razor" ] }
+        { "condition": "(layout != \"blank\")", "exclude": [ "Layout/BlankLayout.razor", "Pages/Blank.razor", "Pages/BlankNotFound.razor" ] },
+        { "condition": "(layout == \"blank\")", "exclude": [ "Pages/NotFound.razor" ] },
+        { "condition": "(layout == \"dashboard\" || layout == \"blank\")", "exclude": [ "Pages/Welcome.razor", "Pages/WelcomeContent.razor" ] },
+        { "condition": "(layout == \"blank\")", "exclude": [ "AppNavigation.cs", "Pages/Settings.razor" ] }
       ]
     },
     {
@@ -131,12 +138,18 @@
         { "condition": "(layout == \"dashboard\")", "rename": { "Layout/DashboardLayout.razor": "Layout/MainLayout.razor" } },
         { "condition": "(layout == \"sidebar\")", "rename": { "Layout/SidebarLayout.razor": "Layout/MainLayout.razor" } },
         { "condition": "(layout == \"navbar\")", "rename": { "Layout/NavbarLayout.razor": "Layout/MainLayout.razor" } },
+        { "condition": "(layout == \"blank\")", "rename": { "Layout/BlankLayout.razor": "Layout/MainLayout.razor" } },
         { "condition": "(layout == \"dashboard\")", "rename": { "Pages/Dashboard.razor": "Pages/Home.razor" } },
-        { "condition": "(layout != \"dashboard\")", "rename": { "Pages/Welcome.razor": "Pages/Home.razor" } },
+        { "condition": "(layout != \"dashboard\" && layout != \"blank\")", "rename": { "Pages/Welcome.razor": "Pages/Home.razor" } },
+        { "condition": "(layout == \"blank\")", "rename": { "Pages/Blank.razor": "Pages/Home.razor" } },
+        { "condition": "(layout == \"blank\")", "rename": { "Pages/BlankNotFound.razor": "Pages/NotFound.razor" } },
         { "condition": "(layout != \"dashboard\")", "exclude": [ "Pages/Dashboard.razor", "Layout/DashboardLayout.razor" ] },
         { "condition": "(layout != \"sidebar\")", "exclude": [ "Layout/SidebarLayout.razor" ] },
         { "condition": "(layout != \"navbar\")", "exclude": [ "Layout/NavbarLayout.razor" ] },
-        { "condition": "(layout == \"dashboard\")", "exclude": [ "Pages/Welcome.razor", "Pages/WelcomeContent.razor" ] }
+        { "condition": "(layout != \"blank\")", "exclude": [ "Layout/BlankLayout.razor", "Pages/Blank.razor", "Pages/BlankNotFound.razor" ] },
+        { "condition": "(layout == \"blank\")", "exclude": [ "Pages/NotFound.razor" ] },
+        { "condition": "(layout == \"dashboard\" || layout == \"blank\")", "exclude": [ "Pages/Welcome.razor", "Pages/WelcomeContent.razor" ] },
+        { "condition": "(layout == \"blank\")", "exclude": [ "AppNavigation.cs", "Pages/Settings.razor" ] }
       ]
     }
   ],

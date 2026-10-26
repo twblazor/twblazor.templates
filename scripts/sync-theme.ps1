@@ -63,6 +63,14 @@ $content = $content -replace '(?m)^\[assembly: MetadataUpdateHandler\([^\r\n]*\)
 $content = $content -replace '(?m)^namespace TwBlazor\.Theme;\r?\n', "#if (HasClient)`nnamespace TwBlazorApp.Client;`n#else`nnamespace TwBlazorApp;`n#endif`n"
 $content = $content -replace '(?m)^using TwBlazor\.Enums;\r?\n\r?\n\r?\n(?=#if \(HasClient\))', "using TwBlazor.Enums;`n`n"
 
+# The template is a blue-primary demo. It uses the canonical theme with the primary family
+# (purple) and accent family (fuchsia) swapped to blue and sky, while Info's blue becomes cyan so it
+# stays distinct from primary. The transform is part of the sync, so -Check compares against the
+# same demo palette rather than the canonical purple one.
+$content = $content -replace 'fuchsia', 'sky'
+$content = $content -replace 'blue', 'cyan'
+$content = $content -replace 'purple', 'blue'
+
 $content = [regex]::Replace(
     $content,
     '(?s)\r?\ninternal static class ThemeUpdateHandler\s*\{.*?\r?\n\}\s*$',
@@ -73,8 +81,9 @@ $templateHeader = @'
 /// The classes every twblazor component is styled with. Tailwind builds the app's stylesheet from this file.
 /// </summary>
 /// <remarks>
-/// This is the default twblazor theme. To change colours, rounding, shadows or the components included,
-/// generate a new theme at https://twblazor.com/theme and replace this whole file.
+/// This is the blue-primary theme used by the template, built from the default twblazor theme. To change colours,
+/// rounding, shadows or the components included, generate a new theme at https://twblazor.com/theme and replace
+/// this whole file.
 /// </remarks>
 '@
 

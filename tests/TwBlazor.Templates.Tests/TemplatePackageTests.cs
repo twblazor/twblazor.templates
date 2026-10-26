@@ -10,7 +10,10 @@ public sealed class TemplatePackageTests
     [InlineData("ui/Layout/DashboardLayout.razor")]
     [InlineData("ui/Layout/SidebarLayout.razor")]
     [InlineData("ui/Layout/NavbarLayout.razor")]
+    [InlineData("ui/Layout/BlankLayout.razor")]
     [InlineData("ui/Pages/Dashboard.razor")]
+    [InlineData("ui/Pages/Blank.razor")]
+    [InlineData("ui/Pages/BlankNotFound.razor")]
     [InlineData("ui/Pages/Welcome.razor")]
     [InlineData("ui/Pages/WelcomeContent.razor")]
     [InlineData("ui/Pages/Settings.razor")]
@@ -43,7 +46,32 @@ public sealed class TemplatePackageTests
         var layouts = symbols.GetProperty("layout").GetProperty("choices").EnumerateArray().Select(choice => choice.GetProperty("choice").GetString()).ToList();
 
         Assert.Equal(["Server", "WebAssembly", "Auto"], interactivity);
-        Assert.Equal(["dashboard", "sidebar", "navbar"], layouts);
+        Assert.Equal(["dashboard", "sidebar", "navbar", "blank"], layouts);
+    }
+
+    [Fact]
+    public void Template_DocumentsHowToBuildAndWatchTailwind()
+    {
+        var readme = File.ReadAllText(Path.Combine(FindTemplateDirectory(), "README.md"));
+
+        Assert.Contains("npm run build:css", readme);
+        Assert.Contains("npm run watch:css", readme);
+    }
+
+    [Fact]
+    public void Template_DecodesTailwindOutputAsUtf8()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        var packageJson = File.ReadAllText(Path.Combine(templateDirectory, "package.json"));
+        var project = File.ReadAllText(Path.Combine(templateDirectory, "host", "TwBlazorApp.csproj"));
+
+        using var document = JsonDocument.Parse(packageJson);
+
+        var buildCss = document.RootElement.GetProperty("scripts").GetProperty("build:css").GetString();
+
+        Assert.DoesNotContain("--silent", buildCss);
+        Assert.Contains("StdOutEncoding=\"utf-8\"", project);
+        Assert.Contains("StdErrEncoding=\"utf-8\"", project);
     }
 
     [Fact]

@@ -1,17 +1,22 @@
 @page "/not-found"
 @layout MainLayout
+@inject TwBlazorOptions Options
 
 <PageTitle>Page not found</PageTitle>
 
 <TwFlex Direction="FlexDirection.Col" Align="AlignItems.Center" Justify="JustifyContent.Center" FullHeight Gap="0" Class="min-h-[60vh] px-4 text-center">
-    <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="size-16 rounded-2xl bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300">
-        <TwIcon Icon="Icon.Compass" Class="text-3xl" />
+    <TwFlex Align="AlignItems.Center" Justify="JustifyContent.Center" Class="@($"size-16 rounded-2xl {primaryTile}")">
+        <TwIcon Icon="Icon.Compass" Color="Color.Primary" Class="text-3xl" />
     </TwFlex>
-    <p class="mt-6 text-xs font-semibold uppercase tracking-widest text-purple-700 dark:text-purple-300">404</p>
-    <h1 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">This page took a wrong turn.</h1>
-    <p class="mt-3 max-w-md text-sm leading-6 text-gray-600 dark:text-gray-400">
+    <TwText Element="LayoutElement.P"
+            Color="Color.Primary"
+            Size="TextSize.Xs"
+            Weight="TextWeight.Semibold"
+            Class="mt-6 uppercase tracking-widest">404</TwText>
+    <TwText Element="LayoutElement.H1" Size="TextSize.Xl3" Weight="TextWeight.Bold" Class="mt-2 tracking-tight sm:text-4xl">This page took a wrong turn.</TwText>
+    <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted" Class="mt-3 max-w-md leading-6">
         The page you are looking for does not exist, or it may have moved somewhere else.
-    </p>
+    </TwText>
     <TwFlex Wrap="FlexWrap.Wrap" Justify="JustifyContent.Center" Gap="2" Class="mt-6">
         <TwButton Label="Back to home"
                   Variant="ButtonVariant.Filled"
@@ -25,3 +30,8 @@
                   Href="/settings" />
     </TwFlex>
 </TwFlex>
+
+@code {
+    private string primaryTile =>
+        $"{Options.Theme.Colors.LightBackground.Lightest.Primary} {Options.Theme.Colors.DarkBackground.Darkest.Primary}";
+}

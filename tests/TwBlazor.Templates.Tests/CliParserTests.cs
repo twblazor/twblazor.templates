@@ -31,6 +31,7 @@ public sealed class CliParserTests
     [InlineData("dashboard", nameof(LayoutTemplate.Dashboard))]
     [InlineData("Sidebar", nameof(LayoutTemplate.Sidebar))]
     [InlineData("navbar", nameof(LayoutTemplate.Navbar))]
+    [InlineData("blank", nameof(LayoutTemplate.Blank))]
     public void ParseLayout_MapsNames(string value, string expected)
     {
         Assert.Equal(expected, CliParser.ParseLayout(value).ToString());

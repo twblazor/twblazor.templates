@@ -8,15 +8,14 @@ The templates share one set of pages and layouts across Server, WebAssembly and 
 
 ## Templates
 
-<!-- The labels are code spans of equal length, with non-breaking spaces, so the three screenshots render at exactly the same width in GitHub and NuGet. -->
-
-| `Dashboard` | ` Sidebar ` | ` Navbar  ` |
-| --- | --- | --- |
-| [![Dashboard template: sidebar, top bar, KPI cards and charts](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png) | [![Sidebar template: grouped navigation and a welcome page](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png) | [![Navbar template: top navigation and a welcome page](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png)](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png) |
+| Dashboard | &nbsp;Sidebar&nbsp; | &nbsp;Navbar&nbsp;&nbsp; | &nbsp;&nbsp;Blank&nbsp;&nbsp; |
+| --- | --- | --- | --- |
+| [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png" alt="Dashboard template: sidebar, top bar, KPI cards and charts" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png" alt="Sidebar template: grouped navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png" alt="Navbar template: top navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/blank.png" alt="Blank template: a centered Hello world page with a link to the docs" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/blank.png) |
 
 - **dashboard**: a sidebar, a top bar, KPI cards, revenue/traffic/order charts, recent orders and activity.
 - **sidebar**: grouped sidebar navigation, a welcome and resources page, and a settings form.
 - **navbar**: a top navigation bar with the same welcome and settings pages.
+- **blank**: a centered Hello world page with a link to the twblazor docs.
 
 Every layout includes `TwToastProvider` and `TwDialogProvider`, light and dark mode classes, and a 404 page.
 
@@ -50,12 +49,13 @@ Choose the render mode and layout:
 twblazor new MyApp -i wasm -t dashboard
 twblazor new MyApp -i auto -t sidebar
 twblazor new MyApp -i server -t navbar
+twblazor new MyApp -i server -t blank
 ```
 
 | Option | Values | Default |
 | --- | --- | --- |
 | `-i`, `--interactivity` | `server`, `wasm` / `webassembly`, `auto` | `server` |
-| `-t`, `--template` | `dashboard`, `sidebar`, `navbar` | `dashboard` |
+| `-t`, `--template` | `dashboard`, `sidebar`, `navbar`, `blank` | `dashboard` |
 | `-o`, `--output` | Folder to create the app in | `./MyApp` |
 | `--templates` | Template folder or package id | Installed templates |
 | `--no-restore` | Skip `dotnet restore` | |
@@ -81,5 +81,3 @@ The preview app, build instructions, screenshot setup, theme sync and release pr
 ## License
 
 MIT
-
-

@@ -3,7 +3,7 @@ param(
     [ValidateSet("server", "wasm", "auto")]
     [string]$Interactivity = "server",
 
-    [ValidateSet("dashboard", "sidebar", "navbar")]
+    [ValidateSet("dashboard", "sidebar", "navbar", "blank")]
     [string]$Layout = "dashboard",
 
     [switch]$NoRestore,

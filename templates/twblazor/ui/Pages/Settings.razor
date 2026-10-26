@@ -5,14 +5,18 @@
 
 <TwContainer MaxWidth="ContainerSize.Xl4" Gutter="0" Class="space-y-6">
     <TwFlex Element="LayoutElement.Header" Direction="FlexDirection.Col" Gap="1">
-        <p class="text-xs font-semibold uppercase tracking-widest text-purple-700 dark:text-purple-300">Account</p>
-        <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
-        <p class="text-sm text-gray-600 dark:text-gray-400">Manage your profile and choose what you hear about.</p>
+        <TwText Element="LayoutElement.P"
+                Color="Color.Primary"
+                Size="TextSize.Xs"
+                Weight="TextWeight.Semibold"
+                Class="uppercase tracking-widest">Account</TwText>
+        <TwText Element="LayoutElement.H1" Size="TextSize.Xl2" Weight="TextWeight.Bold" Class="tracking-tight sm:text-3xl">Settings</TwText>
+        <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted">Manage your profile and choose what you hear about.</TwText>
     </TwFlex>
 
     <TwCard Title="Profile" TitleLevel="2">
         <HeaderContent>
-            <p class="text-sm text-gray-600 dark:text-gray-400">This is how you appear across the app.</p>
+            <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted">This is how you appear across the app.</TwText>
         </HeaderContent>
         <ChildContent>
             <TwGrid Cols="1" ColsSm="2" Gap="4">
@@ -33,7 +37,7 @@
 
     <TwCard Title="Notifications" TitleLevel="2">
         <HeaderContent>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Pick the updates that are worth interrupting you for.</p>
+            <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted">Pick the updates that are worth interrupting you for.</TwText>
         </HeaderContent>
         <ChildContent>
             <TwFlex Direction="FlexDirection.Col" Gap="4">
@@ -47,8 +51,8 @@
     <TwCard Title="Danger zone" TitleLevel="2">
         <TwFlex Direction="FlexDirection.Col" DirectionSm="FlexDirection.Row" Justify="JustifyContent.Between" Align="AlignItems.Center" Gap="3">
             <TwFlexItem MinWidthZero>
-                <p class="text-sm font-medium">Delete your account</p>
-                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">This removes your profile and every page you have created.</p>
+                <TwText Element="LayoutElement.P" Size="TextSize.Sm" Weight="TextWeight.Medium">Delete your account</TwText>
+                <TwText Element="LayoutElement.P" Size="TextSize.Sm" Tone="TextTone.Muted" Class="mt-1">This removes your profile and every page you have created.</TwText>
             </TwFlexItem>
             <TwButton Label="Delete account"
                       Variant="ButtonVariant.Outlined"

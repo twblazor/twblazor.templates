@@ -10,7 +10,7 @@
     <PackageId>twblazor.templates</PackageId>
     <Authors>twblazor</Authors>
     <Company>twblazor</Company>
-    <Description>Scaffold a Blazor Web App with twblazor and a dashboard, sidebar or navbar layout.</Description>
+    <Description>Scaffold a Blazor Web App with twblazor and a dashboard, sidebar, navbar or blank layout.</Description>
     <PackageProjectUrl>https://twblazor.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/twblazor/twblazor.templates</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
