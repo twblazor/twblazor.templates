@@ -13,9 +13,8 @@ namespace TwBlazorApp;
 /// The classes every twblazor component is styled with. Tailwind builds the app's stylesheet from this file.
 /// </summary>
 /// <remarks>
-/// This is the blue-primary theme used by the template, built from the default twblazor theme. To change colours,
-/// rounding, shadows or the components included, generate a new theme at https://twblazor.com/theme and replace
-/// this whole file.
+/// This is the default twblazor theme. To change colours, rounding, shadows or the components included,
+/// generate a new theme at https://twblazor.com/theme and replace this whole file.
 /// </remarks>
 public static class Theme
 {
@@ -116,34 +115,34 @@ public static class Theme
         {
             Light =
             {
-                Primary = "text-blue-200",
-                Accent = "text-sky-200",
+                Primary = "text-purple-200",
+                Accent = "text-fuchsia-200",
                 Success = "text-green-200",
                 Danger = "text-red-200",
                 Warning = "text-yellow-200",
-                Info = "text-cyan-200",
+                Info = "text-blue-200",
                 Light = "text-white",
                 Dark = "text-gray-200"
             },
             Medium =
             {
-                Primary = "text-blue-600",
-                Accent = "text-sky-700",
+                Primary = "text-purple-600",
+                Accent = "text-fuchsia-700",
                 Success = "text-green-800",
                 Danger = "text-red-700",
                 Warning = "text-yellow-800",
-                Info = "text-cyan-600",
+                Info = "text-blue-600",
                 Light = "text-gray-100",
                 Dark = "text-gray-950",
             },
             Dark =
             {
-                Primary = "text-blue-900",
-                Accent = "text-sky-900",
+                Primary = "text-purple-900",
+                Accent = "text-fuchsia-900",
                 Success = "text-green-900",
                 Danger = "text-red-900",
                 Warning = "text-yellow-900",
-                Info = "text-cyan-900",
+                Info = "text-blue-900",
                 Light = "text-gray-300",
                 Dark = "text-gray-900"
             }
@@ -153,57 +152,57 @@ public static class Theme
         {
             Light =
             {
-                Primary = "dark:text-blue-200",
-                Accent = "dark:text-sky-200",
+                Primary = "dark:text-purple-200",
+                Accent = "dark:text-fuchsia-200",
                 Success = "dark:text-green-200",
                 Danger = "dark:text-red-200",
                 Warning = "dark:text-yellow-200",
-                Info = "dark:text-cyan-200",
+                Info = "dark:text-blue-200",
                 Dark = "dark:text-gray-200"
             },
             Medium =
             {
-                Primary = "dark:text-blue-600",
-                Accent = "dark:text-sky-600",
+                Primary = "dark:text-purple-600",
+                Accent = "dark:text-fuchsia-600",
                 Success = "dark:text-green-600",
                 Danger = "dark:text-red-600",
                 Warning = "dark:text-yellow-600",
-                Info = "dark:text-cyan-600",
+                Info = "dark:text-blue-600",
                 Light = "dark:text-white",
                 Dark = "dark:text-gray-950",
             },
             Dark =
             {
-                Primary = "dark:text-blue-900",
-                Accent = "dark:text-sky-900",
+                Primary = "dark:text-purple-900",
+                Accent = "dark:text-fuchsia-900",
                 Success = "dark:text-green-900",
                 Danger = "dark:text-red-900",
                 Warning = "dark:text-yellow-900",
-                Info = "dark:text-cyan-900",
+                Info = "dark:text-blue-900",
                 Dark = "dark:text-gray-900"
             }
         };
 
         var borderColors = new TwBlazorPalette
         {
-            Primary = "border-blue-600 dark:border-blue-500",
-            Accent = "border-sky-600 dark:border-sky-400",
+            Primary = "border-purple-600 dark:border-purple-500",
+            Accent = "border-fuchsia-600 dark:border-fuchsia-400",
             Success = "border-green-600 dark:border-green-400",
             Danger = "border-red-600 dark:border-red-400",
             Warning = "border-yellow-700 dark:border-yellow-400",
-            Info = "border-cyan-600 dark:border-cyan-400",
+            Info = "border-blue-600 dark:border-blue-400",
             Light = "border-gray-100 dark:border-gray-200",
             Dark = "border-gray-900 dark:border-gray-700"
         };
 
         var hoverColors = new TwBlazorPalette
         {
-            Primary = "hover:bg-blue-50 dark:hover:bg-blue-900/20",
-            Accent = "hover:bg-sky-50 dark:hover:bg-sky-900/20",
+            Primary = "hover:bg-purple-50 dark:hover:bg-purple-900/20",
+            Accent = "hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20",
             Success = "hover:bg-green-50 dark:hover:bg-green-900/20",
             Danger = "hover:bg-red-50 dark:hover:bg-red-900/20",
             Warning = "hover:bg-yellow-50 dark:hover:bg-yellow-900/20",
-            Info = "hover:bg-cyan-50 dark:hover:bg-cyan-900/20",
+            Info = "hover:bg-blue-50 dark:hover:bg-blue-900/20",
             Light = "hover:bg-gray-100/10",
             Dark = "hover:bg-gray-900/10 dark:hover:bg-white/10"
         };
@@ -212,56 +211,56 @@ public static class Theme
         {
             Lightest = new()
             {
-                Primary = $"bg-blue-50",
-                Accent = $"bg-sky-50",
+                Primary = $"bg-purple-50",
+                Accent = $"bg-fuchsia-50",
                 Success = $"bg-green-50",
                 Danger = $"bg-red-50",
                 Warning = $"bg-yellow-50",
-                Info = $"bg-cyan-50",
+                Info = $"bg-blue-50",
                 Light = $"bg-white",
                 Dark = $"bg-gray-50"
             },
             Light = new()
             {
-                Primary = $"bg-blue-200",
-                Accent = $"bg-sky-200",
+                Primary = $"bg-purple-200",
+                Accent = $"bg-fuchsia-200",
                 Success = $"bg-green-200",
                 Danger = $"bg-red-200",
                 Warning = $"bg-yellow-200",
-                Info = $"bg-cyan-200",
+                Info = $"bg-blue-200",
                 Light = $"bg-white",
                 Dark = $"bg-gray-200"
             },
             Medium = new()
             {
-                Primary = $"bg-blue-600",
-                Accent = $"bg-sky-600",
+                Primary = $"bg-purple-600",
+                Accent = $"bg-fuchsia-600",
                 Success = $"bg-green-700",
                 Danger = $"bg-red-600",
                 Warning = $"bg-yellow-600",
-                Info = $"bg-cyan-600",
+                Info = $"bg-blue-600",
                 Light = $"bg-gray-100",
                 Dark = $"bg-gray-600",
             },
             Dark = new()
             {
-                Primary = $"bg-blue-900",
-                Accent = $"bg-sky-900",
+                Primary = $"bg-purple-900",
+                Accent = $"bg-fuchsia-900",
                 Success = $"bg-green-900",
                 Danger = $"bg-red-900",
                 Warning = $"bg-yellow-900",
-                Info = $"bg-cyan-900",
+                Info = $"bg-blue-900",
                 Light = $"bg-gray-300",
                 Dark = $"bg-gray-900"
             },
             Darkest = new()
             {
-                Primary = $"bg-blue-950",
-                Accent = $"bg-sky-950",
+                Primary = $"bg-purple-950",
+                Accent = $"bg-fuchsia-950",
                 Success = $"bg-green-950",
                 Danger = $"bg-red-950",
                 Warning = $"bg-yellow-950",
-                Info = $"bg-cyan-950",
+                Info = $"bg-blue-950",
                 Light = $"bg-gray-950",
                 Dark = $"bg-black"
             }
@@ -271,65 +270,65 @@ public static class Theme
         {
             Lightest = new()
             {
-                Primary = $"dark:bg-blue-50",
-                Accent = $"dark:bg-sky-50",
+                Primary = $"dark:bg-purple-50",
+                Accent = $"dark:bg-fuchsia-50",
                 Success = $"dark:bg-green-50",
                 Danger = $"dark:bg-red-50",
                 Warning = $"dark:bg-yellow-50",
-                Info = $"dark:bg-cyan-50",
+                Info = $"dark:bg-blue-50",
                 Dark = $"dark:bg-gray-50"
             },
             Light = new()
             {
-                Primary = $"dark:bg-blue-200",
-                Accent = $"dark:bg-sky-200",
+                Primary = $"dark:bg-purple-200",
+                Accent = $"dark:bg-fuchsia-200",
                 Success = $"dark:bg-green-200",
                 Danger = $"dark:bg-red-200",
                 Warning = $"dark:bg-yellow-200",
-                Info = $"dark:bg-cyan-200",
+                Info = $"dark:bg-blue-200",
                 Dark = $"dark:bg-gray-200",
             },
             Medium = new()
             {
-                Primary = $"dark:bg-blue-600",
-                Accent = $"dark:bg-sky-600",
+                Primary = $"dark:bg-purple-600",
+                Accent = $"dark:bg-fuchsia-600",
                 Success = $"dark:bg-green-600",
                 Danger = $"dark:bg-red-600",
                 Warning = $"dark:bg-yellow-600",
-                Info = $"dark:bg-cyan-600",
+                Info = $"dark:bg-blue-600",
                 Light = $"dark:bg-white",
                 Dark = $"dark:bg-gray-600",
             },
             Dark = new()
             {
-                Primary = $"dark:bg-blue-900",
-                Accent = $"dark:bg-sky-900",
+                Primary = $"dark:bg-purple-900",
+                Accent = $"dark:bg-fuchsia-900",
                 Success = $"dark:bg-green-900",
                 Danger = $"dark:bg-red-900",
                 Warning = $"dark:bg-yellow-900",
-                Info = $"dark:bg-cyan-900",
+                Info = $"dark:bg-blue-900",
                 Dark = $"dark:bg-gray-900",
             },
             Darkest = new()
             {
-                Primary = $"dark:bg-blue-950",
-                Accent = $"dark:bg-sky-950",
+                Primary = $"dark:bg-purple-950",
+                Accent = $"dark:bg-fuchsia-950",
                 Success = $"dark:bg-green-950",
                 Danger = $"dark:bg-red-950",
                 Warning = $"dark:bg-yellow-950",
-                Info = $"dark:bg-cyan-950",
+                Info = $"dark:bg-blue-950",
                 Dark = $"dark:bg-black",
             }
         };
 
         var checkBoxRadioButtonColors = new TwBlazorPalette()
         {
-            Primary = "checked:bg-blue-600 checked:border-blue-600 dark:checked:bg-blue-500 dark:checked:border-blue-500",
-            Accent = "checked:bg-sky-600 checked:border-sky-600 dark:checked:bg-sky-500 dark:checked:border-sky-500",
+            Primary = "checked:bg-purple-600 checked:border-purple-600 dark:checked:bg-purple-500 dark:checked:border-purple-500",
+            Accent = "checked:bg-fuchsia-600 checked:border-fuchsia-600 dark:checked:bg-fuchsia-500 dark:checked:border-fuchsia-500",
             Success = "checked:bg-green-600 checked:border-green-600 dark:checked:bg-green-500 dark:checked:border-green-500",
             Danger = "checked:bg-red-600 checked:border-red-600 dark:checked:bg-red-500 dark:checked:border-red-500",
             Warning = "checked:bg-yellow-700 checked:border-yellow-700 dark:checked:bg-yellow-500 dark:checked:border-yellow-500",
-            Info = "checked:bg-cyan-600 checked:border-cyan-600 dark:checked:bg-cyan-500 dark:checked:border-cyan-500",
+            Info = "checked:bg-blue-600 checked:border-blue-600 dark:checked:bg-blue-500 dark:checked:border-blue-500",
             Light = "checked:bg-white checked:border-gray-900 dark:checked:bg-white dark:checked:border-gray-500",
             Dark = "checked:bg-gray-900 checked:border-gray-900 dark:checked:bg-gray-900 dark:checked:border-gray-900"
         };
@@ -360,8 +359,8 @@ public static class Theme
             InputHeight = "h-10",
             InputDenseHeight = "h-8",
             InputLabelText = $"text-xs font-normal tracking-wide {neutralText.Muted}",
-            FocusRing = "focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400",
-            FocusRingInset = "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400",
+            FocusRing = "focus-visible:ring-2 focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400",
+            FocusRingInset = "focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400",
             FocusRingCurrent = "focus-visible:ring-2 focus-visible:ring-current",
             FocusRingOffset = "focus-visible:ring-offset-[oklch(100%_0_0)] dark:focus-visible:ring-offset-[oklch(28%_0.016_252.42)]",
             Transparent = "bg-transparent",
@@ -875,24 +874,24 @@ public static class Theme
                 FocusRingBase = $"focus-visible:ring-2 focus-visible:ring-offset-2 {tokens.FocusRingOffset}",
                 FocusColors = new()
                 {
-                    Primary = "focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400",
-                    Accent = "focus-visible:ring-sky-500 dark:focus-visible:ring-sky-400",
+                    Primary = "focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400",
+                    Accent = "focus-visible:ring-fuchsia-500 dark:focus-visible:ring-fuchsia-400",
                     Success = "focus-visible:ring-green-600 dark:focus-visible:ring-green-400",
                     Danger = "focus-visible:ring-red-500 dark:focus-visible:ring-red-400",
                     Warning = "focus-visible:ring-yellow-500 dark:focus-visible:ring-yellow-400",
-                    Info = "focus-visible:ring-cyan-500 dark:focus-visible:ring-cyan-400",
+                    Info = "focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400",
                     Light = "focus-visible:ring-gray-400 dark:focus-visible:ring-gray-300",
                     Dark = "focus-visible:ring-gray-700 dark:focus-visible:ring-gray-300"
                 },
                 PeerFocusRingBase = "peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-[oklch(100%_0_0)] dark:peer-focus-visible:ring-offset-[oklch(28%_0.016_252.42)] forced-colors:peer-focus-visible:outline-2 forced-colors:peer-focus-visible:outline-offset-2 forced-colors:peer-focus-visible:outline-[Highlight]",
                 PeerFocusColors = new()
                 {
-                    Primary = "peer-focus-visible:ring-blue-500 dark:peer-focus-visible:ring-blue-400",
-                    Accent = "peer-focus-visible:ring-sky-500 dark:peer-focus-visible:ring-sky-400",
+                    Primary = "peer-focus-visible:ring-purple-500 dark:peer-focus-visible:ring-purple-400",
+                    Accent = "peer-focus-visible:ring-fuchsia-500 dark:peer-focus-visible:ring-fuchsia-400",
                     Success = "peer-focus-visible:ring-green-600 dark:peer-focus-visible:ring-green-400",
                     Danger = "peer-focus-visible:ring-red-500 dark:peer-focus-visible:ring-red-400",
                     Warning = "peer-focus-visible:ring-yellow-500 dark:peer-focus-visible:ring-yellow-400",
-                    Info = "peer-focus-visible:ring-cyan-500 dark:peer-focus-visible:ring-cyan-400",
+                    Info = "peer-focus-visible:ring-blue-500 dark:peer-focus-visible:ring-blue-400",
                     Light = "peer-focus-visible:ring-gray-400 dark:peer-focus-visible:ring-gray-300",
                     Dark = "peer-focus-visible:ring-gray-700 dark:peer-focus-visible:ring-gray-300"
                 },
@@ -900,12 +899,12 @@ public static class Theme
                 {
                     Filled = new()
                     {
-                        Primary = $"{background.Medium.Primary} hover:bg-blue-700 active:bg-blue-800 {text.Medium.Light}",
-                        Accent = "bg-sky-700 hover:bg-sky-800 active:bg-sky-900 text-gray-100",
+                        Primary = $"{background.Medium.Primary} hover:bg-purple-700 active:bg-purple-800 {text.Medium.Light}",
+                        Accent = "bg-fuchsia-700 hover:bg-fuchsia-800 active:bg-fuchsia-900 text-gray-100",
                         Success = $"{background.Medium.Success} hover:bg-green-700 active:bg-green-800 text-white",
                         Danger = "bg-red-700 hover:bg-red-800 active:bg-red-900 text-gray-100",
                         Warning = $"{background.Medium.Warning} hover:bg-yellow-600 active:bg-yellow-700 {text.Medium.Dark}",
-                        Info = $"{background.Medium.Info} hover:bg-cyan-700 active:bg-cyan-800 {text.Medium.Light}",
+                        Info = $"{background.Medium.Info} hover:bg-blue-700 active:bg-blue-800 {text.Medium.Light}",
                         Light = $"{background.Medium.Light} hover:bg-gray-50 active:bg-gray-100 {text.Medium.Dark}",
                         Dark = $"{background.Dark.Dark} hover:bg-gray-800 active:bg-gray-700 {text.Medium.Light}",
                     },
@@ -968,7 +967,7 @@ public static class Theme
                     Colors = new()
                     {
                         Primary = $"{background.Medium.Primary} {text.Medium.Light}",
-                        Accent = "bg-sky-700 text-gray-100",
+                        Accent = "bg-fuchsia-700 text-gray-100",
                         Success = $"{background.Medium.Success} text-white",
                         Danger = "bg-red-700 text-gray-100",
                         Warning = $"{background.Medium.Warning} {text.Medium.Dark}",
@@ -1016,7 +1015,7 @@ public static class Theme
                     Filled = new()
                     {
                         Primary = $"{background.Medium.Primary} {text.Medium.Light}",
-                        Accent = "bg-sky-700 text-gray-100",
+                        Accent = "bg-fuchsia-700 text-gray-100",
                         Success = $"{background.Medium.Success} text-white",
                         Danger = "bg-red-700 text-gray-100",
                         Warning = $"{background.Medium.Warning} {text.Medium.Dark}",
@@ -1086,10 +1085,10 @@ public static class Theme
                     Separator = $"{display.InlineFlex} {flexbox.Align.Center} {neutralText.Subtle} select-none",
                     SeparatorIcon = "text-[0.875em] leading-none",
                     Label = $"{display.InlineFlex} {flexbox.Align.Center} {spacing.Gap[1.5]} {spacing.PaddingX[1.5]} {spacing.PaddingY[1]} {rounded.Md} {typography.WrapBreakWord}",
-                    Link = $"{typography.Weight.Medium} {neutralText.Muted} hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-500/15 {transition.ColorsFast} {tokens.FocusRing} {interaction.FocusOutlineNone}",
+                    Link = $"{typography.Weight.Medium} {neutralText.Muted} hover:text-purple-700 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-500/15 {transition.ColorsFast} {tokens.FocusRing} {interaction.FocusOutlineNone}",
                     Current = $"{typography.Weight.Semibold} {neutralText.Heading}",
                     Icon = $"{flexbox.ShrinkNone} leading-none",
-                    CurrentIcon = "text-blue-600 dark:text-blue-400"
+                    CurrentIcon = "text-purple-600 dark:text-purple-400"
                 },
                 new TwButtonTheme
                 {
@@ -1131,7 +1130,7 @@ public static class Theme
                     PlayPauseButton = $"{positioning.Absolute} top-2 end-2 z-10 text-sm {shadows.Md}",
                     IndicatorContainer = $"{positioning.Absolute} bottom-2 inset-x-0 z-10 w-fit mx-auto {display.Flex} {flexbox.Justify.Center} {flexbox.Align.Center} {spacing.Gap[4]} {spacing.PaddingX[4]} {spacing.PaddingY[2]} {rounded.Full} bg-white/45 dark:bg-black/60 {shadows.Md}",
                     Indicator = $"{positioning.Relative} size-2.5 before:absolute before:-inset-2 before:content-[''] {rounded.Full} {interaction.PointerCursor} {interaction.FocusOutlineNone} {tokens.FocusRing} focus-visible:ring-offset-2 {tokens.FocusRingOffset} forced-colors:border forced-colors:border-[ButtonText] {transition.ColorsFast}",
-                    IndicatorActive = "bg-blue-600 dark:bg-blue-500 forced-colors:bg-[Highlight]",
+                    IndicatorActive = "bg-purple-600 dark:bg-purple-500 forced-colors:bg-[Highlight]",
                     IndicatorInactive = "bg-[oklch(21%_0.006_285.885)]/45 dark:bg-[oklch(97.807%_0.029_256.847)]/50 hover:bg-[oklch(21%_0.006_285.885)]/65 dark:hover:bg-[oklch(97.807%_0.029_256.847)]/70"
                 },
                 new TwCheckboxTheme
@@ -1217,19 +1216,19 @@ public static class Theme
                     TableRowHeader = typography.Weight.Medium,
                     Series =
                     [
-                        new() { Background = "bg-blue-600 dark:bg-blue-500", Fill = "fill-blue-600 dark:fill-blue-500", Stroke = "stroke-blue-600 dark:stroke-blue-500", Text = "text-blue-600 dark:text-blue-500" },
+                        new() { Background = "bg-purple-600 dark:bg-purple-500", Fill = "fill-purple-600 dark:fill-purple-500", Stroke = "stroke-purple-600 dark:stroke-purple-500", Text = "text-purple-600 dark:text-purple-500" },
                         new() { Background = "bg-orange-600", Fill = "fill-orange-600", Stroke = "stroke-orange-600", Text = "text-orange-600" },
                         new() { Background = "bg-teal-600", Fill = "fill-teal-600", Stroke = "stroke-teal-600", Text = "text-teal-600" },
                         new() { Background = "bg-yellow-700", Fill = "fill-yellow-700", Stroke = "stroke-yellow-700", Text = "text-yellow-700" },
                         new() { Background = "bg-pink-500", Fill = "fill-pink-500", Stroke = "stroke-pink-500", Text = "text-pink-500" },
                         new() { Background = "bg-green-600", Fill = "fill-green-600", Stroke = "stroke-green-600", Text = "text-green-600" },
-                        new() { Background = "bg-cyan-600 dark:bg-cyan-500", Fill = "fill-cyan-600 dark:fill-cyan-500", Stroke = "stroke-cyan-600 dark:stroke-cyan-500", Text = "text-cyan-600 dark:text-cyan-500" },
+                        new() { Background = "bg-blue-600 dark:bg-blue-500", Fill = "fill-blue-600 dark:fill-blue-500", Stroke = "stroke-blue-600 dark:stroke-blue-500", Text = "text-blue-600 dark:text-blue-500" },
                         new() { Background = "bg-red-600 dark:bg-red-500", Fill = "fill-red-600 dark:fill-red-500", Stroke = "stroke-red-600 dark:stroke-red-500", Text = "text-red-600 dark:text-red-500" }
                     ],
                     Positive = new() { Background = "bg-green-600", Fill = "fill-green-600", Stroke = "stroke-green-600", Text = "text-green-600" },
                     Negative = new() { Background = "bg-red-600 dark:bg-red-500", Fill = "fill-red-600 dark:fill-red-500", Stroke = "stroke-red-600 dark:stroke-red-500", Text = "text-red-600 dark:text-red-500" },
                     Total = new() { Background = "bg-slate-500 dark:bg-slate-400", Fill = "fill-slate-500 dark:fill-slate-400", Stroke = "stroke-slate-500 dark:stroke-slate-400", Text = "text-slate-500 dark:text-slate-400" },
-                    Sequential = new() { Background = "bg-blue-600 dark:bg-blue-500", Fill = "fill-blue-600 dark:fill-blue-500", Stroke = "stroke-blue-600 dark:stroke-blue-500", Text = "text-blue-600 dark:text-blue-500" },
+                    Sequential = new() { Background = "bg-purple-600 dark:bg-purple-500", Fill = "fill-purple-600 dark:fill-purple-500", Stroke = "stroke-purple-600 dark:stroke-purple-500", Text = "text-purple-600 dark:text-purple-500" },
                     Track = new() { Background = "bg-[oklch(91%_0_0)] dark:bg-[oklch(34%_0.016_253)]", Fill = "fill-[oklch(91%_0_0)] dark:fill-[oklch(34%_0.016_253)]", Stroke = "stroke-[oklch(91%_0_0)] dark:stroke-[oklch(34%_0.016_253)]", Text = "text-[oklch(91%_0_0)] dark:text-[oklch(34%_0.016_253)]" },
                     Grid = new() { Background = "bg-[oklch(92%_0_0)] dark:bg-[oklch(32%_0.016_253)]", Fill = "fill-[oklch(92%_0_0)] dark:fill-[oklch(32%_0.016_253)]", Stroke = "stroke-[oklch(92%_0_0)] dark:stroke-[oklch(32%_0.016_253)]", Text = "text-[oklch(92%_0_0)] dark:text-[oklch(32%_0.016_253)]" },
                     Axis = new() { Background = "bg-[oklch(78%_0_0)] dark:bg-[oklch(48%_0.016_253)]", Fill = "fill-[oklch(78%_0_0)] dark:fill-[oklch(48%_0.016_253)]", Stroke = "stroke-[oklch(78%_0_0)] dark:stroke-[oklch(48%_0.016_253)]", Text = "text-[oklch(78%_0_0)] dark:text-[oklch(48%_0.016_253)]" },
@@ -1288,10 +1287,10 @@ public static class Theme
                     WeekdaysHeader = $"{display.Flex} {anchor.Center} h-8 {typography.Size.Xs} font-normal {neutralText.Muted}",
                     Base = $"{positioning.Fixed} z-120 {flexbox.Row} md:flex-row {flexbox.Align.Center} {spacing.MarginTop[1]} {spacing.PaddingX[2]} {spacing.PaddingBottom[2]} {typography.AlignCenter} {typography.Size.Sm} {typography.Weight.Medium} {transition.ColorsFast} {interaction.PointerCursor}",
                     ActiveClass = $"{tokens.Track} {neutralText.Heading} {typography.Weight.Semibold}",
-                    SelectedClass = $"bg-blue-600 hover:bg-blue-700 text-white {typography.Weight.Semibold}",
+                    SelectedClass = $"bg-purple-600 hover:bg-purple-700 text-white {typography.Weight.Semibold}",
                     HoverClass = tokens.HoverFill,
                     ButtonClass = $"{display.Flex} {flexbox.Align.Center} {flexbox.Justify.Center} h-8 {sizing.FullWidth} {spacing.Padding[2]} tabular-nums {tokens.FocusRingInset} {interaction.FocusOutlineNone} {transition.ColorsFast}",
-                    RangeClass = "bg-blue-100 text-blue-900 dark:bg-blue-500/20 dark:text-blue-100",
+                    RangeClass = "bg-purple-100 text-purple-900 dark:bg-purple-500/20 dark:text-purple-100",
                     RangeMonthCaptionClass = $"{spacing.MarginTop[2]} {typography.AlignCenter} {typography.Size.Sm} {typography.Weight.Semibold} {neutralText.Heading}",
                     PrevMonthClass = neutralText.Subtle,
                     DefaultFormat = "dd/MM/yyyy",
@@ -1350,7 +1349,7 @@ public static class Theme
                 {
                     IconSpacing = spacing.MarginEnd[2],
                     FileList = $"{typography.Size.Sm} {neutralText.Secondary}",
-                    FocusRing = "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-500 dark:has-[:focus-visible]:ring-blue-400 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[oklch(100%_0_0)] dark:has-[:focus-visible]:ring-offset-[oklch(28%_0.016_252.42)] forced-colors:has-[:focus-visible]:outline-2 forced-colors:has-[:focus-visible]:outline-offset-2 forced-colors:has-[:focus-visible]:outline-[Highlight]"
+                    FocusRing = "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-purple-500 dark:has-[:focus-visible]:ring-purple-400 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[oklch(100%_0_0)] dark:has-[:focus-visible]:ring-offset-[oklch(28%_0.016_252.42)] forced-colors:has-[:focus-visible]:outline-2 forced-colors:has-[:focus-visible]:outline-offset-2 forced-colors:has-[:focus-visible]:outline-[Highlight]"
                 },
                 new TwFooterTheme
                 {
@@ -1414,12 +1413,12 @@ public static class Theme
                 {
                     Colors = new()
                     {
-                        Primary = "text-blue-600 dark:text-blue-400",
-                        Accent = "text-sky-600 dark:text-sky-400",
+                        Primary = "text-purple-600 dark:text-purple-400",
+                        Accent = "text-fuchsia-600 dark:text-fuchsia-400",
                         Success = "text-green-600 dark:text-green-400",
                         Danger = "text-red-600 dark:text-red-400",
                         Warning = "text-[oklch(65%_0.15_80)] dark:text-yellow-400",
-                        Info = "text-cyan-600 dark:text-cyan-400",
+                        Info = "text-blue-600 dark:text-blue-400",
                         Light = "text-gray-100 dark:text-white",
                         Dark = "text-gray-950 dark:text-gray-950",
                     },
@@ -1465,7 +1464,7 @@ public static class Theme
                     ClearablePadding = "pe-10",
                     ClearButton = $"{display.InlineFlex} w-8 {flexbox.Align.Center} {flexbox.Justify.Center} {flexbox.ShrinkNone} {rounded.Md} {neutralText.Secondary} {tokens.HoverText} {tokens.HoverFill} {interaction.PointerCursor} {transition.ColorsFast} {tokens.FocusRing} {interaction.FocusOutlineNone} {tokens.DisabledControl}",
                     ClearButtonIcon = $"{typography.Size.Sm} leading-none",
-                    SelectOption = $"{spacing.Padding[3]} dark:bg-gray-800 dark:text-white supports-[appearance:base-select]:[padding-inline:revert] supports-[appearance:base-select]:py-2 supports-[appearance:base-select]:bg-transparent dark:supports-[appearance:base-select]:bg-transparent supports-[appearance:base-select]:hover:bg-[oklch(97%_0_0)] dark:supports-[appearance:base-select]:hover:bg-[oklch(34%_0.018_253)] supports-[appearance:base-select]:checked:bg-blue-50 supports-[appearance:base-select]:checked:text-blue-700 dark:supports-[appearance:base-select]:checked:bg-blue-500/20 dark:supports-[appearance:base-select]:checked:text-blue-300",
+                    SelectOption = $"{spacing.Padding[3]} dark:bg-gray-800 dark:text-white supports-[appearance:base-select]:[padding-inline:revert] supports-[appearance:base-select]:py-2 supports-[appearance:base-select]:bg-transparent dark:supports-[appearance:base-select]:bg-transparent supports-[appearance:base-select]:hover:bg-[oklch(97%_0_0)] dark:supports-[appearance:base-select]:hover:bg-[oklch(34%_0.018_253)] supports-[appearance:base-select]:checked:bg-purple-50 supports-[appearance:base-select]:checked:text-purple-700 dark:supports-[appearance:base-select]:checked:bg-purple-500/20 dark:supports-[appearance:base-select]:checked:text-purple-300",
                     SelectNativeBackground = "!bg-white dark:!bg-gray-800",
                     SelectDefaultPadding = spacing.PaddingX[3],
                     SelectReadOnlyBackground = "!bg-none",
@@ -1474,24 +1473,24 @@ public static class Theme
                     SelectMultiOpenButton = $"{flexbox.Flex1} min-w-[2rem] min-h-8 truncate text-start {tokens.Transparent} border-0 {interaction.FocusOutlineNone}",
                     SelectPanelPosition = $"{positioning.Fixed} z-120 {spacing.MarginTop[2]}",
                     SelectPanelSurface = $"overflow-y-auto max-h-64 {spacing.Padding[1]}",
-                    SelectPanelItemText = "[&_label]:!text-[oklch(21%_0.006_285.885)] dark:[&_label]:!text-[oklch(97.807%_0.029_256.847)] [&_fieldset]:gap-0 [&_label]:w-full [&_label]:gap-2 [&_label]:px-2 [&_label]:py-2 [&_label]:text-base [&_input]:sr-only [&_label>span]:hidden [&_label::before]:content-['✓'] [&_label::before]:invisible [&_label::before]:w-4 [&_label::before]:shrink-0 [&_label::before]:text-center [&_label:has(input:checked)::before]:visible [&_label:hover]:bg-[oklch(97%_0_0)] dark:[&_label:hover]:bg-[oklch(34%_0.018_253)] [&_label:has(input:checked)]:bg-blue-50 dark:[&_label:has(input:checked)]:bg-blue-500/20 [&_label:has(input:checked)]:!text-blue-700 dark:[&_label:has(input:checked)]:!text-blue-300 [&_label:has(input:focus-visible)]:ring-2 [&_label:has(input:focus-visible)]:ring-inset [&_label:has(input:focus-visible)]:ring-blue-500 dark:[&_label:has(input:focus-visible)]:ring-blue-400",
+                    SelectPanelItemText = "[&_label]:!text-[oklch(21%_0.006_285.885)] dark:[&_label]:!text-[oklch(97.807%_0.029_256.847)] [&_fieldset]:gap-0 [&_label]:w-full [&_label]:gap-2 [&_label]:px-2 [&_label]:py-2 [&_label]:text-base [&_input]:sr-only [&_label>span]:hidden [&_label::before]:content-['✓'] [&_label::before]:invisible [&_label::before]:w-4 [&_label::before]:shrink-0 [&_label::before]:text-center [&_label:has(input:checked)::before]:visible [&_label:hover]:bg-[oklch(97%_0_0)] dark:[&_label:hover]:bg-[oklch(34%_0.018_253)] [&_label:has(input:checked)]:bg-purple-50 dark:[&_label:has(input:checked)]:bg-purple-500/20 [&_label:has(input:checked)]:!text-purple-700 dark:[&_label:has(input:checked)]:!text-purple-300 [&_label:has(input:focus-visible)]:ring-2 [&_label:has(input:focus-visible)]:ring-inset [&_label:has(input:focus-visible)]:ring-purple-500 dark:[&_label:has(input:focus-visible)]:ring-purple-400",
                     SelectCustomTrigger = $"{display.Flex} {flexbox.Align.Center} {flexbox.Justify.Between} {spacing.Gap[2]} {sizing.FullWidth} {sizing.MinWidthNone} text-start {neutralText.Heading} {transition.ColorsFast} {interaction.FocusOutlineNone} {interaction.PointerCursor}",
                     SelectCustomPlaceholder = neutralText.Muted,
                     SelectCustomChevron = $"{display.Flex} {anchor.Center} {sizing.Icon.Sm} {flexbox.ShrinkNone} leading-none {neutralText.Muted} {transition.TransformFast}",
                     SelectCustomChevronOpen = "rotate-180",
                     SelectCustomListbox = $"{display.Flex} {flexbox.Col} {spacing.Gap[0.5]} {interaction.FocusOutlineNone}",
-                    SelectCustomOption = $"{display.Flex} {flexbox.Align.Center} {flexbox.Justify.Between} {spacing.Gap[2]} {rounded.Md} {spacing.PaddingX[2]} {spacing.PaddingY[2]} {typography.Size.Sm} {neutralText.Heading} {interaction.PointerCursor} select-none data-[active=true]:bg-[oklch(95%_0_0)] dark:data-[active=true]:bg-[oklch(48%_0.016_253)] data-[active=true]:outline-2 data-[active=true]:-outline-offset-2 data-[active=true]:outline-blue-600 dark:data-[active=true]:outline-blue-300 aria-selected:font-semibold",
+                    SelectCustomOption = $"{display.Flex} {flexbox.Align.Center} {flexbox.Justify.Between} {spacing.Gap[2]} {rounded.Md} {spacing.PaddingX[2]} {spacing.PaddingY[2]} {typography.Size.Sm} {neutralText.Heading} {interaction.PointerCursor} select-none data-[active=true]:bg-[oklch(95%_0_0)] dark:data-[active=true]:bg-[oklch(48%_0.016_253)] data-[active=true]:outline-2 data-[active=true]:-outline-offset-2 data-[active=true]:outline-purple-600 dark:data-[active=true]:outline-purple-300 aria-selected:font-semibold",
                     SelectMultiTriggerBase = $"{positioning.Relative} {sizing.FullWidth} {sizing.MinWidthNone} text-start pe-10 {neutralText.Heading} {transition.ColorsFast} {interaction.FocusOutlineNone} {interaction.PointerCursor}",
                     SelectMultiChipsPadding = "ps-0.75",
                     SelectMultiChevron = $"{positioning.Absolute} end-3 top-1/2 -translate-y-1/2 {display.Flex} {sizing.Icon.Sm} leading-none {neutralText.Muted} {transition.TransformFast} {interaction.PointerEventsNone}",
-                    SelectCustomCheck = $"{sizing.Icon.Sm} {flexbox.ShrinkNone} text-blue-600 dark:text-blue-300",
+                    SelectCustomCheck = $"{sizing.Icon.Sm} {flexbox.ShrinkNone} text-purple-600 dark:text-purple-300",
                     InputLegendBase = $"{spacing.MarginBottom[3]} {typography.Size.Base} {typography.Weight.Medium} {neutralText.Secondary}",
                     LabelBase = $"{display.Block} {spacing.MarginBottom[2]} {tokens.InputLabelText}",
                     OutlinedBorder = $"{borderWidth.Thin} {neutralSurface.BorderStrong}",
                     FilledBorder = $"border-b {neutralSurface.BorderStrong}",
-                    FocusBorder = "focus:border-blue-600 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400",
-                    FocusVisibleBorder = $"focus-visible:border-blue-600 dark:focus-visible:border-blue-400 {tokens.FocusRing}",
-                    FocusWithinBorder = "has-[:focus-visible]:border-blue-600 dark:has-[:focus-visible]:border-blue-400 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-500 dark:has-[:focus-visible]:ring-blue-400",
+                    FocusBorder = "focus:border-purple-600 dark:focus:border-purple-400 focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400",
+                    FocusVisibleBorder = $"focus-visible:border-purple-600 dark:focus-visible:border-purple-400 {tokens.FocusRing}",
+                    FocusWithinBorder = "has-[:focus-visible]:border-purple-600 dark:has-[:focus-visible]:border-purple-400 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-purple-500 dark:has-[:focus-visible]:ring-purple-400",
                     FilledBackgroundColor = neutralSurface.Elevated,
                     ErrorMessage = $"{spacing.MarginTop[2]} {spacing.MarginStart[1]} text-sm leading-4 {typography.Weight.Medium} {text.Medium.Danger} dark:text-rose-300"
                 },
@@ -1508,7 +1507,7 @@ public static class Theme
                     Item = $"{display.Flex} {sizing.FullWidth} {flexbox.Align.Center} {spacing.Gap[1]} {spacing.PaddingX[3]} {spacing.PaddingY[2]} text-start {typography.Size.Sm} {neutralText.Heading} {tokens.RowHover} focus-visible:bg-[oklch(21%_0.006_285.885)]/5 dark:focus-visible:bg-[oklch(97.807%_0.029_256.847)]/8 {interaction.PointerCursor} {transition.ColorsFast} {interaction.FocusOutlineNone} {tokens.FocusRingInset}",
                     ItemDisabled = $"{interaction.DisabledOpacity} {interaction.DisabledCursor}",
                     ItemIcon = $"{typography.Size.Base} {flexbox.ShrinkNone} {neutralText.Subtle}",
-                    CheckIcon = $"{typography.Size.Base} {flexbox.ShrinkNone} text-blue-600 dark:text-blue-300",
+                    CheckIcon = $"{typography.Size.Base} {flexbox.ShrinkNone} text-purple-600 dark:text-purple-300",
                     CheckIconHidden = "invisible",
                     Divider = $"my-1 border-t {neutralSurface.Border}",
                     GroupLabel = $"{spacing.PaddingX[3]} {spacing.PaddingTop[2]} {spacing.PaddingBottom[1]} {typography.Size.Xs} {typography.Weight.Semibold} {neutralText.Muted}"
@@ -1518,7 +1517,7 @@ public static class Theme
                     Title = $"{spacing.MarginBottom[3]} {typography.Weight.Semibold} {neutralText.Heading}",
                     List = $"border-s {neutralSurface.Border}",
                     Link = $"{display.Block} -ms-px {spacing.PaddingY[1]} {spacing.PaddingStart[4]} border-s border-transparent {neutralText.Muted} {tokens.HoverText} {tokens.HoverBorderStrong} {transition.ColorsFast} {tokens.FocusRingInset} {interaction.FocusOutlineNone}",
-                    LinkCurrent = $"aria-[current=location]:font-medium aria-[current=location]:border-blue-600 dark:aria-[current=location]:border-blue-400 aria-[current=location]:text-[oklch(21%_0.006_285.885)] dark:aria-[current=location]:text-[oklch(97.807%_0.029_256.847)] forced-colors:aria-[current=location]:border-[Highlight]"
+                    LinkCurrent = $"aria-[current=location]:font-medium aria-[current=location]:border-purple-600 dark:aria-[current=location]:border-purple-400 aria-[current=location]:text-[oklch(21%_0.006_285.885)] dark:aria-[current=location]:text-[oklch(97.807%_0.029_256.847)] forced-colors:aria-[current=location]:border-[Highlight]"
                 },
                 new TwPaginationTheme
                 {
@@ -1526,7 +1525,7 @@ public static class Theme
                     Base = $"{display.Flex} {anchor.Center} tabular-nums select-none {transition.ColorsFast} {tokens.FocusRingInset} {interaction.FocusOutlineNone}",
                     Size = $"{tokens.InputHeight} min-w-10 {spacing.PaddingX[3]} {typography.Size.Sm}",
                     DenseSize = $"{tokens.InputDenseHeight} min-w-8 {spacing.PaddingX[2]} {typography.Size.Sm}",
-                    ActiveButton = $"{typography.Weight.Semibold} bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20 dark:bg-blue-500/20 dark:text-blue-300 dark:ring-blue-400/30 forced-colors:outline forced-colors:outline-2 forced-colors:-outline-offset-2 forced-colors:outline-[Highlight] {interaction.PointerCursor}",
+                    ActiveButton = $"{typography.Weight.Semibold} bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-600/20 dark:bg-purple-500/20 dark:text-purple-300 dark:ring-purple-400/30 forced-colors:outline forced-colors:outline-2 forced-colors:-outline-offset-2 forced-colors:outline-[Highlight] {interaction.PointerCursor}",
                     Buttons = $"{neutralText.Secondary} {tokens.HoverFill} {tokens.HoverText} {interaction.PointerCursor}",
                     DisabledButton = $"{tokens.DisabledInk} cursor-not-allowed"
                 },
@@ -1542,7 +1541,7 @@ public static class Theme
                     TransferButtonColumn = $"{display.Flex} {flexbox.Col} {flexbox.Align.Center} {flexbox.Justify.Center} {flexbox.AlignSelf.Center} {spacing.Gap[2]}",
                     ListBox = $"overflow-y-auto {sizing.FullWidth} h-64 {spacing.Padding[1]} {neutralSurface.Background} {borderWidth.Thin} {neutralSurface.BorderStrong}",
                     ListBoxDisabled = $"{interaction.DisabledOpacity} {interaction.PointerEventsNone}",
-                    Item = $"{display.Flex} {flexbox.Align.Center} {spacing.Gap[2]} {rounded.Md} {spacing.PaddingX[3]} {spacing.PaddingY[2]} {typography.Size.Sm} {neutralText.Heading} {tokens.RowHover} aria-selected:bg-blue-50 aria-selected:text-blue-700 aria-selected:hover:bg-blue-100 dark:aria-selected:bg-blue-500/20 dark:aria-selected:text-blue-300 dark:aria-selected:hover:bg-blue-500/30 {tokens.FocusRingInset} {transition.ColorsFast} {interaction.PointerCursor} select-none {interaction.FocusOutlineNone}",
+                    Item = $"{display.Flex} {flexbox.Align.Center} {spacing.Gap[2]} {rounded.Md} {spacing.PaddingX[3]} {spacing.PaddingY[2]} {typography.Size.Sm} {neutralText.Heading} {tokens.RowHover} aria-selected:bg-purple-50 aria-selected:text-purple-700 aria-selected:hover:bg-purple-100 dark:aria-selected:bg-purple-500/20 dark:aria-selected:text-purple-300 dark:aria-selected:hover:bg-purple-500/30 {tokens.FocusRingInset} {transition.ColorsFast} {interaction.PointerCursor} select-none {interaction.FocusOutlineNone}",
                     ItemSelected = typography.Weight.Medium,
                     EmptyState = $"{spacing.PaddingX[3]} {spacing.PaddingY[8]} {typography.AlignCenter} {typography.Size.Sm} {neutralText.Subtle}"
                 },
@@ -1550,12 +1549,12 @@ public static class Theme
                 {
                     Colors = new()
                     {
-                        Primary = "[&::-webkit-progress-value]:bg-blue-600 dark:[&::-webkit-progress-value]:bg-blue-500 [&::-moz-progress-bar]:bg-blue-600 dark:[&::-moz-progress-bar]:bg-blue-500",
-                        Accent = "[&::-webkit-progress-value]:bg-sky-600 dark:[&::-webkit-progress-value]:bg-sky-500 [&::-moz-progress-bar]:bg-sky-600 dark:[&::-moz-progress-bar]:bg-sky-500",
+                        Primary = "[&::-webkit-progress-value]:bg-purple-600 dark:[&::-webkit-progress-value]:bg-purple-500 [&::-moz-progress-bar]:bg-purple-600 dark:[&::-moz-progress-bar]:bg-purple-500",
+                        Accent = "[&::-webkit-progress-value]:bg-fuchsia-600 dark:[&::-webkit-progress-value]:bg-fuchsia-500 [&::-moz-progress-bar]:bg-fuchsia-600 dark:[&::-moz-progress-bar]:bg-fuchsia-500",
                         Success = "[&::-webkit-progress-value]:bg-green-600 dark:[&::-webkit-progress-value]:bg-green-500 [&::-moz-progress-bar]:bg-green-600 dark:[&::-moz-progress-bar]:bg-green-500",
                         Danger = "[&::-webkit-progress-value]:bg-red-600 dark:[&::-webkit-progress-value]:bg-red-500 [&::-moz-progress-bar]:bg-red-600 dark:[&::-moz-progress-bar]:bg-red-500",
                         Warning = "[&::-webkit-progress-value]:bg-yellow-500 dark:[&::-webkit-progress-value]:bg-yellow-400 [&::-moz-progress-bar]:bg-yellow-500 dark:[&::-moz-progress-bar]:bg-yellow-400",
-                        Info = "[&::-webkit-progress-value]:bg-cyan-600 dark:[&::-webkit-progress-value]:bg-cyan-500 [&::-moz-progress-bar]:bg-cyan-600 dark:[&::-moz-progress-bar]:bg-cyan-500",
+                        Info = "[&::-webkit-progress-value]:bg-blue-600 dark:[&::-webkit-progress-value]:bg-blue-500 [&::-moz-progress-bar]:bg-blue-600 dark:[&::-moz-progress-bar]:bg-blue-500",
                         Light = "[&::-webkit-progress-value]:bg-gray-400 dark:[&::-webkit-progress-value]:bg-gray-300 [&::-moz-progress-bar]:bg-gray-400 dark:[&::-moz-progress-bar]:bg-gray-300",
                         Dark = "[&::-webkit-progress-value]:bg-gray-900 dark:[&::-webkit-progress-value]:bg-gray-100 [&::-moz-progress-bar]:bg-gray-900 dark:[&::-moz-progress-bar]:bg-gray-100"
                     },
@@ -1649,7 +1648,7 @@ public static class Theme
                     Sidebar = $"z-100 overflow-auto scrollbar-gutter-stable overscroll-contain {flexbox.ShrinkNone} h-dvh w-64 {spacing.Padding[4]} {neutralSurface.Background} border-e {neutralSurface.Border} {transition.TransformFast} {transition.EaseInOut}",
                     NavigationItemBase = $"{display.Flex} {flexbox.Align.Center} {spacing.Gap[2]} {sizing.MinWidthNone} {spacing.PaddingX[3]} {spacing.PaddingY[2]} {typography.Size.Sm} {neutralText.Secondary} {neutralSurface.Hover} {tokens.FocusRingInset} {transition.ColorsFast} {interaction.FocusOutlineNone} {interaction.PointerCursor}",
                     NavigationItemActive = $"{tokens.Track} {neutralText.Heading}",
-                    NavigationItemCurrent = $"{positioning.Relative} {overflow.Hidden} before:absolute before:inset-y-0 before:start-0 before:w-0.5 before:bg-linear-to-b before:from-blue-600 before:to-sky-500 forced-colors:before:bg-[Highlight]",
+                    NavigationItemCurrent = $"{positioning.Relative} {overflow.Hidden} before:absolute before:inset-y-0 before:start-0 before:w-0.5 before:bg-linear-to-b before:from-purple-600 before:to-fuchsia-500 forced-colors:before:bg-[Highlight]",
                     NavigationItemParent = typography.Weight.Semibold,
                     NavigationItemIcon = flexbox.ShrinkNone,
                     NavigationItemContent = $"{display.InlineFlex} {flexbox.Align.Center} {flexbox.ShrinkNone} {spacing.PushEnd}",
@@ -1664,7 +1663,7 @@ public static class Theme
                 {
                     Container = $"{display.Flex} {flexbox.Col} {typography.Size.Sm}",
                     Group = $"{display.Flex} {flexbox.Col} {spacing.Gap[0.5]} {spacing.MarginTop[0.5]} {spacing.MarginStart[3]} {spacing.PaddingStart[2]} border-s {neutralSurface.Border}",
-                    Row = $"group/row {display.Flex} {flexbox.Align.Center} {spacing.Gap[1]} {sizing.MinWidthNone} {rounded.Md} {spacing.PaddingX[2]} {spacing.PaddingY[1.5]} {typography.Size.Sm} {neutralText.Heading} {tokens.RowHover} [li:focus-visible>&]:ring-inset [li:focus-visible>&]:ring-2 [li:focus-visible>&]:ring-blue-500 dark:[li:focus-visible>&]:ring-blue-400 forced-colors:[li:focus-visible>&]:outline-2 forced-colors:[li:focus-visible>&]:-outline-offset-2 forced-colors:[li:focus-visible>&]:outline-[Highlight] {transition.ColorsFast} {interaction.PointerCursor}",
+                    Row = $"group/row {display.Flex} {flexbox.Align.Center} {spacing.Gap[1]} {sizing.MinWidthNone} {rounded.Md} {spacing.PaddingX[2]} {spacing.PaddingY[1.5]} {typography.Size.Sm} {neutralText.Heading} {tokens.RowHover} [li:focus-visible>&]:ring-inset [li:focus-visible>&]:ring-2 [li:focus-visible>&]:ring-purple-500 dark:[li:focus-visible>&]:ring-purple-400 forced-colors:[li:focus-visible>&]:outline-2 forced-colors:[li:focus-visible>&]:-outline-offset-2 forced-colors:[li:focus-visible>&]:outline-[Highlight] {transition.ColorsFast} {interaction.PointerCursor}",
                     RowDisabled = $"{interaction.DisabledOpacity} {interaction.PointerEventsNone}",
                     ToggleSlot = $"{display.InlineFlex} {flexbox.ShrinkNone} {flexbox.Align.Center} {flexbox.Justify.Center} size-6",
                     ToggleIcon = $"{display.InlineFlex} {flexbox.ShrinkNone} {flexbox.Align.Center} {flexbox.Justify.Center} size-6 {rounded.Full} {neutralText.Muted} {tokens.HoverFill} {tokens.HoverText} transition-[transform,background-color,color] {transition.DurationFast} {tokens.ReduceMotion}",
@@ -1690,19 +1689,19 @@ public static class Theme
                 {
                     Colors = new()
                     {
-                        Primary = "text-blue-600 dark:text-blue-400",
-                        Accent = "text-sky-600 dark:text-sky-400",
+                        Primary = "text-purple-600 dark:text-purple-400",
+                        Accent = "text-fuchsia-600 dark:text-fuchsia-400",
                         Success = "text-green-600 dark:text-green-400",
                         Danger = "text-red-600 dark:text-red-400",
                         Warning = "text-amber-600 dark:text-amber-400",
-                        Info = "text-cyan-600 dark:text-cyan-400",
+                        Info = "text-blue-600 dark:text-blue-400",
                         Light = "text-gray-100 dark:text-white",
                         Dark = "text-gray-950 dark:text-gray-950",
                     },
                     Base = $"{display.InlineFlex} {flexbox.Align.Center} {spacing.Gap[0.5]} {rounded.Sm} select-none touch-manipulation",
-                    EmptyFocusRing = "has-[input[data-rating-empty]:focus-visible]:ring-2 has-[input[data-rating-empty]:focus-visible]:ring-blue-500 dark:has-[input[data-rating-empty]:focus-visible]:ring-blue-400",
+                    EmptyFocusRing = "has-[input[data-rating-empty]:focus-visible]:ring-2 has-[input[data-rating-empty]:focus-visible]:ring-purple-500 dark:has-[input[data-rating-empty]:focus-visible]:ring-purple-400",
                     Item = $"{positioning.Relative} {display.InlineFlex} {flexbox.ShrinkNone} {rounded.Sm} leading-none",
-                    ItemFocusRing = "has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-blue-500 dark:has-[input:focus-visible]:ring-blue-400",
+                    ItemFocusRing = "has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-purple-500 dark:has-[input:focus-visible]:ring-purple-400",
                     ItemHover = $"{transition.TransformFast} {transition.EaseInOut} hover:scale-115 motion-reduce:hover:scale-100",
                     Visual = $"{positioning.Relative} {display.InlineFlex} {interaction.PointerEventsNone}",
                     Empty = "text-[oklch(21%_0.006_285.885)]/30 dark:text-[oklch(97.807%_0.029_256.847)]/30 forced-colors:text-[GrayText]",
@@ -1776,12 +1775,12 @@ public static class Theme
                 {
                     Colors = new()
                     {
-                        Primary = "peer-checked:bg-blue-600 dark:peer-checked:bg-blue-500",
-                        Accent = "peer-checked:bg-sky-600 dark:peer-checked:bg-sky-500",
+                        Primary = "peer-checked:bg-purple-600 dark:peer-checked:bg-purple-500",
+                        Accent = "peer-checked:bg-fuchsia-600 dark:peer-checked:bg-fuchsia-500",
                         Success = "peer-checked:bg-green-600 dark:peer-checked:bg-green-500",
                         Danger = "peer-checked:bg-red-600 dark:peer-checked:bg-red-500",
                         Warning = "peer-checked:bg-yellow-600 dark:peer-checked:bg-yellow-500",
-                        Info = "peer-checked:bg-cyan-600 dark:peer-checked:bg-cyan-500",
+                        Info = "peer-checked:bg-blue-600 dark:peer-checked:bg-blue-500",
                         Light = "peer-[:not(:checked)]:bg-white/25 peer-checked:bg-[oklch(80%_0.01_258)]",
                         Dark = "peer-[:not(:checked)]:bg-neutral-300 peer-checked:bg-gray-900",
                     },
@@ -1798,12 +1797,12 @@ public static class Theme
                 {
                     Colors = new()
                     {
-                        Primary = "border-t-blue-600 dark:border-t-blue-500",
-                        Accent = "border-t-sky-600 dark:border-t-sky-500",
+                        Primary = "border-t-purple-600 dark:border-t-purple-500",
+                        Accent = "border-t-fuchsia-600 dark:border-t-fuchsia-500",
                         Success = "border-t-green-600 dark:border-t-green-500",
                         Danger = "border-t-red-600 dark:border-t-red-500",
                         Warning = "border-t-yellow-500 dark:border-t-yellow-500",
-                        Info = "border-t-cyan-600 dark:border-t-cyan-500",
+                        Info = "border-t-blue-600 dark:border-t-blue-500",
                         Light = "border-t-white",
                         Dark = "border-t-gray-900",
                     },
@@ -1835,7 +1834,7 @@ public static class Theme
                     BodyInner = $"{spacing.Padding[2]} {typography.AlignCenter} {typography.Weight.Medium} {neutralText.Heading}",
                     ContentRow = $"{display.Flex} {anchor.Center} {spacing.Gap[3]}",
                     Column = $"{display.Flex} {flexbox.Col} {flexbox.Align.Center} {spacing.Gap[1]}",
-                    StepButton = $"{neutralText.Subtle} hover:text-blue-600 dark:hover:text-blue-400 {interaction.PointerCursor}",
+                    StepButton = $"{neutralText.Subtle} hover:text-purple-600 dark:hover:text-purple-400 {interaction.PointerCursor}",
                     NumberWrapper = $"{display.Flex} {flexbox.Align.Center} {flexbox.Justify.Center}",
                     NumberInput = $"w-12 {spacing.PaddingY[1]} {typography.AlignCenter} {typography.Size.Lg} {typography.Weight.Semibold} {neutralText.Heading} {transition.ColorsFast} {rounded.Md} {tokens.FocusRing} {interaction.FocusOutlineNone}",
                     Separator = $"self-center {spacing.PaddingX[1]} {typography.Size.Lg} {typography.Weight.Semibold} {neutralText.Subtle}",
@@ -1844,7 +1843,7 @@ public static class Theme
                 },
                 new TwTableTheme
                 {
-                    Wrapper = $"{positioning.Relative} overflow-auto focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-300",
+                    Wrapper = $"{positioning.Relative} overflow-auto focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-purple-600 dark:focus-visible:outline-purple-300",
                     ContainerClip = overflow.Hidden,
                     Base = $"{sizing.FullWidth} {typography.Size.Sm} text-start {neutralText.Heading}",
                     FixedLayout = "table-fixed",
@@ -1861,14 +1860,14 @@ public static class Theme
                     HeaderCellPadding = $"{spacing.PaddingX[4]} {spacing.PaddingY[2.5]}",
                     BodyCellPadding = $"{spacing.PaddingX[4]} {spacing.PaddingY[2.5]} {typography.WrapBreakWord}",
                     EmptyState = $"{spacing.PaddingY[8]} {typography.AlignCenter} {neutralText.Muted}",
-                    ResizeHandle = $"{positioning.Absolute} z-20 flex w-3 -translate-x-1/2 justify-center cursor-col-resize touch-none select-none before:block before:h-full before:w-px before:bg-gray-300 dark:before:bg-gray-600 hover:before:w-0.5 hover:before:bg-blue-500 active:before:bg-blue-600 dark:hover:before:bg-blue-400 focus-visible:outline-none focus-visible:before:w-0.5 focus-visible:before:bg-blue-600 dark:focus-visible:before:bg-blue-300",
+                    ResizeHandle = $"{positioning.Absolute} z-20 flex w-3 -translate-x-1/2 justify-center cursor-col-resize touch-none select-none before:block before:h-full before:w-px before:bg-gray-300 dark:before:bg-gray-600 hover:before:w-0.5 hover:before:bg-purple-500 active:before:bg-purple-600 dark:hover:before:bg-purple-400 focus-visible:outline-none focus-visible:before:w-0.5 focus-visible:before:bg-purple-600 dark:focus-visible:before:bg-purple-300",
                     GroupByColumn = "w-full sm:w-56",
                     GroupRow = $"{neutralSurface.BackgroundSubtle} {neutralText.Heading}",
-                    GroupToggle = $"{display.InlineFlex} {flexbox.Align.Center} {spacing.Gap[1]} {rounded.Md} -mx-1 {spacing.PaddingX[1]} {typography.Weight.Semibold} {interaction.PointerCursor} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-300",
+                    GroupToggle = $"{display.InlineFlex} {flexbox.Align.Center} {spacing.Gap[1]} {rounded.Md} -mx-1 {spacing.PaddingX[1]} {typography.Weight.Semibold} {interaction.PointerCursor} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 dark:focus-visible:outline-purple-300",
                     GroupCount = $"{typography.Weight.Medium} {neutralText.Muted}",
                     LoadingCell = $"{spacing.PaddingY[2.5]} {typography.AlignCenter} {neutralText.Muted}",
                     ActionsCell = "w-px whitespace-nowrap",
-                    EditingRow = "!bg-blue-50 dark:!bg-blue-500/10",
+                    EditingRow = "!bg-purple-50 dark:!bg-purple-500/10",
                     FilterPanel = $"z-50 w-72 max-w-[calc(100vw-1rem)] {rounded.Lg} {borderWidth.Thin} {neutralSurface.Border} {neutralSurface.Background} shadow-lg {spacing.Padding[2]} {interaction.FocusOutlineNone}",
                     FilterHeading = $"{display.Flex} {flexbox.Align.Center} {spacing.Gap[1]} {spacing.MarginBottom[2]} {typography.Size.Sm} {typography.Weight.Semibold} {neutralText.Heading}"
                 },
@@ -1931,7 +1930,7 @@ public static class Theme
                     EventChipReadOnly = $"{interaction.ReadonlyCursor} opacity-90",
                     EventChipDraggable = "cursor-grab active:cursor-grabbing",
                     DropPlaceholder = $"{overflow.Hidden} {rounded.Sm} border-2 border-dashed {borderColors.Primary} {background.Lightest.Primary} {darkBackground.Dark.Primary} {text.Dark.Primary} {darkText.Light.Primary} {typography.Size.Xs} opacity-70 z-10",
-                    TodayHighlight = $"animate-pulse motion-reduce:animate-none [animation-iteration-count:1] {background.Light.Primary} dark:bg-blue-500/50",
+                    TodayHighlight = $"animate-pulse motion-reduce:animate-none [animation-iteration-count:1] {background.Light.Primary} dark:bg-purple-500/50",
                     AllDayRow = $"border-b {neutralSurface.Border}",
                     AllDayLabel = $"{flexbox.ShrinkNone} w-10 sm:w-16 {spacing.Padding[1]} text-end {typography.Size.Xxs} sm:text-xs {neutralText.Subtle}",
                     AllDayGrid = $"{spacing.GapY[1]} {spacing.PaddingY[1]}",
