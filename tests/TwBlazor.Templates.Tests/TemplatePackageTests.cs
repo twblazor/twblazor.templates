@@ -50,6 +50,31 @@ public sealed class TemplatePackageTests
     }
 
     [Fact]
+    public void Template_DocumentsHowToBuildAndWatchTailwind()
+    {
+        var readme = File.ReadAllText(Path.Combine(FindTemplateDirectory(), "README.md"));
+
+        Assert.Contains("npm run build:css", readme);
+        Assert.Contains("npm run watch:css", readme);
+    }
+
+    [Fact]
+    public void Template_DecodesTailwindOutputAsUtf8()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        var packageJson = File.ReadAllText(Path.Combine(templateDirectory, "package.json"));
+        var project = File.ReadAllText(Path.Combine(templateDirectory, "host", "TwBlazorApp.csproj"));
+
+        using var document = JsonDocument.Parse(packageJson);
+
+        var buildCss = document.RootElement.GetProperty("scripts").GetProperty("build:css").GetString();
+
+        Assert.DoesNotContain("--silent", buildCss);
+        Assert.Contains("StdOutEncoding=\"utf-8\"", project);
+        Assert.Contains("StdErrEncoding=\"utf-8\"", project);
+    }
+
+    [Fact]
     public void Template_LaunchSettingsHaveNoWslProfile()
     {
         var templateDirectory = FindTemplateDirectory();

@@ -9,9 +9,23 @@ npm install
 dotnet run --project TwBlazorApp
 ```
 
-Tailwind CSS is rebuilt every time the app builds. While you work on markup, run `npm run watch:css` alongside `dotnet watch` so new classes show up straight away.
-
 The first build creates `wwwroot/css/output.css`, so the app has no styling until `npm install` and a build have run.
+
+## Tailwind CSS
+
+Run the CSS build after changing classes or pulling changes:
+
+```bash
+npm run build:css
+```
+
+While you work on markup, leave the watch build running in a second terminal so new classes show up straight away:
+
+```bash
+npm run watch:css
+```
+
+Tailwind CSS is also rebuilt every time the app builds.
 
 Open `TwBlazorApp.slnx` in Visual Studio to work on it there. The checked-in `.vsconfig` asks for the ASP.NET and web development workload, which is all the app needs.
 

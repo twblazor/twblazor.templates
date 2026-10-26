@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 
 namespace TwBlazor.Templates.Cli;
 
@@ -26,6 +27,8 @@ internal static class ProcessRunner
             WorkingDirectory = workingDirectory,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
+            StandardOutputEncoding = Encoding.UTF8,
+            StandardErrorEncoding = Encoding.UTF8,
             UseShellExecute = false
         };
 

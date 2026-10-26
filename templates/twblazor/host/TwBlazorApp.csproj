@@ -22,7 +22,7 @@
 
   <!-- Tailwind cannot read classes from a .dll, so the app builds its own stylesheet from the markup and Theme.cs. -->
   <Target Name="BuildTailwindCss" BeforeTargets="BeforeBuild" Condition="Exists('$(MSBuildProjectDirectory)/../node_modules/.bin')">
-    <Exec Command="npm run build:css" WorkingDirectory="$(MSBuildProjectDirectory)/.." />
+    <Exec Command="npm run build:css" WorkingDirectory="$(MSBuildProjectDirectory)/.." StdOutEncoding="utf-8" StdErrEncoding="utf-8" />
   </Target>
 
 </Project>
