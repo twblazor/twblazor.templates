@@ -1,7 +1,7 @@
 # Configures GitHub's generated release notes (see "Create GitHub Release" in
-# publish.yml). Every develop -> main release PR carries exactly one release:*
-# label, so excluding them drops the release PR itself and leaves the changes it
-# shipped.
+# publish.yml). Every pull request to main carries exactly one release:* label,
+# and releases that follow a twblazor release have no pull request at all, so
+# these labels are excluded from the categories rather than used for them.
 changelog:
   exclude:
     labels:

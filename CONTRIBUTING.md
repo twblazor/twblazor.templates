@@ -119,9 +119,16 @@ global.json                   pins the .NET 10 SDK
 
 `templates/twblazor/ui/Theme.cs` is generated from the default theme in the main `twblazor` repository. The canonical source is currently `src/TwBlazor.Theme/Theme.cs`; the sync also checks `src/Theme/Theme.cs` first if the file moves. This is a template copy, not a live dependency: a generated app pins a `twblazor` package version, so its `Theme.cs` must match that version.
 
-The **Update twblazor** workflow checks the latest stable `twblazor` release every day at 06:17 UTC, syncs the theme and package references, builds and tests the result, then opens a pull request to `develop`. It can also be run from **Actions > Update twblazor > Run workflow** with a version, or triggered by a `twblazor-release` repository dispatch. Merging the pull request puts the update into the normal develop -> main release flow.
+Every twblazor release is followed by a twblazor.templates release with the same version. When twblazor publishes, its release workflow sends a `twblazor-release` repository dispatch to this repository, and the **Update twblazor** workflow:
 
-The workflow uses the same `twblazor-release` GitHub App as the main repository. Install the app on `twblazor.templates` with **Contents: read and write** and **Pull requests: read and write**, and add `RELEASE_BOT_CLIENT_ID` as a repository variable and `RELEASE_BOT_PRIVATE_KEY` as a repository secret.
+1. waits until that `twblazor` version is listed on NuGet.org,
+2. syncs `Theme.cs`, the package references and the template README with `update-twblazor.ps1`,
+3. builds and tests, then commits the update straight to `main` (the commit message carries `[skip ci]`, so the push does not start a release by itself), and
+4. starts **Publish Release** with that exact version, which then waits for approval in the `release` environment.
+
+If this repository already has that version, or a later one, nothing is released. The workflow can also be run from **Actions > Update twblazor > Run workflow**, with a version or blank for the latest stable twblazor release, for example if a release dispatch failed.
+
+The workflow uses the same `twblazor-release` GitHub App as the main repository. Install the app on `twblazor.templates` with **Contents: read and write**, keep it on `main`'s ruleset bypass list so it can push the update commit, and add `RELEASE_BOT_CLIENT_ID` as a repository variable and `RELEASE_BOT_PRIVATE_KEY` as a repository secret. The main repository's `RELEASE_BOT_*` settings must belong to the same app, because its token sends the dispatch to this repository.
 
 To do the same locally:
 
@@ -140,12 +147,18 @@ To do the same locally:
 
 ## Release flow
 
-Releases follow the same develop -> main model as the main twblazor repository.
+`main` is the only long-lived branch. Work goes into short-lived branches named `feature/*`, `fix/*`, `bug/*` or `chore/*` and is merged into `main` by pull request.
 
-- Pull requests to `develop` run **PR Checks (develop)**.
-- Pull requests to `main` must come from `develop` and run **PR Checks (main)**.
+- Pull requests to `main` run **PR Checks (main)**. Its **Verify Branch Policy** job checks the branch name.
 - Every PR to `main` carries exactly one release label. **Release Bump Label** creates the labels and fails if the PR has none, more than one, or `release:none` mixed with a bump.
-- On merge to `main`, **Publish Release** turns the label into a version, waits for the `release` environment approval, creates the tag, builds, tests, packs, publishes to GitHub Packages and NuGet.org, creates a GitHub Release and fast-forwards `develop`.
+- On merge to `main`, **Publish Release** turns the label into a version, waits for the `release` environment approval, creates the tag, builds, tests, packs, publishes to GitHub Packages and NuGet.org and creates a GitHub Release.
+- After each twblazor release, **Update twblazor** releases the same version automatically (see [Keeping Theme.cs in sync](#keeping-themecs-in-sync)).
+
+### Version numbers
+
+twblazor.templates follows twblazor's version. A twblazor `3.1.1` release is followed by twblazor.templates `3.1.1`.
+
+A fix to the templates alone is still released with a label, so the two can differ for a while. If twblazor.templates is patched to `3.1.2` while twblazor is on `3.1.1`, twblazor's next release bumps from the higher of the two versions, so a patch becomes `3.1.3` for both and they match again.
 
 ### Release labels
 
@@ -166,13 +179,9 @@ Create an environment named `release` in the repository:
 
 **Settings > Environments > New environment > release**
 
-Add yourself as a **Required reviewer**. The `release` job in `publish.yml` then waits for your approval before it tags or publishes anything. Develop previews do not use this environment and do not need approval.
+Add yourself as a **Required reviewer**. The `release` job in `publish.yml` then waits for your approval before it tags or publishes anything, including the releases that follow a twblazor release.
 
 This repository's `release` environment is already configured with the owner as the required reviewer, and only `main` may deploy to it. Edit those rules under **Settings > Environments > release**.
-
-### Develop previews
-
-Every push to `develop` runs **Publish Develop Preview**. It computes `X.Y.Z-preview.N` from the newest release tag and the commit height, packs the tool, publishes it to GitHub Packages and uploads the `.nupkg` as an artifact. NuGet.org only receives stable releases from `publish.yml`, so develop never claims a stable NuGet version.
 
 ### NuGet trusted publishing
 
@@ -193,10 +202,9 @@ In GitHub, make sure the `NUGET_ORG_USERNAME` secret is available to this reposi
 
 Make these checks required:
 
-- `develop`: **PR Checks (develop)**
-- `main`: **PR Checks (main)** and **Release Bump Label**
+- `main`: **PR Checks (main)** (including **Verify Branch Policy**) and **Release Bump Label**
 
-If `main` or its tags are protected, add the `twblazor-release` app to the ruleset's bypass list. The release job uses the app token for checkout, tag pushes and the back-merge into `develop`; `GITHUB_TOKEN` is only used for the GitHub Release notes.
+Keep the `twblazor-release` app on `main`'s ruleset bypass list. The release job uses the app token for checkout and tag pushes, and **Update twblazor** uses it to push the update commit to `main`. `GITHUB_TOKEN` is only used for the GitHub Release notes and to start **Publish Release**.
 
 ### Manual release
 
