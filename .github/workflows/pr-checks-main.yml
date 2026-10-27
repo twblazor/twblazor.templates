@@ -17,14 +17,18 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
+      # main is the only long-lived branch. Work comes in from short-lived
+      # branches named for the kind of change, as in the main twblazor repository.
       - name: Verify source branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         shell: bash
         run: |
-          if [ "${{ github.head_ref }}" != "develop" ]; then
-            echo "::error::PRs to main must originate from the develop branch. Merge into develop first."
+          if ! [[ "$HEAD_REF" =~ ^(feature|feat|fix|bug|chore|docs|ci|build|refactor|perf|test|style|revert)/.+ ]]; then
+            echo "::error::'$HEAD_REF' does not follow the branch naming: use feature/*, fix/*, bug/* or chore/* (or another conventional type such as docs/* or ci/*)."
             exit 1
           fi
-          echo "Branch policy check passed."
+          echo "Branch policy check passed for $HEAD_REF."
 
   build-and-test:
     name: Build and Test (PR to main)

@@ -10,7 +10,7 @@ The templates share one set of pages and layouts across Server, WebAssembly and 
 
 | Dashboard | &nbsp;Sidebar&nbsp; | &nbsp;Navbar&nbsp;&nbsp; | &nbsp;&nbsp;Blank&nbsp;&nbsp; |
 | --- | --- | --- | --- |
-| [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png" alt="Dashboard template: sidebar, top bar, KPI cards and charts" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/dashboard.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png" alt="Sidebar template: grouped navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/sidebar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png" alt="Navbar template: top navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/navbar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/blank.png" alt="Blank template: a centered Hello world page with a link to the docs" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/develop/images/templates/blank.png) |
+| [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png" alt="Dashboard template: sidebar, top bar, KPI cards and charts" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png" alt="Sidebar template: grouped navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png" alt="Navbar template: top navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/blank.png" alt="Blank template: a centered Hello world page with a link to the docs" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/blank.png) |
 
 - **dashboard**: a sidebar, a top bar, KPI cards, revenue/traffic/order charts, recent orders and activity.
 - **sidebar**: grouped sidebar navigation, a welcome and resources page, and a settings form.
@@ -76,7 +76,7 @@ The pages, layouts and `Theme.cs` move to the `.Client` project for WebAssembly 
 
 ## Contributing
 
-The preview app, build instructions, screenshot setup, theme sync and release process are documented in [CONTRIBUTING.md](https://github.com/twblazor/twblazor.templates/blob/develop/CONTRIBUTING.md).
+The preview app, build instructions, screenshot setup, theme sync and release process are documented in [CONTRIBUTING.md](https://github.com/twblazor/twblazor.templates/blob/main/CONTRIBUTING.md).
 
 ## License
 

@@ -1,6 +1,6 @@
 name: Release Bump Label
 
-# Gate on develop -> main pull requests: exactly one of release:major,
+# Gate on pull requests to main: exactly one of release:major,
 # release:minor, release:patch or release:none must be applied.
 # publish.yml reads that label after the merge to decide the version it
 # tags, or to skip the release entirely for release:none. Kept in its own
@@ -162,7 +162,7 @@ jobs:
               BODY="$MARKER
           ### Choose the release bump
 
-          This PR releases \`develop\` to \`main\` but carries no bump label. \`release:patch\` is normally applied automatically when a PR is opened, so add one by hand in the sidebar:
+          This PR merges into \`main\` but carries no bump label. \`release:patch\` is normally applied automatically when a PR is opened, so add one by hand in the sidebar:
 
           $TABLE
 

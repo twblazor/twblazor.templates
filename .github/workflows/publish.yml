@@ -7,6 +7,11 @@ name: Publish Release
 # nothing in the repository needs to be edited or committed in order to release.
 # release:none skips the release job entirely.
 #
+# "Update twblazor" also starts this workflow with an exact version, so each
+# twblazor release is followed by a twblazor.templates release of the same
+# number. A pull request with a release label can still release in between (for
+# example a 3.1.2 patch after 3.1.1); twblazor's next release then bumps past it.
+#
 # The release job uses the "release" environment, so it waits for an approver
 # before anything is tagged or published.
 on:
@@ -23,6 +28,10 @@ on:
           - minor
           - patch
         default: patch
+      version:
+        description: 'Exact version to release, for example 3.1.1. Overrides the bump. Used by Update twblazor to match a twblazor release.'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -44,6 +53,7 @@ jobs:
     outputs:
       skip: ${{ steps.bump.outputs.skip }}
       bump: ${{ steps.bump.outputs.bump }}
+      version: ${{ steps.bump.outputs.version }}
 
     steps:
       - name: Determine version bump
@@ -52,11 +62,23 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT_NAME: ${{ github.event_name }}
           INPUT_BUMP: ${{ inputs.bump }}
+          INPUT_VERSION: ${{ inputs.version }}
           REPO: ${{ github.repository }}
           SHA: ${{ github.sha }}
         shell: bash
         run: |
           set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "$INPUT_VERSION" ]; then
+            VERSION="${INPUT_VERSION#v}"
+            if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "::error::'$INPUT_VERSION' is not a stable version such as 3.1.1."
+              exit 1
+            fi
+            echo "Manual dispatch requested version $VERSION."
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             echo "Manual dispatch requested a '$INPUT_BUMP' bump."
             echo "bump=$INPUT_BUMP" >> "$GITHUB_OUTPUT"
@@ -97,8 +119,8 @@ jobs:
 
     steps:
       # GITHUB_TOKEN is subject to branch protection, so the app token is used
-      # for checkout, tag pushes and the develop back-merge. The app is on the
-      # ruleset's bypass list, as in the main twblazor repository.
+      # for checkout and tag pushes. The app is on the ruleset's bypass list, as
+      # in the main twblazor repository.
       - name: Create app token
         id: app-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
@@ -116,7 +138,29 @@ jobs:
       - name: Compute release version
         id: version
         shell: pwsh
+        env:
+          REQUESTED_VERSION: ${{ needs.determine-bump.outputs.version }}
         run: |
+          . ./scripts/version-tags.ps1
+          if ($env:REQUESTED_VERSION) {
+              # An exact version, from Update twblazor or a manual run. Re-running for a version that is
+              # already tagged here is allowed; anything at or below the latest release is not.
+              $version = $env:REQUESTED_VERSION
+              $tag = "v$version"
+              $tagged = @(git tag --list $tag).Count -gt 0
+              if ($tagged -and (git rev-list -n 1 $tag) -ne (git rev-parse HEAD)) {
+                  throw "$tag already exists on another commit, so $version cannot be released again."
+              }
+              $latest = Get-LatestReleaseTag
+              if (-not $tagged -and $latest -and [version]$version -le [version]$latest.Tag.Substring(1)) {
+                  throw "$version is not above the latest release $($latest.Tag)."
+              }
+              Write-Host "Releasing the requested version $version."
+              Set-GitHubOutput -Name 'version' -Value $version
+              Set-GitHubOutput -Name 'tag'     -Value $tag
+              exit 0
+          }
+
           $existing = @(git tag --list --points-at HEAD | Where-Object { $_ -match '^v\d+\.\d+\.\d+$' })
           if ($existing.Count -gt 0) {
               $tag = $existing[0]
@@ -216,20 +260,3 @@ jobs:
           else
             gh release create "$TAG" --title "$TAG" --generate-notes ./artifacts/*.nupkg
           fi
-
-      - name: Back-merge into develop
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          REPO: ${{ github.repository }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          SHA="$(git rev-parse HEAD)"
-          if OUT="$(gh api -X PATCH "repos/$REPO/git/refs/heads/develop" -F sha="$SHA" -F force=false 2>&1)"; then
-            echo "Fast-forwarded develop to $SHA."
-          else
-            echo "$OUT"
-            echo "::warning::Could not fast-forward develop to $SHA; it has likely moved on since this release started. Merge main into develop by hand."
-          fi
-
-
