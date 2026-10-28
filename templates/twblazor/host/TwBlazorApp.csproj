@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="twblazor" Version="3.1.1" />
+    <PackageReference Include="twblazor" Version="3.1.2" />
     <!--#if (HasClient) -->
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.13" />
     <!--#endif -->
