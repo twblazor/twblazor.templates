@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddTwBlazor(_ => { }, Theme.CreateDefaultTheme);
+builder.Services.AddTwBlazor(_ => { }, Theme.CreateTheme);
 
 var app = builder.Build();
 

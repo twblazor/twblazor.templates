@@ -50,6 +50,9 @@ if ($NoRestore) {
 if ($NoNpm) {
     $arguments += "--no-npm"
 }
+else {
+    $arguments += "--tailwind", "cli"
+}
 
 & dotnet @arguments
 

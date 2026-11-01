@@ -10,7 +10,7 @@ The templates share one set of pages and layouts across Server, WebAssembly and 
 
 | Dashboard | &nbsp;Sidebar&nbsp; | &nbsp;Navbar&nbsp;&nbsp; | &nbsp;&nbsp;Blank&nbsp;&nbsp; |
 | --- | --- | --- | --- |
-| [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png" alt="Dashboard template: sidebar, top bar, KPI cards and charts" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png" alt="Sidebar template: grouped navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png" alt="Navbar template: top navigation and a welcome page" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/blank.png" alt="Blank template: a centered Hello world page with a link to the docs" width="100%" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/blank.png) |
+| [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png" alt="Dashboard template: sidebar, top bar, KPI cards and charts" width="200" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/dashboard.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png" alt="Sidebar template: grouped navigation and a welcome page" width="200" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/sidebar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png" alt="Navbar template: top navigation and a welcome page" width="200" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/navbar.png) | [<img src="https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/blank.png" alt="Blank template: a centered Hello world page with a link to the docs" width="200" />](https://raw.githubusercontent.com/twblazor/twblazor.templates/main/images/templates/blank.png) |
 
 - **dashboard**: a sidebar, a top bar, KPI cards, revenue/traffic/order charts, recent orders and activity.
 - **sidebar**: grouped sidebar navigation, a welcome and resources page, and a settings form.
@@ -58,11 +58,14 @@ twblazor new MyApp -i server -t blank
 | `-t`, `--template` | `dashboard`, `sidebar`, `navbar`, `blank` | `dashboard` |
 | `-o`, `--output` | Folder to create the app in | `./MyApp` |
 | `--templates` | Template folder or package id | Installed templates |
+| `--tailwind` | `cli` or `npm` — how to build the stylesheet | Prompt, or `cli` when not interactive |
 | `--no-restore` | Skip `dotnet restore` | |
-| `--no-npm` | Skip `npm install` and the Tailwind CSS build | |
+| `--no-npm` | Skip the Tailwind CSS build (same as the menu's "Skip") | |
 | `--force` | Write into a folder that is not empty | |
 
-The command installs the templates, creates the solution, restores NuGet packages and builds the Tailwind stylesheet. It then prints the two commands needed to run the app.
+The command installs the templates, creates the solution and restores NuGet packages. It then asks how to build the Tailwind stylesheet — the Tailwind CSS CLI via `npx` (default), npm, or skip. `npx` leaves nothing behind, and on success the npm path removes `node_modules` and `package-lock.json`, so the project stays clean. It then prints the two commands needed to run the app.
+
+Node.js is required for the `cli` and `npm` build options; pass `--no-npm` to create the app without building the stylesheet. Add `--tailwind cli` to skip the prompt in scripts.
 
 ### Render modes
 

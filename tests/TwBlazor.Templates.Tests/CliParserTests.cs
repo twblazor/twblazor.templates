@@ -135,4 +135,78 @@ public sealed class CliParserTests
 
         Assert.Contains("Unknown option", exception.Message);
     }
+
+    [Theory]
+    [InlineData("cli", nameof(TailwindBuild.Cli))]
+    [InlineData("Cli", nameof(TailwindBuild.Cli))]
+    [InlineData("npm", nameof(TailwindBuild.Npm))]
+    [InlineData("Npm", nameof(TailwindBuild.Npm))]
+    public void ParseTailwind_MapsNames(string value, string expected)
+    {
+        Assert.Equal(expected, CliParser.ParseTailwind(value).ToString());
+    }
+
+    [Theory]
+    [InlineData("skip")]
+    [InlineData("none")]
+    public void ParseTailwind_RejectsSkipAndUnknown(string value)
+    {
+        var exception = Assert.Throws<CliException>(() => CliParser.ParseTailwind(value));
+
+        Assert.Contains("--no-npm", exception.Message);
+    }
+
+    [Fact]
+    public void ParseNew_ReadsTailwind()
+    {
+        var spaced = CliParser.ParseNew(["MyApp", "--tailwind", "npm"]);
+        var inline = CliParser.ParseNew(["MyApp", "--tailwind=cli"]);
+        var unspecified = CliParser.ParseNew(["MyApp"]);
+
+        Assert.Equal(TailwindBuild.Npm, spaced.Tailwind);
+        Assert.Equal(TailwindBuild.Cli, inline.Tailwind);
+        Assert.Null(unspecified.Tailwind);
+    }
+
+    [Fact]
+    public void ParseNew_RejectsInvalidTailwindValue()
+    {
+        Assert.Throws<CliException>(() => CliParser.ParseNew(["MyApp", "--tailwind", "skip"]));
+    }
+
+    [Theory]
+    [InlineData("-v")]
+    [InlineData("--verbose")]
+    public void ParseNew_ReadsVerbose(string flag)
+    {
+        var options = CliParser.ParseNew(["MyApp", flag]);
+
+        Assert.True(options.Verbose);
+    }
+
+    [Fact]
+    public void ParseNew_VerboseIsFalseByDefault()
+    {
+        var options = CliParser.ParseNew(["MyApp"]);
+
+        Assert.False(options.Verbose);
+    }
+
+    [Theory]
+    [InlineData("-v")]
+    [InlineData("--verbose")]
+    public void ParseInstall_ReadsVerbose(string flag)
+    {
+        var options = CliParser.ParseInstall([flag]);
+
+        Assert.True(options.Verbose);
+    }
+
+    [Fact]
+    public void ParseInstall_VerboseIsFalseByDefault()
+    {
+        var options = CliParser.ParseInstall([]);
+
+        Assert.False(options.Verbose);
+    }
 }

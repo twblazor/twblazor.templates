@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 
@@ -14,12 +15,14 @@ internal static class ProcessRunner
     /// <param name="fileName">The executable to start.</param>
     /// <param name="arguments">The arguments passed to the executable.</param>
     /// <param name="workingDirectory">The working directory for the process.</param>
+    /// <param name="verbose">Whether the child process output is written to the console.</param>
     /// <param name="cancellationToken">A token that cancels the running process.</param>
     /// <returns>The process exit code.</returns>
     internal static async Task<int> RunAsync(
         string fileName,
         IEnumerable<string> arguments,
         string workingDirectory,
+        bool verbose,
         CancellationToken cancellationToken)
     {
         var startInfo = new ProcessStartInfo(fileName)
@@ -39,9 +42,17 @@ internal static class ProcessRunner
 
         using var process = new Process { StartInfo = startInfo };
 
-        if (!process.Start())
+        try
         {
-            throw new CliException($"Could not start '{fileName}'.");
+            if (!process.Start())
+            {
+                throw new CliException($"Could not start '{fileName}'.");
+            }
+        }
+        catch (Win32Exception exception)
+        {
+            Console.Error.WriteLine($"error: could not start '{fileName}' ({exception.Message}). Is it installed and on the PATH?");
+            return 1;
         }
 
         var standardOutput = process.StandardOutput.ReadToEndAsync(cancellationToken);
@@ -52,14 +63,17 @@ internal static class ProcessRunner
         var output = await standardOutput;
         var error = await standardError;
 
-        if (!string.IsNullOrWhiteSpace(output))
+        if (verbose)
         {
-            Console.Out.Write(output);
-        }
+            if (!string.IsNullOrWhiteSpace(output))
+            {
+                Console.Out.Write(output);
+            }
 
-        if (!string.IsNullOrWhiteSpace(error))
-        {
-            Console.Error.Write(error);
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                Console.Error.Write(error);
+            }
         }
 
         return process.ExitCode;

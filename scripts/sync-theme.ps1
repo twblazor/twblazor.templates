@@ -82,9 +82,15 @@ $content = $content.Replace(
     'public static class Theme',
     "$templateHeader`npublic static class Theme")
 
+# The template copy is a real app file, not a doc source: drop the GetStartedTheme doc-snippet
+# region and rename the factory to the public CreateTheme() the docs and theme builder use.
+$content = $content -replace '(?m)^[ \t]*#region CodeExample GetStartedTheme\r?\n', ''
+$content = $content -replace '(?m)^[ \t]*#endregion\r?\n(?=[ \t]*public static TwBlazorTheme DefaultTheme)', ''
+$content = $content -replace 'CreateDefaultTheme', 'CreateTheme'
+
 $content = ($content -replace "`r`n", "`n").TrimEnd("`n") + "`n"
 
-if ($content -notmatch '#if \(HasClient\)' -or $content -notmatch 'namespace TwBlazorApp;' -or $content -notmatch 'public static TwBlazorTheme CreateDefaultTheme') {
+if ($content -notmatch '#if \(HasClient\)' -or $content -notmatch 'namespace TwBlazorApp;' -or $content -notmatch 'public static TwBlazorTheme CreateTheme') {
     throw "The transformed theme does not look like a template Theme.cs. The canonical theme format may have changed."
 }
 

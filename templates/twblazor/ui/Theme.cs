@@ -18,8 +18,7 @@ namespace TwBlazorApp;
 /// </remarks>
 public static class Theme
 {
-    #region CodeExample GetStartedTheme
-    public static TwBlazorTheme CreateDefaultTheme()
+    public static TwBlazorTheme CreateTheme()
     {
         #region utility classes
 
@@ -1961,7 +1960,6 @@ public static class Theme
             ]
         };
     }
-    #endregion
 
-    public static TwBlazorTheme DefaultTheme { get; internal set; } = CreateDefaultTheme();
+    public static TwBlazorTheme DefaultTheme { get; internal set; } = CreateTheme();
 }

@@ -5,27 +5,28 @@ A Blazor app styled with [twblazor](https://twblazor.com) and Tailwind CSS. The 
 ## Run it
 
 ```bash
-npm install
 dotnet run --project TwBlazorApp
 ```
 
-The first build creates `wwwroot/css/output.css`, so the app has no styling until `npm install` and a build have run.
+`twblazor new` builds the stylesheet so the app is styled on first run. If you created the app with `dotnet new` or skipped the build, run the Tailwind build below first.
 
 ## Tailwind CSS
 
-Run the CSS build after changing classes or pulling changes:
+The app ships a ready-built `wwwroot/css/output.css`, so rebuild it only after changing classes, `Theme.cs` or pulling changes.
+
+With the Tailwind CSS CLI, no install is needed:
 
 ```bash
-npm run build:css
+npx @tailwindcss/cli -i ./TwBlazorApp/wwwroot/css/input.css -o ./TwBlazorApp/wwwroot/css/output.css --minify
 ```
 
 While you work on markup, leave the watch build running in a second terminal so new classes show up straight away:
 
 ```bash
-npm run watch:css
+npx @tailwindcss/cli -i ./TwBlazorApp/wwwroot/css/input.css -o ./TwBlazorApp/wwwroot/css/output.css --watch
 ```
 
-Tailwind CSS is also rebuilt every time the app builds.
+Prefer project-local tooling? Run `npm install` once to restore the `package.json` dev dependencies, then `npm run build:css` or `npm run watch:css`.
 
 Open `TwBlazorApp.slnx` in Visual Studio to work on it there. The checked-in `.vsconfig` asks for the ASP.NET and web development workload, which is all the app needs.
 

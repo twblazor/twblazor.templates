@@ -62,7 +62,7 @@ The preview project uses the published `twblazor` package and is Server-only. To
 .\preview.ps1 -Interactivity wasm -Layout dashboard
 ```
 
-The script writes the app to `artifacts/preview/<name>`, restores packages, builds Tailwind CSS and starts it with the HTTP launch profile.
+The script writes the app to `artifacts/preview/<name>`, restores packages, builds the Tailwind stylesheet with npx and starts it with the HTTP launch profile.
 
 | Option | Effect |
 | --- | --- |
@@ -71,7 +71,7 @@ The script writes the app to `artifacts/preview/<name>`, restores packages, buil
 | `-Open` | Open the generated `.slnx` in Visual Studio instead of running it. |
 | `-NoRun` | Generate the app without starting it. |
 | `-NoRestore` | Skip `dotnet restore`. |
-| `-NoNpm` | Skip `npm install` and the Tailwind build. |
+| `-NoNpm` | Skip the Tailwind stylesheet build. |
 
 The repository solution contains the CLI, the tests and the preview app. Visual Studio's "install extra components" prompt is about the workloads it infers, not the `.slnx` format. The checked-in `.vsconfig` asks for the ASP.NET and web development workload, which is what the solution and the generated apps need. Generated apps also include the `.vsconfig` and the web projects, so they should not ask for the desktop workload.
 

@@ -34,6 +34,21 @@ internal enum LayoutTemplate
 }
 
 /// <summary>
+/// How the generated app builds its Tailwind stylesheet.
+/// </summary>
+internal enum TailwindBuild
+{
+    /// <summary>Uses the Tailwind CSS CLI through <c>npx</c>, leaving no <c>node_modules</c> behind.</summary>
+    Cli,
+
+    /// <summary>Installs the npm dev dependencies and builds locally, then removes <c>node_modules</c>.</summary>
+    Npm,
+
+    /// <summary>Skips the stylesheet build entirely.</summary>
+    Skip
+}
+
+/// <summary>
 /// The options accepted by <c>twblazor new</c>.
 /// </summary>
 internal sealed class NewOptions
@@ -56,8 +71,14 @@ internal sealed class NewOptions
     /// <summary>Gets or sets whether dotnet restore is skipped.</summary>
     public bool NoRestore { get; set; }
 
-    /// <summary>Gets or sets whether npm install and the Tailwind build are skipped.</summary>
+    /// <summary>Gets or sets whether the Tailwind CSS build is skipped.</summary>
     public bool NoNpm { get; set; }
+
+    /// <summary>Gets or sets whether the underlying dotnet/npm output is shown.</summary>
+    public bool Verbose { get; set; }
+
+    /// <summary>Gets or sets the stylesheet build method from <c>--tailwind</c>, or <see langword="null"/> when unspecified.</summary>
+    public TailwindBuild? Tailwind { get; set; }
 
     /// <summary>Gets or sets whether an existing non-empty folder is reused.</summary>
     public bool Force { get; set; }
@@ -73,6 +94,9 @@ internal sealed class InstallOptions
 {
     /// <summary>Gets or sets the template folder or package id.</summary>
     public string? Templates { get; set; }
+
+    /// <summary>Gets or sets whether the underlying dotnet/npm output is shown.</summary>
+    public bool Verbose { get; set; }
 
     /// <summary>Gets or sets whether help was requested instead of a command to run.</summary>
     public bool ShowHelp { get; set; }
