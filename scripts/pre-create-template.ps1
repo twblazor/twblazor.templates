@@ -6,6 +6,8 @@
 #   ./scripts/pre-create-template.ps1
 #   ./scripts/pre-create-template.ps1 MyApp -t blank
 #
+# A locally-built tool (a prerelease version, or one newer than the latest
+# published version) is never updated, so a local build can be tested safely.
 # If an explicit template source is used (--templates), the NuGet tool check is skipped.
 
 $ErrorActionPreference = 'Stop'
@@ -49,6 +51,25 @@ function Get-LatestTemplateVersion {
 
 function Get-BaseVersion([string]$version) {
     return [version]($version -replace '[-+].*$', '')
+}
+
+function Test-IsLocalBuild {
+    param(
+        [string]$Version,
+        [string]$LatestVersion
+    )
+
+    # A prerelease suffix (e.g. -local.5) marks a local/dev build, and a version
+    # newer than the latest published one can only be a local build.
+    if ($Version -match '-') {
+        return $true
+    }
+
+    if ($LatestVersion -and (Get-BaseVersion $Version) -gt (Get-BaseVersion $LatestVersion)) {
+        return $true
+    }
+
+    return $false
 }
 
 function Update-TemplateTool([string]$version) {
@@ -98,24 +119,30 @@ else {
         }
         else {
             $installedVersion = $installed.version
-            $needsUpdate = (Get-BaseVersion $installedVersion) -lt (Get-BaseVersion $latestVersion) -or
-                ((Get-BaseVersion $installedVersion) -eq (Get-BaseVersion $latestVersion) -and $installedVersion -ne $latestVersion)
 
-            if ($needsUpdate) {
-                Write-Host "$packageId $installedVersion is installed, but $latestVersion is available on NuGet." -ForegroundColor Yellow
-                Write-Host "NuGet: $packageUrl" -ForegroundColor DarkGray
-                $answer = Read-Host 'Update before creating the app? [y/N]'
-
-                if ($answer -match '^(y|yes)$') {
-                    Update-TemplateTool $latestVersion
-                    Write-Host "Updated $packageId to $latestVersion." -ForegroundColor Green
-                }
-                else {
-                    Write-Host "Continuing with $packageId $installedVersion." -ForegroundColor DarkGray
-                }
+            if (Test-IsLocalBuild -Version $installedVersion -LatestVersion $latestVersion) {
+                Write-Host "Local build $packageId $installedVersion detected; skipping the update check." -ForegroundColor DarkGray
             }
             else {
-                Write-Host "$packageId $installedVersion is up to date." -ForegroundColor Green
+                $needsUpdate = (Get-BaseVersion $installedVersion) -lt (Get-BaseVersion $latestVersion) -or
+                    ((Get-BaseVersion $installedVersion) -eq (Get-BaseVersion $latestVersion) -and $installedVersion -ne $latestVersion)
+
+                if ($needsUpdate) {
+                    Write-Host "$packageId $installedVersion is installed, but $latestVersion is available on NuGet." -ForegroundColor Yellow
+                    Write-Host "NuGet: $packageUrl" -ForegroundColor DarkGray
+                    $answer = Read-Host 'Update before creating the app? [y/N]'
+
+                    if ($answer -match '^(y|yes)$') {
+                        Update-TemplateTool $latestVersion
+                        Write-Host "Updated $packageId to $latestVersion." -ForegroundColor Green
+                    }
+                    else {
+                        Write-Host "Continuing with $packageId $installedVersion." -ForegroundColor DarkGray
+                    }
+                }
+                else {
+                    Write-Host "$packageId $installedVersion is up to date." -ForegroundColor Green
+                }
             }
         }
     }

@@ -50,6 +50,15 @@ public sealed class TemplatePackageTests
     }
 
     [Fact]
+    public void Template_GitignoreIgnoresNpmArtifacts()
+    {
+        var gitignore = File.ReadAllText(Path.Combine(FindTemplateDirectory(), ".gitignore"));
+
+        Assert.Contains("node_modules/", gitignore);
+        Assert.Contains("package-lock.json", gitignore);
+    }
+
+    [Fact]
     public void Template_DocumentsHowToBuildAndWatchTailwind()
     {
         var readme = File.ReadAllText(Path.Combine(FindTemplateDirectory(), "README.md"));
@@ -132,6 +141,8 @@ public sealed class TemplatePackageTests
         Assert.Contains("https://www.nuget.org/packages/twblazor.templates", script);
         Assert.Contains("dotnet tool update --global", script);
         Assert.Contains("Read-Host", script);
+        Assert.Contains("Test-IsLocalBuild", script);
+        Assert.Contains("Local build", script);
     }
 
     [Fact]

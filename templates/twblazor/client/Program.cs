@@ -4,6 +4,6 @@ using TwBlazorApp.Client;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.Services.AddTwBlazor(_ => { }, Theme.CreateDefaultTheme);
+builder.Services.AddTwBlazor(_ => { }, Theme.CreateTheme);
 
 await builder.Build().RunAsync();

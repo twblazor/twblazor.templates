@@ -18,7 +18,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 #endif
 
-builder.Services.AddTwBlazor(_ => { }, Theme.CreateDefaultTheme);
+builder.Services.AddTwBlazor(_ => { }, Theme.CreateTheme);
 
 var app = builder.Build();
 

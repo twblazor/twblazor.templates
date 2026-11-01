@@ -114,8 +114,10 @@ internal static class CliApplication
               -o, --output <path>         Folder to create the app in. Default: ./<name>.
                   --templates <path|id>   Template folder or package id. Default: installed templates.
                   --no-restore            Skip dotnet restore.
-                  --no-npm                Skip npm install and the Tailwind CSS build.
+                  --tailwind <cli|npm>    Build CSS with the Tailwind CSS CLI (npx) or npm. Default: prompt, or cli when not interactive.
+                  --no-npm                Skip the Tailwind CSS build (same as choosing "Skip" in the menu).
                   --force                 Write into a folder that is not empty.
+              -v, --verbose              Show the underlying dotnet/npm output (hidden by default).
               -h, --help                  Show this help.
             """);
     }
@@ -129,6 +131,7 @@ internal static class CliApplication
 
             Options:
                   --templates <path|id>  Template folder or package id. Default: installed templates.
+              -v, --verbose              Show the underlying dotnet output (hidden by default).
               -h, --help                 Show this help.
             """);
     }

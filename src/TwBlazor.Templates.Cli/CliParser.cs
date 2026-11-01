@@ -53,6 +53,16 @@ internal static partial class CliParser
                     options.NoNpm = true;
                     break;
 
+                case "-v":
+                case "--verbose":
+                    EnsureNoValue(inlineValue, name);
+                    options.Verbose = true;
+                    break;
+
+                case "--tailwind":
+                    options.Tailwind = ParseTailwind(ReadValue(args, ref index, inlineValue, name));
+                    break;
+
                 case "--force":
                     EnsureNoValue(inlineValue, name);
                     options.Force = true;
@@ -115,6 +125,12 @@ internal static partial class CliParser
                     options.Templates = ReadValue(args, ref index, inlineValue, name);
                     break;
 
+                case "-v":
+                case "--verbose":
+                    EnsureNoValue(inlineValue, name);
+                    options.Verbose = true;
+                    break;
+
                 case "-h":
                 case "--help":
                     options.ShowHelp = true;
@@ -157,6 +173,20 @@ internal static partial class CliParser
             "navbar" => LayoutTemplate.Navbar,
             "blank" => LayoutTemplate.Blank,
             _ => throw new CliException($"'{value}' is not a template. Use dashboard, sidebar, navbar or blank.")
+        };
+
+    /// <summary>
+    /// Maps the accepted stylesheet build methods to <see cref="TailwindBuild"/>.
+    /// </summary>
+    /// <param name="value">The value passed on the command line.</param>
+    /// <returns>The matching build method.</returns>
+    /// <exception cref="CliException">Thrown when the value is not a build method.</exception>
+    internal static TailwindBuild ParseTailwind(string value) =>
+        value.ToLowerInvariant() switch
+        {
+            "cli" => TailwindBuild.Cli,
+            "npm" => TailwindBuild.Npm,
+            _ => throw new CliException($"'{value}' is not a Tailwind build method. Use cli or npm, or --no-npm to skip the build.")
         };
 
     /// <summary>
