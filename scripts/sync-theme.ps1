@@ -85,7 +85,7 @@ $content = $content.Replace(
 # The template copy is a real app file, not a doc source: drop the GetStartedTheme doc-snippet
 # region and rename the factory to the public CreateTheme() the docs and theme builder use.
 $content = $content -replace '(?m)^[ \t]*#region CodeExample GetStartedTheme\r?\n', ''
-$content = $content -replace '(?m)^[ \t]*#endregion\r?\n(?=[ \t]*public static TwBlazorTheme DefaultTheme)', ''
+$content = $content -replace '(?m)^[ \t]*#endregion\r?\n(?=(?:[ \t]*\r?\n)*[ \t]*public static TwBlazorTheme DefaultTheme)', ''
 $content = $content -replace 'CreateDefaultTheme', 'CreateTheme'
 
 $content = ($content -replace "`r`n", "`n").TrimEnd("`n") + "`n"
