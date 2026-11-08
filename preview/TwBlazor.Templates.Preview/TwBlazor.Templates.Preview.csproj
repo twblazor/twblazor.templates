@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="twblazor" Version="3.3.0" />
+    <PackageReference Include="twblazor" Version="3.4.0" />
   </ItemGroup>
 
   <!-- The template's shared UI is linked rather than copied, so edits show up here immediately. -->
