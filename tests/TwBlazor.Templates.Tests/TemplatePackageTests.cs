@@ -50,6 +50,47 @@ public sealed class TemplatePackageTests
     }
 
     [Fact]
+    public void Template_OffersNet11AndNet10()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        using var template = JsonDocument.Parse(File.ReadAllText(Path.Combine(templateDirectory, ".template.config", "template.json")));
+        using var host = JsonDocument.Parse(File.ReadAllText(Path.Combine(templateDirectory, ".template.config", "dotnetcli.host.json")));
+
+        var framework = template.RootElement.GetProperty("symbols").GetProperty("Framework");
+        var choices = framework.GetProperty("choices").EnumerateArray().Select(choice => choice.GetProperty("choice").GetString()).ToList();
+
+        Assert.Equal(["net11.0", "net10.0"], choices);
+        Assert.Equal("net11.0", framework.GetProperty("defaultValue").GetString());
+        Assert.Equal("net11.0", framework.GetProperty("replaces").GetString());
+        Assert.Equal("f", host.RootElement.GetProperty("symbolInfo").GetProperty("Framework").GetProperty("shortName").GetString());
+    }
+
+    [Theory]
+    [InlineData("host/TwBlazorApp.csproj")]
+    [InlineData("client/TwBlazorApp.Client.csproj")]
+    public void Template_ProjectsTargetTheChosenFramework(string relativePath)
+    {
+        var project = File.ReadAllText(Path.Combine(FindTemplateDirectory(), relativePath));
+
+        Assert.Contains("<TargetFramework>net11.0</TargetFramework>", project);
+        Assert.Contains("<!--#if (UseNet10) -->", project);
+        Assert.Matches(@"Version=""10\.0\.\d+""", project);
+        Assert.Matches(@"Version=""11\.0\.\d+""", project);
+    }
+
+    [Fact]
+    public void Template_OnlyUsesTheWebAssemblyDebugProxyOnNet10()
+    {
+        var templateDirectory = FindTemplateDirectory();
+        var program = File.ReadAllText(Path.Combine(templateDirectory, "host", "Program.cs"));
+        var launchSettings = File.ReadAllText(Path.Combine(templateDirectory, "host", "Properties", "launchSettings.json"));
+
+        Assert.Contains("#if (UseDebugProxy)" + Environment.NewLine + "if (app.Environment.IsDevelopment())", program.ReplaceLineEndings());
+        Assert.DoesNotContain("//#if (HasClient)", launchSettings);
+        Assert.Equal(2, launchSettings.Split("//#if (UseDebugProxy)").Length - 1);
+    }
+
+    [Fact]
     public void Template_GitignoreIgnoresNpmArtifacts()
     {
         var gitignore = File.ReadAllText(Path.Combine(FindTemplateDirectory(), ".gitignore"));

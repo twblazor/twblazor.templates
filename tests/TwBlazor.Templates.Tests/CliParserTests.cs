@@ -62,6 +62,50 @@ public sealed class CliParserTests
         Assert.True(options.Force);
     }
 
+    [Theory]
+    [InlineData("net11.0", nameof(TargetFramework.Net11))]
+    [InlineData("NET11", nameof(TargetFramework.Net11))]
+    [InlineData("11", nameof(TargetFramework.Net11))]
+    [InlineData("net10.0", nameof(TargetFramework.Net10))]
+    [InlineData("net10", nameof(TargetFramework.Net10))]
+    [InlineData("10.0", nameof(TargetFramework.Net10))]
+    public void ParseFramework_MapsNames(string value, string expected)
+    {
+        Assert.Equal(expected, CliParser.ParseFramework(value).ToString());
+    }
+
+    [Fact]
+    public void ParseFramework_RejectsUnsupportedFrameworks()
+    {
+        var exception = Assert.Throws<CliException>(() => CliParser.ParseFramework("net9.0"));
+
+        Assert.Contains("net11.0 or net10.0", exception.Message);
+    }
+
+    [Theory]
+    [InlineData("-f", "net10.0")]
+    [InlineData("--framework", "net10.0")]
+    public void ParseNew_ReadsTheFramework(string option, string value)
+    {
+        var options = CliParser.ParseNew(["MyApp", option, value]);
+
+        Assert.Equal(TargetFramework.Net10, options.Framework);
+    }
+
+    [Fact]
+    public void ParseNew_DefaultsToNet11()
+    {
+        Assert.Equal(TargetFramework.Net11, CliParser.ParseNew(["MyApp"]).Framework);
+    }
+
+    [Theory]
+    [InlineData(nameof(TargetFramework.Net11), "net11.0")]
+    [InlineData(nameof(TargetFramework.Net10), "net10.0")]
+    public void ToTemplateValue_GivesTheTargetFrameworkMoniker(string framework, string expected)
+    {
+        Assert.Equal(expected, Enum.Parse<TargetFramework>(framework).ToTemplateValue());
+    }
+
     [Fact]
     public void ParseNew_SupportsInlineValues()
     {

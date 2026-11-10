@@ -34,6 +34,11 @@ internal static partial class CliParser
                     options.Layout = ParseLayout(ReadValue(args, ref index, inlineValue, name));
                     break;
 
+                case "-f":
+                case "--framework":
+                    options.Framework = ParseFramework(ReadValue(args, ref index, inlineValue, name));
+                    break;
+
                 case "-o":
                 case "--output":
                     options.OutputPath = ReadValue(args, ref index, inlineValue, name);
@@ -176,6 +181,20 @@ internal static partial class CliParser
         };
 
     /// <summary>
+    /// Maps the accepted target framework names to <see cref="TargetFramework"/>.
+    /// </summary>
+    /// <param name="value">The value passed on the command line.</param>
+    /// <returns>The matching target framework.</returns>
+    /// <exception cref="CliException">Thrown when the value is not a supported target framework.</exception>
+    internal static TargetFramework ParseFramework(string value) =>
+        value.ToLowerInvariant() switch
+        {
+            "net11.0" or "net11" or "11" or "11.0" => TargetFramework.Net11,
+            "net10.0" or "net10" or "10" or "10.0" => TargetFramework.Net10,
+            _ => throw new CliException($"'{value}' is not a supported target framework. Use net11.0 or net10.0.")
+        };
+
+    /// <summary>
     /// Maps the accepted stylesheet build methods to <see cref="TailwindBuild"/>.
     /// </summary>
     /// <param name="value">The value passed on the command line.</param>
@@ -216,6 +235,19 @@ internal static partial class CliParser
             LayoutTemplate.Navbar => "navbar",
             LayoutTemplate.Blank => "blank",
             _ => throw new ArgumentOutOfRangeException(nameof(layout))
+        };
+
+    /// <summary>
+    /// Gets the value <c>dotnet new</c> expects for a target framework.
+    /// </summary>
+    /// <param name="framework">The target framework.</param>
+    /// <returns>The template choice name.</returns>
+    internal static string ToTemplateValue(this TargetFramework framework) =>
+        framework switch
+        {
+            TargetFramework.Net11 => "net11.0",
+            TargetFramework.Net10 => "net10.0",
+            _ => throw new ArgumentOutOfRangeException(nameof(framework))
         };
 
     private static (string Name, string? InlineValue) SplitOption(string argument)

@@ -89,27 +89,10 @@ internal static class NewCommand
             throw new CliException("The templates could not be installed. Run 'twblazor new -v' to see the details.");
         }
 
-        var arguments = new List<string>
-        {
-            "new",
-            "twblazor",
-            "--name",
-            projectName,
-            "--output",
-            outputPath,
-            "--interactivity",
-            options.Interactivity.ToTemplateValue(),
-            "--layout",
-            options.Layout.ToTemplateValue()
-        };
-
-        if (options.Force)
-        {
-            arguments.Add("--force");
-        }
+        var arguments = BuildTemplateArguments(options, projectName, outputPath);
 
         var createExitCode = await steps.RunAsync(
-            $"Creating {projectName} ({options.Layout.ToTemplateValue()}, {options.Interactivity.ToTemplateValue()})",
+            $"Creating {projectName} ({options.Layout.ToTemplateValue()}, {options.Interactivity.ToTemplateValue()}, {options.Framework.ToTemplateValue()})",
             token => ProcessRunner.RunAsync("dotnet", arguments, Directory.GetCurrentDirectory(), options.Verbose, token),
             cancellationToken);
 
@@ -287,6 +270,39 @@ internal static class NewCommand
         }
 
         return interactive ? null : TailwindBuild.Cli;
+    }
+
+    /// <summary>
+    /// Builds the <c>dotnet new twblazor</c> arguments for the chosen options.
+    /// </summary>
+    /// <param name="options">The parsed options.</param>
+    /// <param name="projectName">The project and solution name.</param>
+    /// <param name="outputPath">The folder to create the app in.</param>
+    /// <returns>The arguments to pass to <c>dotnet</c>.</returns>
+    internal static List<string> BuildTemplateArguments(NewOptions options, string projectName, string outputPath)
+    {
+        var arguments = new List<string>
+        {
+            "new",
+            "twblazor",
+            "--name",
+            projectName,
+            "--output",
+            outputPath,
+            "--interactivity",
+            options.Interactivity.ToTemplateValue(),
+            "--layout",
+            options.Layout.ToTemplateValue(),
+            "--framework",
+            options.Framework.ToTemplateValue()
+        };
+
+        if (options.Force)
+        {
+            arguments.Add("--force");
+        }
+
+        return arguments;
     }
 
     /// <summary>

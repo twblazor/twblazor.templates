@@ -9,6 +9,10 @@
       "longName": "layout",
       "shortName": "l"
     },
+    "Framework": {
+      "longName": "framework",
+      "shortName": "f"
+    },
     "kestrelHttpPort": {
       "isHidden": true
     },
