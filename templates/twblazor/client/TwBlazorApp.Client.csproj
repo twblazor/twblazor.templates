@@ -15,7 +15,7 @@
     <!--#else -->
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0" />
     <!--#endif -->
-    <PackageReference Include="twblazor" Version="3.5.1" />
+    <PackageReference Include="twblazor" Version="3.7.0" />
   </ItemGroup>
 
 </Project>
