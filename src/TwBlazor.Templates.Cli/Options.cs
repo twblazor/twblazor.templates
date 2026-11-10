@@ -34,6 +34,18 @@ internal enum LayoutTemplate
 }
 
 /// <summary>
+/// The .NET version the generated projects target.
+/// </summary>
+internal enum TargetFramework
+{
+    /// <summary>.NET 11 (<c>net11.0</c>).</summary>
+    Net11,
+
+    /// <summary>.NET 10 (<c>net10.0</c>).</summary>
+    Net10
+}
+
+/// <summary>
 /// How the generated app builds its Tailwind stylesheet.
 /// </summary>
 internal enum TailwindBuild
@@ -61,6 +73,9 @@ internal sealed class NewOptions
 
     /// <summary>Gets or sets the layout template.</summary>
     public LayoutTemplate Layout { get; set; } = LayoutTemplate.Dashboard;
+
+    /// <summary>Gets or sets the .NET version the projects target.</summary>
+    public TargetFramework Framework { get; set; } = TargetFramework.Net11;
 
     /// <summary>Gets or sets the folder to create the app in.</summary>
     public string? OutputPath { get; set; }

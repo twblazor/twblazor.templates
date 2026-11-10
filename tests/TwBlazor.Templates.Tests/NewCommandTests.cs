@@ -32,6 +32,33 @@ public sealed class NewCommandTests
     }
 
     [Fact]
+    public void BuildTemplateArguments_PassesEveryChoiceToDotnetNew()
+    {
+        var options = new NewOptions
+        {
+            Interactivity = Interactivity.Auto,
+            Layout = LayoutTemplate.Navbar,
+            Framework = TargetFramework.Net10,
+            Force = true
+        };
+
+        var arguments = NewCommand.BuildTemplateArguments(options, "MyApp", "out");
+
+        Assert.Equal(
+            ["new", "twblazor", "--name", "MyApp", "--output", "out", "--interactivity", "Auto", "--layout", "navbar", "--framework", "net10.0", "--force"],
+            arguments);
+    }
+
+    [Fact]
+    public void BuildTemplateArguments_TargetsNet11ByDefault()
+    {
+        var arguments = NewCommand.BuildTemplateArguments(new NewOptions(), "MyApp", "out");
+
+        Assert.Equal("net11.0", arguments[arguments.IndexOf("--framework") + 1]);
+        Assert.DoesNotContain("--force", arguments);
+    }
+
+    [Fact]
     public void RemoveNpmArtifacts_DoesNothingWhenArtifactsAreAbsent()
     {
         using var temp = new TemporaryDirectory();

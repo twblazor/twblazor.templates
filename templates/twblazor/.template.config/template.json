@@ -38,6 +38,25 @@
         { "choice": "blank", "description": "A centered blank home page with a link to the docs." }
       ]
     },
+    "Framework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "net11.0",
+      "replaces": "net11.0",
+      "description": "The target framework for the projects.",
+      "choices": [
+        { "choice": "net11.0", "description": "Target .NET 11." },
+        { "choice": "net10.0", "description": "Target .NET 10." }
+      ]
+    },
+    "UseNet10": {
+      "type": "computed",
+      "value": "(Framework == \"net10.0\")"
+    },
+    "UseDebugProxy": {
+      "type": "computed",
+      "value": "(interactivity != \"Server\" && Framework == \"net10.0\")"
+    },
     "UseServer": {
       "type": "computed",
       "value": "(interactivity == \"Server\")"

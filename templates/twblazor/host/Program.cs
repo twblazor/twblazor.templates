@@ -22,7 +22,7 @@ builder.Services.AddTwBlazor(_ => { }, Theme.CreateTheme);
 
 var app = builder.Build();
 
-#if (HasClient)
+#if (UseDebugProxy)
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();

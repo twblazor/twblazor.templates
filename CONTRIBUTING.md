@@ -112,7 +112,7 @@ scripts/                      release, theme sync and screenshot helpers
 .github/workflows/            CI, PR checks, theme sync and NuGet publishing
 preview.ps1                   generates and runs a preview app
 .vsconfig                     the Visual Studio workload the solution needs
-global.json                   pins the .NET 10 SDK
+global.json                   pins the .NET 11 SDK
 ```
 
 ## Keeping Theme.cs in sync
